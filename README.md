@@ -12,7 +12,7 @@ I made Areej for someone I love — as a gift, and as a means of ongoing reward 
 
 May Allah accept it from her, and may it be a source of light for everyone who uses it.
 
-**All praise is due to Allah. This is from Him and returns to Him.**
+**All praise is due to Allah.**
 
 ---
 
