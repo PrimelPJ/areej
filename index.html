@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Areej — عَرَج</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    :root{--g:#0d5c30;--gl:#f4faf6;--gb:#e0f0e6;--gm:#7aaa8a;--gd:#0d2a18;--bd:#d0e8d8;}
+    body{font-family:'DM Sans',sans-serif;background:#f7fbf8;color:var(--gd);}
+    .auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f7fbf8;padding:24px;}
+    .auth-card{background:#fff;border:1px solid var(--bd);border-radius:20px;padding:40px;width:100%;max-width:420px;}
+    .auth-logo{font-family:'Playfair Display',serif;font-size:28px;color:var(--g);}
+    .auth-logo-ar{font-size:12px;color:var(--gm);direction:rtl;margin-bottom:28px;}
+    .auth-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--gd);margin-bottom:6px;}
+    .auth-sub{font-size:13px;color:var(--gm);margin-bottom:28px;line-height:1.6;}
+    .field-label{font-size:12px;color:var(--gm);margin-bottom:6px;display:block;}
+    .field-input{width:100%;background:var(--gl);border:1px solid var(--bd);border-radius:10px;padding:13px;font-size:14px;color:var(--gd);font-family:'DM Sans',sans-serif;outline:none;margin-bottom:14px;}
+    .field-input:focus{border-color:var(--g);}
+    .field-input::placeholder{color:#b0d4bc;}
+    .auth-btn{width:100%;background:var(--g);color:#fff;border:none;padding:14px;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:4px;}
+    .auth-btn:hover{opacity:.88;}
+    .auth-switch{text-align:center;margin-top:20px;font-size:13px;color:var(--gm);}
+    .auth-switch a{color:var(--g);cursor:pointer;font-weight:500;}
+    .auth-divider{display:flex;align-items:center;gap:12px;margin:20px 0;}
+    .auth-divider-line{flex:1;height:1px;background:var(--bd);}
+    .auth-divider-text{font-size:12px;color:var(--gm);}
+    .google-btn{width:100%;background:#fff;color:var(--gd);border:1px solid var(--bd);padding:13px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;}
+    .google-btn:hover{background:var(--gl);}
+    .err{font-size:12px;color:#c0392b;background:#fff0f0;border:1px solid #f0b8b8;border-radius:8px;padding:10px 12px;margin-bottom:14px;display:none;}
+    .app-wrap{display:none;}
+    .layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh;}
+    .sidebar{background:#fff;border-right:1px solid var(--bd);padding:24px 16px;display:flex;flex-direction:column;gap:4px;}
+    .s-logo{font-family:'Playfair Display',serif;font-size:22px;color:var(--g);}
+    .s-logo-ar{font-size:11px;color:var(--gm);direction:rtl;margin-bottom:24px;}
+    .s-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;font-size:13px;color:#5a8a6a;transition:all .15s;}
+    .s-item:hover{background:var(--gl);}
+    .s-item.active{background:var(--g);color:#fff;}
+    .s-divider{height:1px;background:var(--bd);margin:10px 0;}
+    .s-user{background:var(--gl);border-radius:12px;padding:12px;border:1px solid var(--bd);margin-bottom:10px;}
+    .s-user-name{font-size:13px;color:var(--gd);font-weight:500;}
+    .s-user-email{font-size:11px;color:var(--gm);margin-bottom:8px;}
+    .s-logout{font-size:11px;color:#c0392b;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0;}
+    .s-streak{background:var(--gl);border-radius:12px;padding:14px;border:1px solid var(--bd);margin-top:auto;}
+    .s-streak-label{font-size:10px;color:var(--gm);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+    .s-streak-val{font-family:'Playfair Display',serif;font-size:28px;color:var(--g);}
+    .s-streak-sub{font-size:11px;color:var(--gm);}
+    .main{padding:32px;overflow-y:auto;max-height:100vh;}
+    .page{display:none;}
+    .page.active{display:block;}
+    .page-title{font-family:'Playfair Display',serif;font-size:28px;color:var(--gd);margin-bottom:4px;}
+    .page-sub{font-size:13px;color:var(--gm);margin-bottom:28px;}
+    .card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:20px;margin-bottom:14px;}
+    .label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gm);margin-bottom:10px;}
+    .label-w{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#88c9a0;margin-bottom:10px;}
+    .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+    .stat-card{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:16px;text-align:center;}
+    .stat-num{font-family:'Playfair Display',serif;font-size:32px;color:var(--g);}
+    .stat-lbl{font-size:11px;color:var(--gm);margin-top:2px;}
+    .prog-bar{background:var(--gb);border-radius:4px;height:6px;overflow:hidden;margin-top:10px;}
+    .prog-fill{height:100%;background:var(--g);border-radius:4px;transition:width .3s;}
+    .hadith-ar{font-family:'Playfair Display',serif;font-size:22px;color:#fff;text-align:right;direction:rtl;line-height:1.8;margin-bottom:12px;}
+    .hadith-en{font-size:13px;color:#b8dfc4;line-height:1.7;margin-bottom:10px;}
+    .hadith-src{font-size:11px;color:#88c9a0;}
+    .btn{background:var(--g);color:#fff;border:none;padding:11px 22px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;}
+    .btn:hover{opacity:.85;}
+    .btn-outline{background:transparent;color:var(--g);border:1px solid var(--bd);padding:11px 22px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;}
+    .btn-outline:hover{background:var(--gl);}
+    .btn-row{display:flex;gap:10px;margin-top:14px;}
+    .sunnah-item{display:flex;align-items:center;gap:14px;padding:16px;background:var(--gl);border:1px solid var(--bd);border-radius:14px;margin-bottom:10px;cursor:pointer;}
+    .sunnah-item.done{background:#e6f5ec;border-color:var(--g);}
+    .chk{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--bd);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+    .sunnah-item.done .chk{background:var(--g);border-color:var(--g);}
+    .chk-mark{display:none;width:7px;height:11px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg) translate(-1px,-2px);}
+    .sunnah-item.done .chk-mark{display:block;}
+    .sunnah-name{font-size:14px;color:var(--gd);font-weight:500;margin-bottom:2px;}
+    .sunnah-sahabi{font-size:11px;color:var(--gm);}
+    .step-item{display:flex;gap:14px;padding:16px;background:var(--gl);border:1px solid var(--bd);border-radius:14px;margin-bottom:10px;align-items:flex-start;transition:all .3s;}
+    .step-item.active-step{background:#e6f5ec;border-color:var(--g);}
+    .step-num{width:30px;height:30px;background:var(--g);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;flex-shrink:0;}
+    .step-title{font-size:14px;color:var(--gd);font-weight:500;margin-bottom:3px;}
+    .step-ar{font-family:'Playfair Display',serif;font-size:15px;color:var(--g);direction:rtl;margin-bottom:3px;}
+    .step-sub{font-size:12px;color:var(--gm);}
+    .anger-trigger{background:#fff0f0;border:1px solid #f0b8b8;color:#c0392b;font-size:14px;font-weight:500;border-radius:12px;padding:16px;width:100%;cursor:pointer;text-align:center;margin-bottom:20px;font-family:'DM Sans',sans-serif;}
+    .shukr-input{background:var(--gl);border:1px solid var(--bd);border-radius:10px;padding:13px;width:100%;color:var(--gd);font-family:'DM Sans',sans-serif;font-size:14px;margin-bottom:10px;outline:none;}
+    .shukr-input:focus{border-color:var(--g);}
+    .shukr-input::placeholder{color:#b0d4bc;}
+    .ayah-card{background:var(--g);border-radius:12px;padding:16px;margin-top:16px;}
+    .ayah-label{font-size:10px;color:#88c9a0;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+    .ayah-text{font-size:13px;color:#e0f4e8;line-height:1.7;font-style:italic;}
+    .ayah-ref{font-size:10px;color:#88c9a0;margin-top:4px;}
+    .shukr-entry{background:var(--gl);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:10px;}
+    .shukr-date{font-size:10px;color:var(--gm);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+    .shukr-b{font-size:13px;color:var(--gd);display:flex;gap:8px;align-items:flex-start;margin-bottom:4px;}
+    .shukr-b-dot{width:5px;height:5px;border-radius:50%;background:var(--g);flex-shrink:0;margin-top:6px;}
+    .week-dots{display:flex;gap:6px;margin-top:14px;}
+    .wd{width:32px;height:32px;border-radius:50%;background:var(--gl);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gm);}
+    .wd.on{background:var(--g);border-color:var(--g);color:#fff;}
+    .home-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+    .home-card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:18px;cursor:pointer;transition:border-color .15s;}
+    .home-card:hover{border-color:var(--g);}
+    .home-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+    .hc-icon{width:40px;height:40px;background:var(--gb);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid var(--bd);}
+    .hc-badge{font-size:10px;color:var(--g);background:var(--gb);border:1px solid var(--bd);padding:3px 8px;border-radius:20px;}
+    .hc-name{font-size:15px;color:var(--gd);font-weight:500;margin-bottom:3px;}
+    .hc-desc{font-size:11px;color:var(--gm);line-height:1.5;}
+    .hadith-list{max-height:340px;overflow-y:auto;}
+    .h-row{display:flex;align-items:center;gap:12px;padding:12px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--bd);}
+    .h-row:hover{background:var(--gl);}
+    .h-row.learned{background:#e6f5ec;}
+    .h-num{width:28px;height:28px;background:var(--gl);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--g);flex-shrink:0;border:1px solid var(--bd);}
+    .h-row.learned .h-num{background:var(--g);color:#fff;border-color:var(--g);}
+    .h-ar{font-family:'Playfair Display',serif;font-size:13px;color:var(--gd);direction:rtl;flex:1;text-align:right;}
+    .review-mode{display:none;}
+    .review-mode.active{display:block;}
+    .list-mode.hidden{display:none;}
+    .flip-card{perspective:600px;cursor:pointer;margin-bottom:16px;}
+    .flip-inner{transition:transform .5s;transform-style:preserve-3d;position:relative;min-height:180px;}
+    .flip-inner.flipped{transform:rotateY(180deg);}
+    .flip-front,.flip-back{position:absolute;width:100%;backface-visibility:hidden;border-radius:16px;padding:24px;}
+    .flip-front{background:var(--g);}
+    .flip-back{background:#0a4524;transform:rotateY(180deg);}
+    .flip-hint{font-size:11px;color:#88c9a0;text-align:center;margin-bottom:8px;}
+    .toast{position:fixed;bottom:24px;right:24px;background:var(--g);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;}
+    .toast.show{opacity:1;}
+    .loading{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:var(--g);}
+    @media(max-width:640px){.layout{grid-template-columns:1fr;}.sidebar{display:none;}.home-grid{grid-template-columns:1fr;}.stat-grid{grid-template-columns:1fr 1fr;}}
+  </style>
+</head>
+<body>
+
+<div id="loading" class="loading">Areej ✦</div>
+
+<!-- AUTH -->
+<div id="auth-wrap" class="auth-wrap" style="display:none;">
+  <div class="auth-card" id="login-card">
+    <div class="auth-logo">Areej</div>
+    <div class="auth-logo-ar">عَرَج</div>
+    <div class="auth-title">Welcome back</div>
+    <div class="auth-sub">Sign in to continue your personal growth journey</div>
+    <div class="err" id="login-err"></div>
+    <label class="field-label">Email</label>
+    <input class="field-input" id="login-email" type="email" placeholder="you@example.com"/>
+    <label class="field-label">Password</label>
+    <input class="field-input" id="login-pw" type="password" placeholder="••••••••"/>
+    <button class="auth-btn" onclick="doLogin()">Sign in</button>
+    <div class="auth-divider"><div class="auth-divider-line"></div><div class="auth-divider-text">or</div><div class="auth-divider-line"></div></div>
+    <button class="google-btn" onclick="doGoogle()">
+      <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      Continue with Google
+    </button>
+    <div class="auth-switch">Don't have an account? <a onclick="showSignup()">Create one</a></div>
+  </div>
+  <div class="auth-card" id="signup-card" style="display:none;">
+    <div class="auth-logo">Areej</div>
+    <div class="auth-logo-ar">عَرَج</div>
+    <div class="auth-title">Create your account</div>
+    <div class="auth-sub">Your progress will be saved across all your devices</div>
+    <div class="err" id="signup-err"></div>
+    <label class="field-label">Your name</label>
+    <input class="field-input" id="signup-name" type="text" placeholder="e.g. Fatima"/>
+    <label class="field-label">Email</label>
+    <input class="field-input" id="signup-email" type="email" placeholder="you@example.com"/>
+    <label class="field-label">Password</label>
+    <input class="field-input" id="signup-pw" type="password" placeholder="At least 8 characters"/>
+    <button class="auth-btn" onclick="doSignup()">Create account</button>
+    <div class="auth-divider"><div class="auth-divider-line"></div><div class="auth-divider-text">or</div><div class="auth-divider-line"></div></div>
+    <button class="google-btn" onclick="doGoogle()">
+      <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      Continue with Google
+    </button>
+    <div class="auth-switch">Already have an account? <a onclick="showLogin()">Sign in</a></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app-wrap" class="app-wrap">
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="s-logo">Areej</div>
+      <div class="s-logo-ar">عَرَج · personal growth</div>
+      <div class="s-user">
+        <div class="s-user-name" id="sidebar-name"></div>
+        <div class="s-user-email" id="sidebar-email"></div>
+        <button class="s-logout" onclick="doLogout()">Sign out</button>
+      </div>
+      <div class="s-item active" onclick="goTo('home')">🏠 Home</div>
+      <div class="s-item" onclick="goTo('hadith')">📖 40 Hadith</div>
+      <div class="s-divider"></div>
+      <div class="s-item" onclick="goTo('sunnah')">☀️ Sunnah Habits</div>
+      <div class="s-item" onclick="goTo('anger')">🤲 Anger Guide</div>
+      <div class="s-item" onclick="goTo('shukr')">✨ Shukr Log</div>
+      <div class="s-streak">
+        <div class="s-streak-label">Current streak</div>
+        <div class="s-streak-val" id="streak-val">0</div>
+        <div class="s-streak-sub">days in a row</div>
+      </div>
+    </aside>
+    <main class="main">
+      <div class="page active" id="page-home">
+        <div class="page-title" id="home-greeting">Assalamu Alaykum</div>
+        <div class="page-sub" id="home-date"></div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-num" id="h-count">0</div><div class="stat-lbl">Hadith memorised</div></div>
+          <div class="stat-card"><div class="stat-num" id="s-count">0</div><div class="stat-lbl">Sunnahs today</div></div>
+          <div class="stat-card"><div class="stat-num" id="shukr-count">0</div><div class="stat-lbl">Shukr days</div></div>
+        </div>
+        <div class="home-grid">
+          <div class="home-card" onclick="goTo('hadith')">
+            <div class="home-card-top"><div class="hc-icon">📖</div><div class="hc-badge" id="h-badge">0 memorised</div></div>
+            <div class="hc-name">40 Hadith Challenge</div>
+            <div class="hc-desc">Memorise Nawawi's 40 with spaced repetition</div>
+            <div class="prog-bar"><div class="prog-fill" id="h-prog" style="width:0%"></div></div>
+          </div>
+          <div class="home-card" onclick="goTo('sunnah')">
+            <div class="home-card-top"><div class="hc-icon">☀️</div><div class="hc-badge" id="s-badge">0 / 3 done</div></div>
+            <div class="hc-name">Sunnah Habit Builder</div>
+            <div class="hc-desc">3 sunnah acts this month with sahabi context</div>
+            <div class="prog-bar"><div class="prog-fill" id="s-prog" style="width:0%"></div></div>
+          </div>
+          <div class="home-card" onclick="goTo('anger')">
+            <div class="home-card-top"><div class="hc-icon">🤲</div><div class="hc-badge">Guide</div></div>
+            <div class="hc-name">Anger Management</div>
+            <div class="hc-desc">Prophetic steps when emotions rise</div>
+          </div>
+          <div class="home-card" onclick="goTo('shukr')">
+            <div class="home-card-top"><div class="hc-icon">✨</div><div class="hc-badge" id="shukr-badge">Day 0</div></div>
+            <div class="hc-name">Shukr Log</div>
+            <div class="hc-desc">Daily gratitude tied to Quran verses</div>
+          </div>
+        </div>
+      </div>
+      <div class="page" id="page-hadith">
+        <div class="page-title">40 Hadith Challenge</div>
+        <div class="page-sub">Memorise Nawawi's 40 — tap a card to flip it</div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-num" id="hm">0</div><div class="stat-lbl">Memorised</div></div>
+          <div class="stat-card"><div class="stat-num" id="hl">40</div><div class="stat-lbl">Remaining</div></div>
+          <div class="stat-card"><div class="stat-num">3</div><div class="stat-lbl">Due today</div></div>
+        </div>
+        <div id="list-mode">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+            <div class="label" style="margin:0;">All 40 Hadith</div>
+            <button class="btn" onclick="startReview()">Review due (3) →</button>
+          </div>
+          <div class="card" style="padding:0;overflow:hidden;"><div class="hadith-list" id="hadith-list"></div></div>
+        </div>
+        <div class="review-mode" id="review-mode">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <div class="label" style="margin:0;">Review session</div>
+            <button class="btn-outline" onclick="exitReview()">← Back to list</button>
+          </div>
+          <div class="flip-card" onclick="flipCard()">
+            <div class="flip-inner" id="flip-inner">
+              <div class="flip-front"><div class="flip-hint">Tap to reveal translation</div><div class="hadith-ar" id="rev-ar"></div><div class="hadith-src" id="rev-num"></div></div>
+              <div class="flip-back"><div class="label-w">Translation</div><div class="hadith-en" id="rev-en"></div><div class="hadith-src" id="rev-src"></div></div>
+            </div>
+          </div>
+          <div class="btn-row" id="rev-btns" style="display:none;">
+            <button class="btn-outline" style="flex:1;" onclick="markHadith(false)">Need more practice</button>
+            <button class="btn" style="flex:1;" onclick="markHadith(true)">I knew it ✓</button>
+          </div>
+        </div>
+      </div>
+      <div class="page" id="page-sunnah">
+        <div class="page-title">Sunnah Habit Builder</div>
+        <div class="page-sub">Your 3 sunnah acts — tap to check off</div>
+        <div id="sunnah-list"></div>
+        <div style="margin-top:20px;"><div class="label">This week</div><div class="week-dots"><div class="wd on">S</div><div class="wd on">M</div><div class="wd on">T</div><div class="wd on">W</div><div class="wd">T</div><div class="wd">F</div><div class="wd">S</div></div></div>
+      </div>
+      <div class="page" id="page-anger">
+        <div class="page-title">Anger Guide</div>
+        <div class="page-sub">Prophetic steps to follow when you feel angry</div>
+        <button class="anger-trigger" onclick="activateGuide()">I am feeling angry right now</button>
+        <div class="label">The four prophetic steps</div>
+        <div id="anger-steps"></div>
+        <div class="ayah-card" style="margin-top:20px;"><div class="ayah-label">The Prophet ﷺ said</div><div class="ayah-text">"The strong man is not the one who overcomes people by his strength, but the one who controls himself while in anger."</div><div class="ayah-ref">Bukhari & Muslim</div></div>
+      </div>
+      <div class="page" id="page-shukr">
+        <div class="page-title">Shukr Log</div>
+        <div class="page-sub">Log 3 blessings daily with the niyyah of shukr</div>
+        <div class="card">
+          <div class="label">Today's entry</div>
+          <input class="shukr-input" id="b1" placeholder="First blessing..."/>
+          <input class="shukr-input" id="b2" placeholder="Second blessing..."/>
+          <input class="shukr-input" id="b3" placeholder="Third blessing..."/>
+          <button class="btn" style="width:100%;" onclick="saveShukr()">Save today's shukr</button>
+        </div>
+        <div class="ayah-card"><div class="ayah-label">Today's verse on gratitude</div><div class="ayah-text" id="ayah-text">"If you are grateful, I will surely increase you in favour..."</div><div class="ayah-ref" id="ayah-ref">Surah Ibrahim · 14:7</div></div>
+        <div style="margin-top:24px;"><div class="label">Past entries</div><div id="shukr-log"></div></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
