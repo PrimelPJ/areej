@@ -32,47 +32,120 @@
     .google-btn:hover{background:var(--gl);}
     .err{font-size:12px;color:#c0392b;background:#fff0f0;border:1px solid #f0b8b8;border-radius:8px;padding:10px 12px;margin-bottom:14px;display:none;}
     .app-wrap{display:none;}
-    .layout{display:grid;grid-template-columns:230px 1fr;min-height:100vh;}
-    .sidebar{background:var(--sidebar);border-right:1px solid var(--sidebar-border);padding:24px 16px;display:flex;flex-direction:column;gap:4px;transition:background .2s;}
+    .layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh;}
+    .sidebar{background:var(--sidebar);border-right:1px solid var(--sidebar-border);padding:20px 14px;display:flex;flex-direction:column;gap:3px;transition:background .2s;overflow-y:auto;}
     .s-logo{font-family:'Playfair Display',serif;font-size:22px;color:var(--g);}
-    .s-logo-ar{font-size:11px;color:var(--gm);direction:rtl;margin-bottom:24px;}
-    .s-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .15s;}
+    .s-logo-ar{font-size:11px;color:var(--gm);direction:rtl;margin-bottom:20px;}
+    .s-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .15s;}
     .s-item:hover{background:var(--gl);}
     .s-item.active{background:var(--g);color:#fff;}
-    .s-divider{height:1px;background:var(--bd);margin:10px 0;}
+    .s-section{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gm);padding:8px 12px 4px;margin-top:4px;}
+    .s-divider{height:1px;background:var(--bd);margin:8px 0;}
     .s-user{background:var(--gl);border-radius:12px;padding:12px;border:1px solid var(--bd);margin-bottom:10px;}
     .s-user-name{font-size:13px;color:var(--text);font-weight:500;}
     .s-user-email{font-size:11px;color:var(--gm);margin-bottom:8px;}
     .s-logout{font-size:11px;color:#c0392b;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0;}
-    .s-streak{background:var(--gl);border-radius:12px;padding:14px;border:1px solid var(--bd);margin-top:auto;}
+    .s-streak{background:var(--gl);border-radius:12px;padding:12px;border:1px solid var(--bd);margin-top:auto;}
     .s-streak-label{font-size:10px;color:var(--gm);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
-    .s-streak-val{font-family:'Playfair Display',serif;font-size:28px;color:var(--g);}
+    .s-streak-val{font-family:'Playfair Display',serif;font-size:26px;color:var(--g);}
     .s-streak-sub{font-size:11px;color:var(--gm);}
-    .main{padding:32px;overflow-y:auto;max-height:100vh;background:var(--bg);}
+    .main{padding:28px 32px;overflow-y:auto;max-height:100vh;background:var(--bg);}
     .page{display:none;}
     .page.active{display:block;}
     .page-title{font-family:'Playfair Display',serif;font-size:28px;color:var(--text);margin-bottom:4px;}
-    .page-sub{font-size:13px;color:var(--text2);margin-bottom:28px;}
+    .page-sub{font-size:13px;color:var(--text2);margin-bottom:24px;}
     .card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px;margin-bottom:14px;}
     .label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gm);margin-bottom:10px;}
     .label-w{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#88c9a0;margin-bottom:10px;}
     .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
     .stat-card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;text-align:center;}
-    .stat-num{font-family:'Playfair Display',serif;font-size:32px;color:var(--g);}
+    .stat-num{font-family:'Playfair Display',serif;font-size:30px;color:var(--g);}
     .stat-lbl{font-size:11px;color:var(--gm);margin-top:2px;}
     .prog-bar{background:var(--gb);border-radius:4px;height:6px;overflow:hidden;margin-top:10px;}
     .prog-fill{height:100%;background:var(--g);border-radius:4px;transition:width .3s;}
+    .btn{background:var(--g);color:#fff;border:none;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;}
+    .btn:hover{opacity:.85;}
+    .btn:disabled{opacity:.5;cursor:default;}
+    .btn-outline{background:transparent;color:var(--g);border:1px solid var(--bd);padding:10px 20px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;}
+    .btn-outline:hover{background:var(--gl);}
+    .btn-sm{padding:6px 14px;font-size:11px;}
+    .btn-row{display:flex;gap:10px;margin-top:14px;align-items:center;}
+    .mode-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+    .mode-tab{padding:8px 16px;border-radius:20px;border:1px solid var(--bd);background:var(--card);color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+    .mode-tab.active{background:var(--g);color:#fff;border-color:var(--g);}
+    .search-input{width:100%;background:var(--gl);border:1px solid var(--bd);border-radius:10px;padding:11px 14px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;margin-bottom:14px;}
+    .search-input:focus{border-color:var(--g);}
+    .search-input::placeholder{color:#b0d4bc;}
+
+    /* QURAN */
+    .surah-list{max-height:70vh;overflow-y:auto;}
+    .surah-row{display:flex;align-items:center;gap:14px;padding:14px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s;}
+    .surah-row:hover{background:var(--gl);}
+    .surah-num{width:36px;height:36px;background:var(--g);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;flex-shrink:0;font-weight:500;}
+    .surah-info{flex:1;}
+    .surah-name-ar{font-family:'Playfair Display',serif;font-size:16px;color:var(--text);direction:rtl;float:right;}
+    .surah-name-en{font-size:14px;color:var(--text);font-weight:500;}
+    .surah-meta{font-size:11px;color:var(--gm);}
+    .surah-view{display:none;}
+    .surah-view.active{display:block;}
+    .surah-header{background:var(--g);border-radius:16px;padding:24px;text-align:center;margin-bottom:20px;}
+    .surah-header-ar{font-family:'Playfair Display',serif;font-size:28px;color:#fff;margin-bottom:4px;}
+    .surah-header-en{font-size:14px;color:#88c9a0;}
+    .surah-header-meta{font-size:11px;color:#88c9a0;margin-top:4px;}
+    .bismillah{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);text-align:center;direction:rtl;padding:20px 0;border-bottom:1px solid var(--bd);margin-bottom:16px;}
+    .ayah-row{padding:16px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s;}
+    .ayah-row:hover{background:var(--gl);}
+    .ayah-row.bookmarked{background:var(--gb);border-left:3px solid var(--g);}
+    .ayah-ar{font-family:'Playfair Display',serif;font-size:20px;color:var(--text);direction:rtl;text-align:right;line-height:1.9;margin-bottom:10px;}
+    .ayah-en{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:8px;}
+    .ayah-num{font-size:10px;color:var(--gm);}
+    .checkpoint-banner{background:var(--g);color:#fff;padding:12px 16px;border-radius:12px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;font-size:13px;}
+    .checkpoint-btn{background:#fff;color:var(--g);border:none;padding:6px 14px;border-radius:8px;font-size:11px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;}
+    .quran-loader{text-align:center;padding:40px;color:var(--gm);font-size:14px;}
+
+    /* HADITHS */
+    .collection-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+    .collection-card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;cursor:pointer;transition:all .15s;}
+    .collection-card:hover{border-color:var(--g);background:var(--gl);}
+    .collection-icon{font-size:24px;margin-bottom:8px;}
+    .collection-name{font-size:14px;color:var(--text);font-weight:500;margin-bottom:3px;}
+    .collection-count{font-size:11px;color:var(--gm);}
+    .book-list{max-height:60vh;overflow-y:auto;}
+    .book-row{display:flex;align-items:center;justify-content:space-between;padding:14px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s;}
+    .book-row:hover{background:var(--gl);}
+    .book-name{font-size:14px;color:var(--text);}
+    .book-count{font-size:11px;color:var(--gm);}
+    .hadith-item{padding:18px;border-bottom:1px solid var(--bd);}
+    .hadith-item-text{font-size:14px;color:var(--text);line-height:1.8;margin-bottom:10px;}
+    .hadith-item-arabic{font-family:'Playfair Display',serif;font-size:17px;color:var(--text);direction:rtl;text-align:right;line-height:1.9;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--bd);}
+    .hadith-item-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+    .hadith-item-ref{font-size:11px;color:var(--gm);}
+    .bookmark-btn{background:none;border:1px solid var(--bd);color:var(--gm);padding:4px 10px;border-radius:20px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
+    .bookmark-btn:hover{border-color:var(--g);color:var(--g);}
+    .bookmark-btn.saved{background:var(--gb);border-color:var(--g);color:var(--g);}
+    .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+    .breadcrumb-item{font-size:12px;color:var(--text2);cursor:pointer;}
+    .breadcrumb-item:hover{color:var(--g);}
+    .breadcrumb-sep{font-size:12px;color:var(--gm);}
+    .hadith-loader{text-align:center;padding:40px;color:var(--gm);font-size:14px;}
+
+    /* SHARED */
     .hadith-ar{font-family:'Playfair Display',serif;font-size:22px;color:#fff;text-align:right;direction:rtl;line-height:1.8;margin-bottom:12px;}
     .hadith-en{font-size:13px;color:#b8dfc4;line-height:1.7;margin-bottom:10px;}
     .hadith-src{font-size:11px;color:#88c9a0;}
-    .btn{background:var(--g);color:#fff;border:none;padding:11px 22px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;}
-    .btn:hover{opacity:.85;}
-    .btn-outline{background:transparent;color:var(--g);border:1px solid var(--bd);padding:11px 22px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;}
-    .btn-outline:hover{background:var(--gl);}
-    .btn-row{display:flex;gap:10px;margin-top:14px;}
-    .mode-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
-    .mode-tab{padding:8px 18px;border-radius:20px;border:1px solid var(--bd);background:var(--card);color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;}
-    .mode-tab.active{background:var(--g);color:#fff;border-color:var(--g);}
+    .h-row{display:flex;align-items:center;gap:12px;padding:12px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--bd);}
+    .h-row:hover{background:var(--gl);}
+    .h-row.learned{background:var(--gb);}
+    .h-num{width:28px;height:28px;background:var(--gl);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--g);flex-shrink:0;border:1px solid var(--bd);}
+    .h-row.learned .h-num{background:var(--g);color:#fff;border-color:var(--g);}
+    .h-ar{font-family:'Playfair Display',serif;font-size:13px;color:var(--text);direction:rtl;flex:1;text-align:right;}
+    .flip-card{perspective:600px;cursor:pointer;margin-bottom:16px;}
+    .flip-inner{transition:transform .5s;transform-style:preserve-3d;position:relative;min-height:200px;}
+    .flip-inner.flipped{transform:rotateY(180deg);}
+    .flip-front,.flip-back{position:absolute;width:100%;backface-visibility:hidden;border-radius:16px;padding:28px;}
+    .flip-front{background:var(--g);}
+    .flip-back{background:#0a4524;transform:rotateY(180deg);}
+    .flip-hint{font-size:11px;color:#88c9a0;text-align:center;margin-bottom:12px;}
     .quiz-question{font-family:'Playfair Display',serif;font-size:20px;color:#fff;text-align:center;direction:rtl;line-height:1.8;margin-bottom:20px;padding:24px;background:var(--g);border-radius:16px;}
     .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
     .quiz-option{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;cursor:pointer;font-size:13px;color:var(--text);text-align:center;transition:all .15s;line-height:1.5;}
@@ -102,7 +175,7 @@
     .shukr-input::placeholder{color:#b0d4bc;}
     .ayah-card{background:var(--g);border-radius:12px;padding:16px;margin-top:16px;}
     .ayah-label{font-size:10px;color:#88c9a0;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
-    .ayah-text{font-size:13px;color:#e0f4e8;line-height:1.7;font-style:italic;}
+    .ayah-text-s{font-size:13px;color:#e0f4e8;line-height:1.7;font-style:italic;}
     .ayah-ref{font-size:10px;color:#88c9a0;margin-top:4px;}
     .shukr-entry{background:var(--gl);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:10px;}
     .shukr-date{font-size:10px;color:var(--gm);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
@@ -132,20 +205,19 @@
     .goal-input:focus{border-color:var(--g);}
     .goal-input::placeholder{color:#b0d4bc;}
     .goal-cat-select{background:var(--gl);border:1px solid var(--bd);border-radius:10px;padding:12px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;cursor:pointer;}
-    .goal-item{display:flex;align-items:flex-start;gap:12px;padding:14px;background:var(--gl);border:1px solid var(--bd);border-radius:14px;margin-bottom:10px;transition:all .15s;}
+    .goal-item{display:flex;align-items:flex-start;gap:12px;padding:14px;background:var(--gl);border:1px solid var(--bd);border-radius:14px;margin-bottom:10px;}
     .goal-item.done{opacity:.6;}
     .goal-item.done .goal-text{text-decoration:line-through;}
-    .goal-chk{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--bd);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:12px;color:#fff;margin-top:1px;transition:all .15s;}
+    .goal-chk{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--bd);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:12px;color:#fff;margin-top:1px;}
     .goal-item:not(.done) .goal-chk{background:transparent;color:transparent;}
     .goal-item.done .goal-chk{background:var(--g);border-color:var(--g);color:#fff;}
-    .goal-item:not(.done) .goal-chk:hover{background:var(--gb);border-color:var(--g);}
     .goal-body{flex:1;}
     .goal-text{font-size:14px;color:var(--text);margin-bottom:3px;line-height:1.5;}
     .goal-cat{font-size:11px;color:var(--gm);}
     .goal-del{background:none;border:none;color:var(--text2);font-size:18px;cursor:pointer;padding:0 4px;flex-shrink:0;opacity:.4;}
     .goal-del:hover{opacity:1;color:#c0392b;}
     .sug-tabs-wrap{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
-    .sug-tab{padding:6px 12px;border-radius:20px;border:1px solid var(--bd);background:var(--card);color:var(--text2);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
+    .sug-tab{padding:6px 12px;border-radius:20px;border:1px solid var(--bd);background:var(--card);color:var(--text2);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;}
     .sug-tab.active{background:var(--g);color:#fff;border-color:var(--g);}
     .sug-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s;}
     .sug-item:hover{background:var(--gl);}
@@ -153,7 +225,7 @@
     .sug-item span:first-child{font-size:13px;color:var(--text);line-height:1.5;flex:1;}
     .sug-add{font-size:11px;color:var(--g);font-weight:500;flex-shrink:0;margin-left:12px;}
     .week-dots{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap;}
-    .wd{width:32px;height:32px;border-radius:50%;background:var(--gl);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gm);}
+    .wd{width:30px;height:30px;border-radius:50%;background:var(--gl);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gm);}
     .wd.on{background:var(--g);border-color:var(--g);color:#fff;}
     .home-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
     .home-card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;cursor:pointer;transition:border-color .15s;}
@@ -163,59 +235,38 @@
     .hc-badge{font-size:10px;color:var(--g);background:var(--gb);border:1px solid var(--bd);padding:3px 8px;border-radius:20px;}
     .hc-name{font-size:15px;color:var(--text);font-weight:500;margin-bottom:3px;}
     .hc-desc{font-size:11px;color:var(--text2);line-height:1.5;}
-    .hadith-list{max-height:400px;overflow-y:auto;}
-    .h-row{display:flex;align-items:center;gap:12px;padding:12px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--bd);}
-    .h-row:hover{background:var(--gl);}
-    .h-row.learned{background:var(--gb);}
-    .h-num{width:28px;height:28px;background:var(--gl);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--g);flex-shrink:0;border:1px solid var(--bd);}
-    .h-row.learned .h-num{background:var(--g);color:#fff;border-color:var(--g);}
-    .h-ar{font-family:'Playfair Display',serif;font-size:13px;color:var(--text);direction:rtl;flex:1;text-align:right;}
-    .flip-card{perspective:600px;cursor:pointer;margin-bottom:16px;}
-    .flip-inner{transition:transform .5s;transform-style:preserve-3d;position:relative;min-height:200px;}
-    .flip-inner.flipped{transform:rotateY(180deg);}
-    .flip-front,.flip-back{position:absolute;width:100%;backface-visibility:hidden;border-radius:16px;padding:28px;}
-    .flip-front{background:var(--g);}
-    .flip-back{background:#0a4524;transform:rotateY(180deg);}
-    .flip-hint{font-size:11px;color:#88c9a0;text-align:center;margin-bottom:12px;}
+    .hadith-list-scroll{max-height:400px;overflow-y:auto;}
     .toast{position:fixed;bottom:24px;right:24px;background:var(--g);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;}
     .toast.show{opacity:1;}
     .loading{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:var(--g);background:var(--bg);}
-    @media(max-width:640px){.layout{grid-template-columns:1fr;}.sidebar{display:none;}.home-grid{grid-template-columns:1fr;}.stat-grid{grid-template-columns:1fr 1fr;}.quiz-options{grid-template-columns:1fr;}.badges-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:700px){.layout{grid-template-columns:1fr;}.sidebar{display:none;}.home-grid{grid-template-columns:1fr;}.stat-grid{grid-template-columns:1fr 1fr;}.quiz-options{grid-template-columns:1fr;}.badges-grid{grid-template-columns:repeat(2,1fr);}.collection-grid{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
-
 <div id="loading" class="loading">Areej ✦</div>
 
 <!-- AUTH -->
 <div id="auth-wrap" class="auth-wrap" style="display:none;">
   <div class="auth-card" id="login-card">
-    <div class="auth-logo">Areej</div>
-    <div class="auth-logo-ar">عَرَج</div>
+    <div class="auth-logo">Areej</div><div class="auth-logo-ar">عَرَج</div>
     <div class="auth-title">Welcome back</div>
     <div class="auth-sub">Sign in to continue your personal growth journey</div>
     <div class="err" id="login-err"></div>
-    <label class="field-label">Email</label>
-    <input class="field-input" id="login-email" type="email" placeholder="you@example.com"/>
-    <label class="field-label">Password</label>
-    <input class="field-input" id="login-pw" type="password" placeholder="••••••••"/>
+    <label class="field-label">Email</label><input class="field-input" id="login-email" type="email" placeholder="you@example.com"/>
+    <label class="field-label">Password</label><input class="field-input" id="login-pw" type="password" placeholder="••••••••"/>
     <button class="auth-btn" onclick="doLogin()">Sign in</button>
     <div class="auth-divider"><div class="auth-divider-line"></div><div class="auth-divider-text">or</div><div class="auth-divider-line"></div></div>
     <button class="google-btn" onclick="doGoogle()"><svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>Continue with Google</button>
     <div class="auth-switch">Don't have an account? <a onclick="showSignup()">Create one</a></div>
   </div>
   <div class="auth-card" id="signup-card" style="display:none;">
-    <div class="auth-logo">Areej</div>
-    <div class="auth-logo-ar">عَرَج</div>
+    <div class="auth-logo">Areej</div><div class="auth-logo-ar">عَرَج</div>
     <div class="auth-title">Create your account</div>
     <div class="auth-sub">Your progress will be saved across all your devices</div>
     <div class="err" id="signup-err"></div>
-    <label class="field-label">Your name</label>
-    <input class="field-input" id="signup-name" type="text" placeholder="e.g. Fatima"/>
-    <label class="field-label">Email</label>
-    <input class="field-input" id="signup-email" type="email" placeholder="you@example.com"/>
-    <label class="field-label">Password</label>
-    <input class="field-input" id="signup-pw" type="password" placeholder="At least 8 characters"/>
+    <label class="field-label">Your name</label><input class="field-input" id="signup-name" type="text" placeholder="e.g. Fatima"/>
+    <label class="field-label">Email</label><input class="field-input" id="signup-email" type="email" placeholder="you@example.com"/>
+    <label class="field-label">Password</label><input class="field-input" id="signup-pw" type="password" placeholder="At least 8 characters"/>
     <button class="auth-btn" onclick="doSignup()">Create account</button>
     <div class="auth-divider"><div class="auth-divider-line"></div><div class="auth-divider-text">or</div><div class="auth-divider-line"></div></div>
     <button class="google-btn" onclick="doGoogle()"><svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>Continue with Google</button>
@@ -228,25 +279,29 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="s-logo">Areej</div>
-      <div class="s-logo-ar">عَرَج · personal growth</div>
+      <div class="s-logo-ar">عَرَج</div>
       <div class="s-user">
         <div class="s-user-name" id="sidebar-name"></div>
         <div class="s-user-email" id="sidebar-email"></div>
         <button class="s-logout" onclick="doLogout()">Sign out</button>
       </div>
       <div class="s-item active" onclick="goTo('home')">🏠 Home</div>
-      <div class="s-item" onclick="goTo('hadith')">📖 40 Hadith</div>
+      <div class="s-section">Quran & Hadith</div>
+      <div class="s-item" onclick="goTo('quran')">📗 Quran Reader</div>
+      <div class="s-item" onclick="goTo('hadiths')">📜 Hadiths</div>
+      <div class="s-item" onclick="goTo('nawawi')">📖 40 Nawawi</div>
+      <div class="s-section">Learning</div>
       <div class="s-item" onclick="goTo('arabic')">🔤 Arabic Words</div>
-      <div class="s-divider"></div>
+      <div class="s-section">Daily Practice</div>
       <div class="s-item" onclick="goTo('sunnah')">☀️ Sunnah Habits</div>
       <div class="s-item" onclick="goTo('anger')">🤲 Anger Guide</div>
       <div class="s-item" onclick="goTo('shukr')">✨ Shukr Log</div>
       <div class="s-item" onclick="goTo('goals')">🎯 My Goals</div>
-      <div class="s-divider"></div>
+      <div class="s-section">Profile</div>
       <div class="s-item" onclick="goTo('badges')">🏅 Badges</div>
       <div class="s-item" onclick="toggleDark()" id="dark-toggle">🌙 Dark mode</div>
       <div class="s-streak">
-        <div class="s-streak-label">Current streak</div>
+        <div class="s-streak-label">Shukr streak</div>
         <div class="s-streak-val" id="streak-val">0</div>
         <div class="s-streak-sub">days in a row</div>
       </div>
@@ -264,40 +319,93 @@
           <button class="challenge-done" onclick="completeChallenge()">Mark as done ✓</button>
         </div>
         <div class="stat-grid">
-          <div class="stat-card"><div class="stat-num" id="h-count">0</div><div class="stat-lbl">Hadith memorised</div></div>
+          <div class="stat-card"><div class="stat-num" id="h-count">0</div><div class="stat-lbl">Nawawi memorised</div></div>
           <div class="stat-card"><div class="stat-num" id="s-count">0</div><div class="stat-lbl">Sunnahs today</div></div>
           <div class="stat-card"><div class="stat-num" id="shukr-count">0</div><div class="stat-lbl">Shukr days</div></div>
         </div>
         <div class="home-grid">
-          <div class="home-card" onclick="goTo('hadith')">
-            <div class="home-card-top"><div class="hc-icon">📖</div><div class="hc-badge" id="h-badge">0 / 40 memorised</div></div>
-            <div class="hc-name">40 Hadith Challenge</div>
-            <div class="hc-desc">Memorise + quiz yourself on all 40 hadith</div>
+          <div class="home-card" onclick="goTo('quran')">
+            <div class="home-card-top"><div class="hc-icon">📗</div><div class="hc-badge" id="quran-badge">Start reading</div></div>
+            <div class="hc-name">Quran Reader</div>
+            <div class="hc-desc">Full Quran with Arabic + translation. Checkpoint saved.</div>
+          </div>
+          <div class="home-card" onclick="goTo('hadiths')">
+            <div class="home-card-top"><div class="hc-icon">📜</div><div class="hc-badge">9 collections</div></div>
+            <div class="hc-name">Hadiths</div>
+            <div class="hc-desc">Bukhari, Muslim, Abu Dawud, Tirmidhi + more</div>
+          </div>
+          <div class="home-card" onclick="goTo('nawawi')">
+            <div class="home-card-top"><div class="hc-icon">📖</div><div class="hc-badge" id="h-badge">0 / 40</div></div>
+            <div class="hc-name">40 Nawawi Hadith</div>
+            <div class="hc-desc">Memorise + quiz yourself on all 40</div>
             <div class="prog-bar"><div class="prog-fill" id="h-prog" style="width:0%"></div></div>
-          </div>
-          <div class="home-card" onclick="goTo('arabic')">
-            <div class="home-card-top"><div class="hc-icon">🔤</div><div class="hc-badge">30 words</div></div>
-            <div class="hc-name">Arabic Words</div>
-            <div class="hc-desc">Learn Islamic vocabulary with Quran examples</div>
-          </div>
-          <div class="home-card" onclick="goTo('sunnah')">
-            <div class="home-card-top"><div class="hc-icon">☀️</div><div class="hc-badge" id="s-badge">0 done</div></div>
-            <div class="hc-name">Sunnah Habits</div>
-            <div class="hc-desc">12 sunnah acts with sahabi context and rewards</div>
-            <div class="prog-bar"><div class="prog-fill" id="s-prog" style="width:0%"></div></div>
           </div>
           <div class="home-card" onclick="goTo('goals')">
             <div class="home-card-top"><div class="hc-icon">🎯</div><div class="hc-badge" id="goals-count">0 active</div></div>
             <div class="hc-name">My Goals</div>
-            <div class="hc-desc">Set goals and get suggestions by category</div>
+            <div class="hc-desc">Set goals with suggested ideas by category</div>
           </div>
         </div>
       </div>
 
-      <!-- HADITH -->
-      <div class="page" id="page-hadith">
-        <div class="page-title">40 Hadith Challenge</div>
-        <div class="page-sub">All 40 of Nawawi's hadith — memorise, flip cards, or quiz yourself</div>
+      <!-- QURAN READER -->
+      <div class="page" id="page-quran">
+        <div class="page-title">Quran Reader</div>
+        <div class="page-sub">Full Quran — Arabic with English translation. Your checkpoint is saved.</div>
+        <div id="quran-checkpoint-banner" style="display:none;"></div>
+        <div id="quran-surah-list-view">
+          <input class="search-input" id="surah-search" placeholder="Search surah by name..." oninput="filterSurahs()"/>
+          <div class="card" style="padding:0;overflow:hidden;">
+            <div class="surah-list" id="surah-list">
+              <div class="quran-loader">Loading surahs...</div>
+            </div>
+          </div>
+        </div>
+        <div id="quran-surah-reader" style="display:none;">
+          <div class="btn-row" style="margin-bottom:16px;">
+            <button class="btn-outline" onclick="backToSurahList()">← All Surahs</button>
+            <button class="btn btn-sm" onclick="saveCheckpoint()" id="save-checkpoint-btn">📍 Save checkpoint</button>
+          </div>
+          <div class="surah-header" id="surah-header"></div>
+          <div id="surah-ayahs">
+            <div class="quran-loader">Loading ayahs...</div>
+          </div>
+          <div class="btn-row" style="margin-top:20px;justify-content:space-between;">
+            <button class="btn-outline" id="prev-surah-btn" onclick="navigateSurah(-1)">← Previous Surah</button>
+            <button class="btn" id="next-surah-btn" onclick="navigateSurah(1)">Next Surah →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- HADITHS -->
+      <div class="page" id="page-hadiths">
+        <div class="page-title">Hadiths</div>
+        <div class="page-sub">Browse major hadith collections — Bukhari, Muslim, Abu Dawud and more</div>
+        <div id="hadiths-collections-view">
+          <div class="collection-grid" id="collections-grid"></div>
+          <div class="card" style="padding:14px 16px;background:var(--gl);">
+            <div style="font-size:12px;color:var(--text2);line-height:1.6;">Data sourced from the open hadith database. For the full verified sunnah.com database, visit <strong>sunnah.com</strong> and use their API with a free key from <strong>sunnah.com/api</strong>.</div>
+          </div>
+        </div>
+        <div id="hadiths-books-view" style="display:none;">
+          <div class="breadcrumb" id="hadiths-breadcrumb"></div>
+          <div class="card" style="padding:0;overflow:hidden;">
+            <div class="book-list" id="books-list"></div>
+          </div>
+        </div>
+        <div id="hadiths-items-view" style="display:none;">
+          <div class="breadcrumb" id="hadiths-items-breadcrumb"></div>
+          <input class="search-input" id="hadith-search" placeholder="Search within this book..." oninput="filterHadiths()"/>
+          <div class="card" style="padding:0;overflow:hidden;max-height:70vh;overflow-y:auto;" id="hadiths-items-container">
+            <div class="hadith-loader">Loading hadiths...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 40 NAWAWI -->
+      <div class="page" id="page-nawawi">
+        <div class="page-title">40 Nawawi Hadith</div>
+        <div class="page-sub">Memorise, flip cards, or quiz yourself on all 40</div>
         <div class="stat-grid">
           <div class="stat-card"><div class="stat-num" id="hm">0</div><div class="stat-lbl">Memorised</div></div>
           <div class="stat-card"><div class="stat-num" id="hl">40</div><div class="stat-lbl">Remaining</div></div>
@@ -308,9 +416,7 @@
           <div class="mode-tab" onclick="switchHadithMode('review')">🔄 Flip cards</div>
           <div class="mode-tab" onclick="switchHadithMode('quiz')">🧠 Quiz</div>
         </div>
-        <div id="hmode-list">
-          <div class="card" style="padding:0;overflow:hidden;"><div class="hadith-list" id="hadith-list"></div></div>
-        </div>
+        <div id="hmode-list"><div class="card" style="padding:0;overflow:hidden;"><div class="hadith-list-scroll" id="hadith-list"></div></div></div>
         <div id="hmode-review" style="display:none;">
           <div class="flip-card" onclick="flipCard()">
             <div class="flip-inner" id="flip-inner">
@@ -346,26 +452,14 @@
       <div class="page" id="page-arabic">
         <div class="page-title">Arabic Words</div>
         <div class="page-sub">30 Islamic vocabulary words — browse and learn</div>
-        <div class="word-card">
-          <div class="word-arabic" id="w-ar"></div>
-          <div class="word-transliteration" id="w-trans"></div>
-          <div class="word-meaning" id="w-mean"></div>
-          <div class="word-category" id="w-cat"></div>
-        </div>
-        <div class="card">
-          <div class="label">Used in Quran / Hadith</div>
-          <div class="word-ex-ar" id="w-ex-ar"></div>
-          <div class="word-ex-en" id="w-ex-en"></div>
-        </div>
+        <div class="word-card"><div class="word-arabic" id="w-ar"></div><div class="word-transliteration" id="w-trans"></div><div class="word-meaning" id="w-mean"></div><div class="word-category" id="w-cat"></div></div>
+        <div class="card"><div class="label">Used in Quran / Hadith</div><div class="word-ex-ar" id="w-ex-ar"></div><div class="word-ex-en" id="w-ex-en"></div></div>
         <div class="btn-row">
           <button class="btn-outline" style="flex:1;" onclick="prevWord()">← Previous</button>
-          <div style="display:flex;align-items:center;font-size:12px;color:var(--text2);padding:0 12px;" id="w-counter">1 / 30</div>
+          <div style="font-size:12px;color:var(--text2);padding:0 12px;" id="w-counter">1 / 30</div>
           <button class="btn" style="flex:1;" onclick="nextWord()">Next →</button>
         </div>
-        <div style="margin-top:24px;">
-          <div class="label">All 30 words</div>
-          <div class="card" style="padding:0;overflow:hidden;"><div id="word-list"></div></div>
-        </div>
+        <div style="margin-top:24px;"><div class="label">All 30 words</div><div class="card" style="padding:0;overflow:hidden;"><div id="word-list"></div></div></div>
       </div>
 
       <!-- SUNNAH -->
@@ -383,7 +477,7 @@
         <button class="anger-trigger" onclick="activateGuide()">I am feeling angry right now</button>
         <div class="label">The four prophetic steps</div>
         <div id="anger-steps"></div>
-        <div class="ayah-card" style="margin-top:20px;"><div class="ayah-label">The Prophet ﷺ said</div><div class="ayah-text">"The strong man is not the one who overcomes people by his strength, but the one who controls himself while in anger."</div><div class="ayah-ref">Bukhari & Muslim</div></div>
+        <div class="ayah-card" style="margin-top:20px;"><div class="ayah-label">The Prophet ﷺ said</div><div class="ayah-text-s">"The strong man is not the one who overcomes people by his strength, but the one who controls himself while in anger."</div><div class="ayah-ref">Bukhari & Muslim</div></div>
       </div>
 
       <!-- SHUKR -->
@@ -397,7 +491,7 @@
           <input class="shukr-input" id="b3" placeholder="Third blessing..."/>
           <button class="btn" style="width:100%;" onclick="saveShukr()">Save today's shukr</button>
         </div>
-        <div class="ayah-card"><div class="ayah-label">Today's verse on gratitude</div><div class="ayah-text" id="ayah-text">"If you are grateful, I will surely increase you in favour..."</div><div class="ayah-ref" id="ayah-ref">Surah Ibrahim · 14:7</div></div>
+        <div class="ayah-card"><div class="ayah-label">Today's verse on gratitude</div><div class="ayah-text-s" id="ayah-text">"If you are grateful, I will surely increase you in favour..."</div><div class="ayah-ref" id="ayah-ref">Surah Ibrahim · 14:7</div></div>
         <div style="margin-top:24px;"><div class="label">Past entries</div><div id="shukr-log"></div></div>
       </div>
 
@@ -410,13 +504,8 @@
           <div class="goal-add-row">
             <input class="goal-input" id="goal-input" placeholder="What do you want to start doing?" onkeydown="if(event.key==='Enter') addGoalFromInput()"/>
             <select class="goal-cat-select" id="goal-cat-select">
-              <option>🙏 Prayer</option>
-              <option>📖 Quran</option>
-              <option>🌿 Habits</option>
-              <option>💬 Character</option>
-              <option>📚 Knowledge</option>
-              <option>❤️ Community</option>
-              <option>🎯 General</option>
+              <option>🙏 Prayer</option><option>📖 Quran</option><option>🌿 Habits</option>
+              <option>💬 Character</option><option>📚 Knowledge</option><option>❤️ Community</option><option>🎯 General</option>
             </select>
             <button class="btn" onclick="addGoalFromInput()">Add</button>
           </div>
@@ -441,7 +530,6 @@
     </main>
   </div>
 </div>
-
 <div class="toast" id="toast"></div>
 <script type="module" src="/src/main.js"></script>
 </body>
