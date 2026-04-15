@@ -32,7 +32,7 @@
     .google-btn:hover{background:var(--gl);}
     .err{font-size:12px;color:#c0392b;background:#fff0f0;border:1px solid #f0b8b8;border-radius:8px;padding:10px 12px;margin-bottom:14px;display:none;}
     .app-wrap{display:none;}
-    .layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh;}
+    .layout{display:grid;grid-template-columns:230px 1fr;min-height:100vh;}
     .sidebar{background:var(--sidebar);border-right:1px solid var(--sidebar-border);padding:24px 16px;display:flex;flex-direction:column;gap:4px;transition:background .2s;}
     .s-logo{font-family:'Playfair Display',serif;font-size:22px;color:var(--g);}
     .s-logo-ar{font-size:11px;color:var(--gm);direction:rtl;margin-bottom:24px;}
@@ -70,26 +70,26 @@
     .btn-outline{background:transparent;color:var(--g);border:1px solid var(--bd);padding:11px 22px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;}
     .btn-outline:hover{background:var(--gl);}
     .btn-row{display:flex;gap:10px;margin-top:14px;}
-    .mode-tabs{display:flex;gap:8px;margin-bottom:20px;}
+    .mode-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
     .mode-tab{padding:8px 18px;border-radius:20px;border:1px solid var(--bd);background:var(--card);color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;}
     .mode-tab.active{background:var(--g);color:#fff;border-color:var(--g);}
     .quiz-question{font-family:'Playfair Display',serif;font-size:20px;color:#fff;text-align:center;direction:rtl;line-height:1.8;margin-bottom:20px;padding:24px;background:var(--g);border-radius:16px;}
     .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
     .quiz-option{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;cursor:pointer;font-size:13px;color:var(--text);text-align:center;transition:all .15s;line-height:1.5;}
     .quiz-option:hover{border-color:var(--g);background:var(--gl);}
-    .quiz-option.correct{background:#e6f5ec;border-color:var(--g);color:#0d5c30;}
+    .quiz-option.correct{background:#e6f5ec;border-color:#0d5c30;color:#0d5c30;}
     .quiz-option.wrong{background:#fff0f0;border-color:#f0b8b8;color:#c0392b;}
     .quiz-score{font-family:'Playfair Display',serif;font-size:40px;color:var(--g);display:block;margin-bottom:8px;}
-    .sunnah-item{display:flex;align-items:center;gap:14px;padding:16px;background:var(--gl);border:1px solid var(--bd);border-radius:14px;margin-bottom:10px;cursor:pointer;transition:all .15s;}
+    .sunnah-item{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--gl);border:1px solid var(--bd);border-radius:14px;margin-bottom:10px;cursor:pointer;transition:all .15s;}
     .sunnah-item:hover{border-color:var(--g);}
     .sunnah-item.done{background:var(--gb);border-color:var(--g);}
-    .chk{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--bd);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+    .chk{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--bd);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px;}
     .sunnah-item.done .chk{background:var(--g);border-color:var(--g);}
     .chk-mark{display:none;width:7px;height:11px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg) translate(-1px,-2px);}
     .sunnah-item.done .chk-mark{display:block;}
     .sunnah-name{font-size:14px;color:var(--text);font-weight:500;margin-bottom:2px;}
-    .sunnah-sahabi{font-size:11px;color:var(--gm);}
-    .sunnah-reward{font-size:11px;color:var(--g);margin-top:4px;font-style:italic;}
+    .sunnah-sahabi{font-size:11px;color:var(--gm);margin-bottom:2px;}
+    .sunnah-reward{font-size:11px;color:var(--g);font-style:italic;}
     .step-item{display:flex;gap:14px;padding:16px;background:var(--gl);border:1px solid var(--bd);border-radius:14px;margin-bottom:10px;align-items:flex-start;transition:all .3s;}
     .step-item.active-step{background:var(--gb);border-color:var(--g);}
     .step-num{width:30px;height:30px;background:var(--g);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;flex-shrink:0;}
@@ -109,12 +109,12 @@
     .shukr-b{font-size:13px;color:var(--text);display:flex;gap:8px;align-items:flex-start;margin-bottom:4px;}
     .shukr-b-dot{width:5px;height:5px;border-radius:50%;background:var(--g);flex-shrink:0;margin-top:6px;}
     .word-card{background:var(--g);border-radius:20px;padding:32px;text-align:center;margin-bottom:16px;}
-    .word-arabic{font-family:'Playfair Display',serif;font-size:48px;color:#fff;margin-bottom:8px;direction:rtl;}
+    .word-arabic{font-family:'Playfair Display',serif;font-size:52px;color:#fff;margin-bottom:8px;direction:rtl;}
     .word-transliteration{font-size:14px;color:#88c9a0;margin-bottom:4px;}
-    .word-meaning{font-size:18px;color:#e0f4e8;font-family:'Playfair Display',serif;}
+    .word-meaning{font-size:20px;color:#e0f4e8;font-family:'Playfair Display',serif;}
     .word-category{font-size:10px;color:#88c9a0;text-transform:uppercase;letter-spacing:1px;margin-top:8px;}
-    .word-ex-ar{font-family:'Playfair Display',serif;font-size:16px;color:var(--text);direction:rtl;text-align:right;margin-bottom:6px;}
-    .word-ex-en{font-size:12px;color:var(--text2);}
+    .word-ex-ar{font-family:'Playfair Display',serif;font-size:16px;color:var(--text);direction:rtl;text-align:right;margin-bottom:6px;line-height:1.6;}
+    .word-ex-en{font-size:12px;color:var(--text2);line-height:1.6;}
     .badges-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px;}
     .badge-item{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;text-align:center;}
     .badge-item.earned{background:var(--gb);border-color:var(--g);}
@@ -127,7 +127,32 @@
     .challenge-text{font-size:15px;color:#fff;line-height:1.6;margin-bottom:8px;}
     .challenge-reward{font-size:11px;color:#88c9a0;margin-bottom:12px;}
     .challenge-done{background:#fff;color:var(--g);border:none;padding:9px 20px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;}
-    .week-dots{display:flex;gap:6px;margin-top:14px;}
+    .goal-add-row{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+    .goal-input{flex:1;min-width:200px;background:var(--gl);border:1px solid var(--bd);border-radius:10px;padding:12px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;}
+    .goal-input:focus{border-color:var(--g);}
+    .goal-input::placeholder{color:#b0d4bc;}
+    .goal-cat-select{background:var(--gl);border:1px solid var(--bd);border-radius:10px;padding:12px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;cursor:pointer;}
+    .goal-item{display:flex;align-items:flex-start;gap:12px;padding:14px;background:var(--gl);border:1px solid var(--bd);border-radius:14px;margin-bottom:10px;transition:all .15s;}
+    .goal-item.done{opacity:.6;}
+    .goal-item.done .goal-text{text-decoration:line-through;}
+    .goal-chk{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--bd);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:12px;color:#fff;margin-top:1px;transition:all .15s;}
+    .goal-item:not(.done) .goal-chk{background:transparent;color:transparent;}
+    .goal-item.done .goal-chk{background:var(--g);border-color:var(--g);color:#fff;}
+    .goal-item:not(.done) .goal-chk:hover{background:var(--gb);border-color:var(--g);}
+    .goal-body{flex:1;}
+    .goal-text{font-size:14px;color:var(--text);margin-bottom:3px;line-height:1.5;}
+    .goal-cat{font-size:11px;color:var(--gm);}
+    .goal-del{background:none;border:none;color:var(--text2);font-size:18px;cursor:pointer;padding:0 4px;flex-shrink:0;opacity:.4;}
+    .goal-del:hover{opacity:1;color:#c0392b;}
+    .sug-tabs-wrap{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+    .sug-tab{padding:6px 12px;border-radius:20px;border:1px solid var(--bd);background:var(--card);color:var(--text2);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
+    .sug-tab.active{background:var(--g);color:#fff;border-color:var(--g);}
+    .sug-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s;}
+    .sug-item:hover{background:var(--gl);}
+    .sug-item:last-child{border-bottom:none;}
+    .sug-item span:first-child{font-size:13px;color:var(--text);line-height:1.5;flex:1;}
+    .sug-add{font-size:11px;color:var(--g);font-weight:500;flex-shrink:0;margin-left:12px;}
+    .week-dots{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap;}
     .wd{width:32px;height:32px;border-radius:50%;background:var(--gl);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gm);}
     .wd.on{background:var(--g);border-color:var(--g);color:#fff;}
     .home-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
@@ -138,7 +163,7 @@
     .hc-badge{font-size:10px;color:var(--g);background:var(--gb);border:1px solid var(--bd);padding:3px 8px;border-radius:20px;}
     .hc-name{font-size:15px;color:var(--text);font-weight:500;margin-bottom:3px;}
     .hc-desc{font-size:11px;color:var(--text2);line-height:1.5;}
-    .hadith-list{max-height:340px;overflow-y:auto;}
+    .hadith-list{max-height:400px;overflow-y:auto;}
     .h-row{display:flex;align-items:center;gap:12px;padding:12px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--bd);}
     .h-row:hover{background:var(--gl);}
     .h-row.learned{background:var(--gb);}
@@ -146,12 +171,12 @@
     .h-row.learned .h-num{background:var(--g);color:#fff;border-color:var(--g);}
     .h-ar{font-family:'Playfair Display',serif;font-size:13px;color:var(--text);direction:rtl;flex:1;text-align:right;}
     .flip-card{perspective:600px;cursor:pointer;margin-bottom:16px;}
-    .flip-inner{transition:transform .5s;transform-style:preserve-3d;position:relative;min-height:180px;}
+    .flip-inner{transition:transform .5s;transform-style:preserve-3d;position:relative;min-height:200px;}
     .flip-inner.flipped{transform:rotateY(180deg);}
-    .flip-front,.flip-back{position:absolute;width:100%;backface-visibility:hidden;border-radius:16px;padding:24px;}
+    .flip-front,.flip-back{position:absolute;width:100%;backface-visibility:hidden;border-radius:16px;padding:28px;}
     .flip-front{background:var(--g);}
     .flip-back{background:#0a4524;transform:rotateY(180deg);}
-    .flip-hint{font-size:11px;color:#88c9a0;text-align:center;margin-bottom:8px;}
+    .flip-hint{font-size:11px;color:#88c9a0;text-align:center;margin-bottom:12px;}
     .toast{position:fixed;bottom:24px;right:24px;background:var(--g);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;}
     .toast.show{opacity:1;}
     .loading{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:var(--g);background:var(--bg);}
@@ -176,10 +201,7 @@
     <input class="field-input" id="login-pw" type="password" placeholder="••••••••"/>
     <button class="auth-btn" onclick="doLogin()">Sign in</button>
     <div class="auth-divider"><div class="auth-divider-line"></div><div class="auth-divider-text">or</div><div class="auth-divider-line"></div></div>
-    <button class="google-btn" onclick="doGoogle()">
-      <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-      Continue with Google
-    </button>
+    <button class="google-btn" onclick="doGoogle()"><svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>Continue with Google</button>
     <div class="auth-switch">Don't have an account? <a onclick="showSignup()">Create one</a></div>
   </div>
   <div class="auth-card" id="signup-card" style="display:none;">
@@ -196,10 +218,7 @@
     <input class="field-input" id="signup-pw" type="password" placeholder="At least 8 characters"/>
     <button class="auth-btn" onclick="doSignup()">Create account</button>
     <div class="auth-divider"><div class="auth-divider-line"></div><div class="auth-divider-text">or</div><div class="auth-divider-line"></div></div>
-    <button class="google-btn" onclick="doGoogle()">
-      <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-      Continue with Google
-    </button>
+    <button class="google-btn" onclick="doGoogle()"><svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>Continue with Google</button>
     <div class="auth-switch">Already have an account? <a onclick="showLogin()">Sign in</a></div>
   </div>
 </div>
@@ -222,6 +241,7 @@
       <div class="s-item" onclick="goTo('sunnah')">☀️ Sunnah Habits</div>
       <div class="s-item" onclick="goTo('anger')">🤲 Anger Guide</div>
       <div class="s-item" onclick="goTo('shukr')">✨ Shukr Log</div>
+      <div class="s-item" onclick="goTo('goals')">🎯 My Goals</div>
       <div class="s-divider"></div>
       <div class="s-item" onclick="goTo('badges')">🏅 Badges</div>
       <div class="s-item" onclick="toggleDark()" id="dark-toggle">🌙 Dark mode</div>
@@ -250,26 +270,26 @@
         </div>
         <div class="home-grid">
           <div class="home-card" onclick="goTo('hadith')">
-            <div class="home-card-top"><div class="hc-icon">📖</div><div class="hc-badge" id="h-badge">0 memorised</div></div>
+            <div class="home-card-top"><div class="hc-icon">📖</div><div class="hc-badge" id="h-badge">0 / 40 memorised</div></div>
             <div class="hc-name">40 Hadith Challenge</div>
-            <div class="hc-desc">Memorise + quiz yourself on Nawawi's 40</div>
+            <div class="hc-desc">Memorise + quiz yourself on all 40 hadith</div>
             <div class="prog-bar"><div class="prog-fill" id="h-prog" style="width:0%"></div></div>
           </div>
           <div class="home-card" onclick="goTo('arabic')">
-            <div class="home-card-top"><div class="hc-icon">🔤</div><div class="hc-badge">Word of the day</div></div>
+            <div class="home-card-top"><div class="hc-icon">🔤</div><div class="hc-badge">30 words</div></div>
             <div class="hc-name">Arabic Words</div>
-            <div class="hc-desc">Learn Islamic vocabulary with examples</div>
+            <div class="hc-desc">Learn Islamic vocabulary with Quran examples</div>
           </div>
           <div class="home-card" onclick="goTo('sunnah')">
-            <div class="home-card-top"><div class="hc-icon">☀️</div><div class="hc-badge" id="s-badge">0 / 3 done</div></div>
-            <div class="hc-name">Sunnah Habit Builder</div>
-            <div class="hc-desc">3 sunnah acts this month with sahabi context</div>
+            <div class="home-card-top"><div class="hc-icon">☀️</div><div class="hc-badge" id="s-badge">0 done</div></div>
+            <div class="hc-name">Sunnah Habits</div>
+            <div class="hc-desc">12 sunnah acts with sahabi context and rewards</div>
             <div class="prog-bar"><div class="prog-fill" id="s-prog" style="width:0%"></div></div>
           </div>
-          <div class="home-card" onclick="goTo('shukr')">
-            <div class="home-card-top"><div class="hc-icon">✨</div><div class="hc-badge" id="shukr-badge">Day 0</div></div>
-            <div class="hc-name">Shukr Log</div>
-            <div class="hc-desc">Daily gratitude tied to Quran verses</div>
+          <div class="home-card" onclick="goTo('goals')">
+            <div class="home-card-top"><div class="hc-icon">🎯</div><div class="hc-badge" id="goals-count">0 active</div></div>
+            <div class="hc-name">My Goals</div>
+            <div class="hc-desc">Set goals and get suggestions by category</div>
           </div>
         </div>
       </div>
@@ -277,14 +297,14 @@
       <!-- HADITH -->
       <div class="page" id="page-hadith">
         <div class="page-title">40 Hadith Challenge</div>
-        <div class="page-sub">Memorise, flip cards, or test yourself with a quiz</div>
+        <div class="page-sub">All 40 of Nawawi's hadith — memorise, flip cards, or quiz yourself</div>
         <div class="stat-grid">
           <div class="stat-card"><div class="stat-num" id="hm">0</div><div class="stat-lbl">Memorised</div></div>
           <div class="stat-card"><div class="stat-num" id="hl">40</div><div class="stat-lbl">Remaining</div></div>
           <div class="stat-card"><div class="stat-num" id="quiz-score-display">—</div><div class="stat-lbl">Last quiz score</div></div>
         </div>
         <div class="mode-tabs">
-          <div class="mode-tab active" onclick="switchHadithMode('list')">📋 List</div>
+          <div class="mode-tab active" onclick="switchHadithMode('list')">📋 All 40</div>
           <div class="mode-tab" onclick="switchHadithMode('review')">🔄 Flip cards</div>
           <div class="mode-tab" onclick="switchHadithMode('quiz')">🧠 Quiz</div>
         </div>
@@ -325,7 +345,7 @@
       <!-- ARABIC -->
       <div class="page" id="page-arabic">
         <div class="page-title">Arabic Words</div>
-        <div class="page-sub">Learn Islamic vocabulary one word at a time</div>
+        <div class="page-sub">30 Islamic vocabulary words — browse and learn</div>
         <div class="word-card">
           <div class="word-arabic" id="w-ar"></div>
           <div class="word-transliteration" id="w-trans"></div>
@@ -339,10 +359,11 @@
         </div>
         <div class="btn-row">
           <button class="btn-outline" style="flex:1;" onclick="prevWord()">← Previous</button>
-          <button class="btn" style="flex:1;" onclick="nextWord()">Next word →</button>
+          <div style="display:flex;align-items:center;font-size:12px;color:var(--text2);padding:0 12px;" id="w-counter">1 / 30</div>
+          <button class="btn" style="flex:1;" onclick="nextWord()">Next →</button>
         </div>
         <div style="margin-top:24px;">
-          <div class="label">All words</div>
+          <div class="label">All 30 words</div>
           <div class="card" style="padding:0;overflow:hidden;"><div id="word-list"></div></div>
         </div>
       </div>
@@ -350,7 +371,7 @@
       <!-- SUNNAH -->
       <div class="page" id="page-sunnah">
         <div class="page-title">Sunnah Habit Builder</div>
-        <div class="page-sub">Your 3 sunnah acts — tap to check off</div>
+        <div class="page-sub">12 sunnah acts — tap to check off each day</div>
         <div id="sunnah-list"></div>
         <div style="margin-top:20px;"><div class="label">This week</div><div class="week-dots"><div class="wd on">S</div><div class="wd on">M</div><div class="wd on">T</div><div class="wd on">W</div><div class="wd">T</div><div class="wd">F</div><div class="wd">S</div></div></div>
       </div>
@@ -380,10 +401,40 @@
         <div style="margin-top:24px;"><div class="label">Past entries</div><div id="shukr-log"></div></div>
       </div>
 
+      <!-- GOALS -->
+      <div class="page" id="page-goals">
+        <div class="page-title">My Goals</div>
+        <div class="page-sub">Write something you want to start doing for the sake of Allah</div>
+        <div class="card">
+          <div class="label">Add a goal</div>
+          <div class="goal-add-row">
+            <input class="goal-input" id="goal-input" placeholder="What do you want to start doing?" onkeydown="if(event.key==='Enter') addGoalFromInput()"/>
+            <select class="goal-cat-select" id="goal-cat-select">
+              <option>🙏 Prayer</option>
+              <option>📖 Quran</option>
+              <option>🌿 Habits</option>
+              <option>💬 Character</option>
+              <option>📚 Knowledge</option>
+              <option>❤️ Community</option>
+              <option>🎯 General</option>
+            </select>
+            <button class="btn" onclick="addGoalFromInput()">Add</button>
+          </div>
+        </div>
+        <div id="goals-list"></div>
+        <div class="card" style="padding:0;overflow:hidden;">
+          <div style="padding:16px 20px 12px;border-bottom:1px solid var(--bd);">
+            <div class="label" style="margin:0 0 10px;">Need ideas? Pick a suggestion</div>
+            <div class="sug-tabs-wrap" id="suggestion-tabs"></div>
+          </div>
+          <div id="suggestion-list"></div>
+        </div>
+      </div>
+
       <!-- BADGES -->
       <div class="page" id="page-badges">
         <div class="page-title">Badges</div>
-        <div class="page-sub">Earn badges as you grow — keep going</div>
+        <div class="page-sub" id="badges-count">0 / 12 earned</div>
         <div class="badges-grid" id="badges-grid"></div>
       </div>
 
