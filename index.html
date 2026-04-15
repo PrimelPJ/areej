@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,16 +8,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *{box-sizing:border-box;margin:0;padding:0;}
-    :root{--g:#0d5c30;--gl:#f4faf6;--gb:#e0f0e6;--gm:#7aaa8a;--gd:#0d2a18;--bd:#d0e8d8;}
-    body{font-family:'DM Sans',sans-serif;background:#f7fbf8;color:var(--gd);}
-    .auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f7fbf8;padding:24px;}
-    .auth-card{background:#fff;border:1px solid var(--bd);border-radius:20px;padding:40px;width:100%;max-width:420px;}
+    :root{--g:#0d5c30;--gl:#f4faf6;--gb:#e0f0e6;--gm:#7aaa8a;--gd:#0d2a18;--bd:#d0e8d8;--bg:#f7fbf8;--surface:#ffffff;--text:#0d2a18;--text2:#5a8a6a;--card:#ffffff;--sidebar:#ffffff;--sidebar-border:#d0e8d8;}
+    [data-theme="dark"]{--g:#4caf7d;--gl:#0d2218;--gb:#0d3320;--gm:#4a7a5a;--gd:#e8f5ec;--bd:#1a4a28;--bg:#080f0a;--surface:#0d1a10;--text:#e8f5ec;--text2:#4a8a5a;--card:#0d1f14;--sidebar:#0a1a10;--sidebar-border:#1a3a20;}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);transition:background .2s,color .2s;}
+    .auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);padding:24px;}
+    .auth-card{background:var(--surface);border:1px solid var(--bd);border-radius:20px;padding:40px;width:100%;max-width:420px;}
     .auth-logo{font-family:'Playfair Display',serif;font-size:28px;color:var(--g);}
     .auth-logo-ar{font-size:12px;color:var(--gm);direction:rtl;margin-bottom:28px;}
-    .auth-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--gd);margin-bottom:6px;}
-    .auth-sub{font-size:13px;color:var(--gm);margin-bottom:28px;line-height:1.6;}
+    .auth-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);margin-bottom:6px;}
+    .auth-sub{font-size:13px;color:var(--text2);margin-bottom:28px;line-height:1.6;}
     .field-label{font-size:12px;color:var(--gm);margin-bottom:6px;display:block;}
-    .field-input{width:100%;background:var(--gl);border:1px solid var(--bd);border-radius:10px;padding:13px;font-size:14px;color:var(--gd);font-family:'DM Sans',sans-serif;outline:none;margin-bottom:14px;}
+    .field-input{width:100%;background:var(--gl);border:1px solid var(--bd);border-radius:10px;padding:13px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;margin-bottom:14px;}
     .field-input:focus{border-color:var(--g);}
     .field-input::placeholder{color:#b0d4bc;}
     .auth-btn{width:100%;background:var(--g);color:#fff;border:none;padding:14px;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:4px;}
@@ -27,36 +28,36 @@
     .auth-divider{display:flex;align-items:center;gap:12px;margin:20px 0;}
     .auth-divider-line{flex:1;height:1px;background:var(--bd);}
     .auth-divider-text{font-size:12px;color:var(--gm);}
-    .google-btn{width:100%;background:#fff;color:var(--gd);border:1px solid var(--bd);padding:13px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;}
+    .google-btn{width:100%;background:var(--surface);color:var(--text);border:1px solid var(--bd);padding:13px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;}
     .google-btn:hover{background:var(--gl);}
     .err{font-size:12px;color:#c0392b;background:#fff0f0;border:1px solid #f0b8b8;border-radius:8px;padding:10px 12px;margin-bottom:14px;display:none;}
     .app-wrap{display:none;}
     .layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh;}
-    .sidebar{background:#fff;border-right:1px solid var(--bd);padding:24px 16px;display:flex;flex-direction:column;gap:4px;}
+    .sidebar{background:var(--sidebar);border-right:1px solid var(--sidebar-border);padding:24px 16px;display:flex;flex-direction:column;gap:4px;transition:background .2s;}
     .s-logo{font-family:'Playfair Display',serif;font-size:22px;color:var(--g);}
     .s-logo-ar{font-size:11px;color:var(--gm);direction:rtl;margin-bottom:24px;}
-    .s-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;font-size:13px;color:#5a8a6a;transition:all .15s;}
+    .s-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .15s;}
     .s-item:hover{background:var(--gl);}
     .s-item.active{background:var(--g);color:#fff;}
     .s-divider{height:1px;background:var(--bd);margin:10px 0;}
     .s-user{background:var(--gl);border-radius:12px;padding:12px;border:1px solid var(--bd);margin-bottom:10px;}
-    .s-user-name{font-size:13px;color:var(--gd);font-weight:500;}
+    .s-user-name{font-size:13px;color:var(--text);font-weight:500;}
     .s-user-email{font-size:11px;color:var(--gm);margin-bottom:8px;}
     .s-logout{font-size:11px;color:#c0392b;cursor:pointer;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0;}
     .s-streak{background:var(--gl);border-radius:12px;padding:14px;border:1px solid var(--bd);margin-top:auto;}
     .s-streak-label{font-size:10px;color:var(--gm);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
     .s-streak-val{font-family:'Playfair Display',serif;font-size:28px;color:var(--g);}
     .s-streak-sub{font-size:11px;color:var(--gm);}
-    .main{padding:32px;overflow-y:auto;max-height:100vh;}
+    .main{padding:32px;overflow-y:auto;max-height:100vh;background:var(--bg);}
     .page{display:none;}
     .page.active{display:block;}
-    .page-title{font-family:'Playfair Display',serif;font-size:28px;color:var(--gd);margin-bottom:4px;}
-    .page-sub{font-size:13px;color:var(--gm);margin-bottom:28px;}
-    .card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:20px;margin-bottom:14px;}
+    .page-title{font-family:'Playfair Display',serif;font-size:28px;color:var(--text);margin-bottom:4px;}
+    .page-sub{font-size:13px;color:var(--text2);margin-bottom:28px;}
+    .card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px;margin-bottom:14px;}
     .label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gm);margin-bottom:10px;}
     .label-w{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#88c9a0;margin-bottom:10px;}
     .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
-    .stat-card{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:16px;text-align:center;}
+    .stat-card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;text-align:center;}
     .stat-num{font-family:'Playfair Display',serif;font-size:32px;color:var(--g);}
     .stat-lbl{font-size:11px;color:var(--gm);margin-top:2px;}
     .prog-bar{background:var(--gb);border-radius:4px;height:6px;overflow:hidden;margin-top:10px;}
@@ -69,22 +70,34 @@
     .btn-outline{background:transparent;color:var(--g);border:1px solid var(--bd);padding:11px 22px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;}
     .btn-outline:hover{background:var(--gl);}
     .btn-row{display:flex;gap:10px;margin-top:14px;}
-    .sunnah-item{display:flex;align-items:center;gap:14px;padding:16px;background:var(--gl);border:1px solid var(--bd);border-radius:14px;margin-bottom:10px;cursor:pointer;}
-    .sunnah-item.done{background:#e6f5ec;border-color:var(--g);}
+    .mode-tabs{display:flex;gap:8px;margin-bottom:20px;}
+    .mode-tab{padding:8px 18px;border-radius:20px;border:1px solid var(--bd);background:var(--card);color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+    .mode-tab.active{background:var(--g);color:#fff;border-color:var(--g);}
+    .quiz-question{font-family:'Playfair Display',serif;font-size:20px;color:#fff;text-align:center;direction:rtl;line-height:1.8;margin-bottom:20px;padding:24px;background:var(--g);border-radius:16px;}
+    .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .quiz-option{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px;cursor:pointer;font-size:13px;color:var(--text);text-align:center;transition:all .15s;line-height:1.5;}
+    .quiz-option:hover{border-color:var(--g);background:var(--gl);}
+    .quiz-option.correct{background:#e6f5ec;border-color:var(--g);color:#0d5c30;}
+    .quiz-option.wrong{background:#fff0f0;border-color:#f0b8b8;color:#c0392b;}
+    .quiz-score{font-family:'Playfair Display',serif;font-size:40px;color:var(--g);display:block;margin-bottom:8px;}
+    .sunnah-item{display:flex;align-items:center;gap:14px;padding:16px;background:var(--gl);border:1px solid var(--bd);border-radius:14px;margin-bottom:10px;cursor:pointer;transition:all .15s;}
+    .sunnah-item:hover{border-color:var(--g);}
+    .sunnah-item.done{background:var(--gb);border-color:var(--g);}
     .chk{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--bd);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
     .sunnah-item.done .chk{background:var(--g);border-color:var(--g);}
     .chk-mark{display:none;width:7px;height:11px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg) translate(-1px,-2px);}
     .sunnah-item.done .chk-mark{display:block;}
-    .sunnah-name{font-size:14px;color:var(--gd);font-weight:500;margin-bottom:2px;}
+    .sunnah-name{font-size:14px;color:var(--text);font-weight:500;margin-bottom:2px;}
     .sunnah-sahabi{font-size:11px;color:var(--gm);}
+    .sunnah-reward{font-size:11px;color:var(--g);margin-top:4px;font-style:italic;}
     .step-item{display:flex;gap:14px;padding:16px;background:var(--gl);border:1px solid var(--bd);border-radius:14px;margin-bottom:10px;align-items:flex-start;transition:all .3s;}
-    .step-item.active-step{background:#e6f5ec;border-color:var(--g);}
+    .step-item.active-step{background:var(--gb);border-color:var(--g);}
     .step-num{width:30px;height:30px;background:var(--g);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;flex-shrink:0;}
-    .step-title{font-size:14px;color:var(--gd);font-weight:500;margin-bottom:3px;}
+    .step-title{font-size:14px;color:var(--text);font-weight:500;margin-bottom:3px;}
     .step-ar{font-family:'Playfair Display',serif;font-size:15px;color:var(--g);direction:rtl;margin-bottom:3px;}
-    .step-sub{font-size:12px;color:var(--gm);}
+    .step-sub{font-size:12px;color:var(--text2);}
     .anger-trigger{background:#fff0f0;border:1px solid #f0b8b8;color:#c0392b;font-size:14px;font-weight:500;border-radius:12px;padding:16px;width:100%;cursor:pointer;text-align:center;margin-bottom:20px;font-family:'DM Sans',sans-serif;}
-    .shukr-input{background:var(--gl);border:1px solid var(--bd);border-radius:10px;padding:13px;width:100%;color:var(--gd);font-family:'DM Sans',sans-serif;font-size:14px;margin-bottom:10px;outline:none;}
+    .shukr-input{background:var(--gl);border:1px solid var(--bd);border-radius:10px;padding:13px;width:100%;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;margin-bottom:10px;outline:none;}
     .shukr-input:focus{border-color:var(--g);}
     .shukr-input::placeholder{color:#b0d4bc;}
     .ayah-card{background:var(--g);border-radius:12px;padding:16px;margin-top:16px;}
@@ -93,29 +106,45 @@
     .ayah-ref{font-size:10px;color:#88c9a0;margin-top:4px;}
     .shukr-entry{background:var(--gl);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:10px;}
     .shukr-date{font-size:10px;color:var(--gm);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
-    .shukr-b{font-size:13px;color:var(--gd);display:flex;gap:8px;align-items:flex-start;margin-bottom:4px;}
+    .shukr-b{font-size:13px;color:var(--text);display:flex;gap:8px;align-items:flex-start;margin-bottom:4px;}
     .shukr-b-dot{width:5px;height:5px;border-radius:50%;background:var(--g);flex-shrink:0;margin-top:6px;}
+    .word-card{background:var(--g);border-radius:20px;padding:32px;text-align:center;margin-bottom:16px;}
+    .word-arabic{font-family:'Playfair Display',serif;font-size:48px;color:#fff;margin-bottom:8px;direction:rtl;}
+    .word-transliteration{font-size:14px;color:#88c9a0;margin-bottom:4px;}
+    .word-meaning{font-size:18px;color:#e0f4e8;font-family:'Playfair Display',serif;}
+    .word-category{font-size:10px;color:#88c9a0;text-transform:uppercase;letter-spacing:1px;margin-top:8px;}
+    .word-ex-ar{font-family:'Playfair Display',serif;font-size:16px;color:var(--text);direction:rtl;text-align:right;margin-bottom:6px;}
+    .word-ex-en{font-size:12px;color:var(--text2);}
+    .badges-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px;}
+    .badge-item{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;text-align:center;}
+    .badge-item.earned{background:var(--gb);border-color:var(--g);}
+    .badge-icon{font-size:28px;margin-bottom:8px;filter:grayscale(1);opacity:.4;}
+    .badge-item.earned .badge-icon{filter:none;opacity:1;}
+    .badge-name{font-size:11px;color:var(--text);font-weight:500;margin-bottom:2px;}
+    .badge-desc{font-size:10px;color:var(--text2);}
+    .challenge-card{background:var(--g);border-radius:16px;padding:20px;margin-bottom:20px;}
+    .challenge-label{font-size:10px;color:#88c9a0;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+    .challenge-text{font-size:15px;color:#fff;line-height:1.6;margin-bottom:8px;}
+    .challenge-reward{font-size:11px;color:#88c9a0;margin-bottom:12px;}
+    .challenge-done{background:#fff;color:var(--g);border:none;padding:9px 20px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;}
     .week-dots{display:flex;gap:6px;margin-top:14px;}
     .wd{width:32px;height:32px;border-radius:50%;background:var(--gl);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gm);}
     .wd.on{background:var(--g);border-color:var(--g);color:#fff;}
     .home-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
-    .home-card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:18px;cursor:pointer;transition:border-color .15s;}
+    .home-card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;cursor:pointer;transition:border-color .15s;}
     .home-card:hover{border-color:var(--g);}
     .home-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
     .hc-icon{width:40px;height:40px;background:var(--gb);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid var(--bd);}
     .hc-badge{font-size:10px;color:var(--g);background:var(--gb);border:1px solid var(--bd);padding:3px 8px;border-radius:20px;}
-    .hc-name{font-size:15px;color:var(--gd);font-weight:500;margin-bottom:3px;}
-    .hc-desc{font-size:11px;color:var(--gm);line-height:1.5;}
+    .hc-name{font-size:15px;color:var(--text);font-weight:500;margin-bottom:3px;}
+    .hc-desc{font-size:11px;color:var(--text2);line-height:1.5;}
     .hadith-list{max-height:340px;overflow-y:auto;}
     .h-row{display:flex;align-items:center;gap:12px;padding:12px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--bd);}
     .h-row:hover{background:var(--gl);}
-    .h-row.learned{background:#e6f5ec;}
+    .h-row.learned{background:var(--gb);}
     .h-num{width:28px;height:28px;background:var(--gl);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--g);flex-shrink:0;border:1px solid var(--bd);}
     .h-row.learned .h-num{background:var(--g);color:#fff;border-color:var(--g);}
-    .h-ar{font-family:'Playfair Display',serif;font-size:13px;color:var(--gd);direction:rtl;flex:1;text-align:right;}
-    .review-mode{display:none;}
-    .review-mode.active{display:block;}
-    .list-mode.hidden{display:none;}
+    .h-ar{font-family:'Playfair Display',serif;font-size:13px;color:var(--text);direction:rtl;flex:1;text-align:right;}
     .flip-card{perspective:600px;cursor:pointer;margin-bottom:16px;}
     .flip-inner{transition:transform .5s;transform-style:preserve-3d;position:relative;min-height:180px;}
     .flip-inner.flipped{transform:rotateY(180deg);}
@@ -125,8 +154,8 @@
     .flip-hint{font-size:11px;color:#88c9a0;text-align:center;margin-bottom:8px;}
     .toast{position:fixed;bottom:24px;right:24px;background:var(--g);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;}
     .toast.show{opacity:1;}
-    .loading{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:var(--g);}
-    @media(max-width:640px){.layout{grid-template-columns:1fr;}.sidebar{display:none;}.home-grid{grid-template-columns:1fr;}.stat-grid{grid-template-columns:1fr 1fr;}}
+    .loading{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:var(--g);background:var(--bg);}
+    @media(max-width:640px){.layout{grid-template-columns:1fr;}.sidebar{display:none;}.home-grid{grid-template-columns:1fr;}.stat-grid{grid-template-columns:1fr 1fr;}.quiz-options{grid-template-columns:1fr;}.badges-grid{grid-template-columns:repeat(2,1fr);}}
   </style>
 </head>
 <body>
@@ -188,10 +217,14 @@
       </div>
       <div class="s-item active" onclick="goTo('home')">🏠 Home</div>
       <div class="s-item" onclick="goTo('hadith')">📖 40 Hadith</div>
+      <div class="s-item" onclick="goTo('arabic')">🔤 Arabic Words</div>
       <div class="s-divider"></div>
       <div class="s-item" onclick="goTo('sunnah')">☀️ Sunnah Habits</div>
       <div class="s-item" onclick="goTo('anger')">🤲 Anger Guide</div>
       <div class="s-item" onclick="goTo('shukr')">✨ Shukr Log</div>
+      <div class="s-divider"></div>
+      <div class="s-item" onclick="goTo('badges')">🏅 Badges</div>
+      <div class="s-item" onclick="toggleDark()" id="dark-toggle">🌙 Dark mode</div>
       <div class="s-streak">
         <div class="s-streak-label">Current streak</div>
         <div class="s-streak-val" id="streak-val">0</div>
@@ -199,9 +232,17 @@
       </div>
     </aside>
     <main class="main">
+
+      <!-- HOME -->
       <div class="page active" id="page-home">
         <div class="page-title" id="home-greeting">Assalamu Alaykum</div>
         <div class="page-sub" id="home-date"></div>
+        <div class="challenge-card">
+          <div class="challenge-label">Daily Challenge</div>
+          <div class="challenge-text" id="challenge-text"></div>
+          <div class="challenge-reward" id="challenge-reward"></div>
+          <button class="challenge-done" onclick="completeChallenge()">Mark as done ✓</button>
+        </div>
         <div class="stat-grid">
           <div class="stat-card"><div class="stat-num" id="h-count">0</div><div class="stat-lbl">Hadith memorised</div></div>
           <div class="stat-card"><div class="stat-num" id="s-count">0</div><div class="stat-lbl">Sunnahs today</div></div>
@@ -211,19 +252,19 @@
           <div class="home-card" onclick="goTo('hadith')">
             <div class="home-card-top"><div class="hc-icon">📖</div><div class="hc-badge" id="h-badge">0 memorised</div></div>
             <div class="hc-name">40 Hadith Challenge</div>
-            <div class="hc-desc">Memorise Nawawi's 40 with spaced repetition</div>
+            <div class="hc-desc">Memorise + quiz yourself on Nawawi's 40</div>
             <div class="prog-bar"><div class="prog-fill" id="h-prog" style="width:0%"></div></div>
+          </div>
+          <div class="home-card" onclick="goTo('arabic')">
+            <div class="home-card-top"><div class="hc-icon">🔤</div><div class="hc-badge">Word of the day</div></div>
+            <div class="hc-name">Arabic Words</div>
+            <div class="hc-desc">Learn Islamic vocabulary with examples</div>
           </div>
           <div class="home-card" onclick="goTo('sunnah')">
             <div class="home-card-top"><div class="hc-icon">☀️</div><div class="hc-badge" id="s-badge">0 / 3 done</div></div>
             <div class="hc-name">Sunnah Habit Builder</div>
             <div class="hc-desc">3 sunnah acts this month with sahabi context</div>
             <div class="prog-bar"><div class="prog-fill" id="s-prog" style="width:0%"></div></div>
-          </div>
-          <div class="home-card" onclick="goTo('anger')">
-            <div class="home-card-top"><div class="hc-icon">🤲</div><div class="hc-badge">Guide</div></div>
-            <div class="hc-name">Anger Management</div>
-            <div class="hc-desc">Prophetic steps when emotions rise</div>
           </div>
           <div class="home-card" onclick="goTo('shukr')">
             <div class="home-card-top"><div class="hc-icon">✨</div><div class="hc-badge" id="shukr-badge">Day 0</div></div>
@@ -232,26 +273,25 @@
           </div>
         </div>
       </div>
+
+      <!-- HADITH -->
       <div class="page" id="page-hadith">
         <div class="page-title">40 Hadith Challenge</div>
-        <div class="page-sub">Memorise Nawawi's 40 — tap a card to flip it</div>
+        <div class="page-sub">Memorise, flip cards, or test yourself with a quiz</div>
         <div class="stat-grid">
           <div class="stat-card"><div class="stat-num" id="hm">0</div><div class="stat-lbl">Memorised</div></div>
           <div class="stat-card"><div class="stat-num" id="hl">40</div><div class="stat-lbl">Remaining</div></div>
-          <div class="stat-card"><div class="stat-num">3</div><div class="stat-lbl">Due today</div></div>
+          <div class="stat-card"><div class="stat-num" id="quiz-score-display">—</div><div class="stat-lbl">Last quiz score</div></div>
         </div>
-        <div id="list-mode">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
-            <div class="label" style="margin:0;">All 40 Hadith</div>
-            <button class="btn" onclick="startReview()">Review due (3) →</button>
-          </div>
+        <div class="mode-tabs">
+          <div class="mode-tab active" onclick="switchHadithMode('list')">📋 List</div>
+          <div class="mode-tab" onclick="switchHadithMode('review')">🔄 Flip cards</div>
+          <div class="mode-tab" onclick="switchHadithMode('quiz')">🧠 Quiz</div>
+        </div>
+        <div id="hmode-list">
           <div class="card" style="padding:0;overflow:hidden;"><div class="hadith-list" id="hadith-list"></div></div>
         </div>
-        <div class="review-mode" id="review-mode">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-            <div class="label" style="margin:0;">Review session</div>
-            <button class="btn-outline" onclick="exitReview()">← Back to list</button>
-          </div>
+        <div id="hmode-review" style="display:none;">
           <div class="flip-card" onclick="flipCard()">
             <div class="flip-inner" id="flip-inner">
               <div class="flip-front"><div class="flip-hint">Tap to reveal translation</div><div class="hadith-ar" id="rev-ar"></div><div class="hadith-src" id="rev-num"></div></div>
@@ -263,13 +303,59 @@
             <button class="btn" style="flex:1;" onclick="markHadith(true)">I knew it ✓</button>
           </div>
         </div>
+        <div id="hmode-quiz" style="display:none;">
+          <div id="quiz-active">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+              <div class="label" style="margin:0;" id="quiz-progress">Question 1 of 5</div>
+              <div style="font-size:12px;color:var(--text2);" id="quiz-score-live">Score: 0</div>
+            </div>
+            <div class="quiz-question" id="quiz-q"></div>
+            <div class="quiz-options" id="quiz-opts"></div>
+          </div>
+          <div id="quiz-done" style="display:none;">
+            <div class="card" style="text-align:center;padding:32px;">
+              <span class="quiz-score" id="final-score"></span>
+              <div style="font-size:14px;color:var(--text2);margin-bottom:16px;" id="final-msg"></div>
+              <button class="btn" onclick="startQuiz()">Try again</button>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- ARABIC -->
+      <div class="page" id="page-arabic">
+        <div class="page-title">Arabic Words</div>
+        <div class="page-sub">Learn Islamic vocabulary one word at a time</div>
+        <div class="word-card">
+          <div class="word-arabic" id="w-ar"></div>
+          <div class="word-transliteration" id="w-trans"></div>
+          <div class="word-meaning" id="w-mean"></div>
+          <div class="word-category" id="w-cat"></div>
+        </div>
+        <div class="card">
+          <div class="label">Used in Quran / Hadith</div>
+          <div class="word-ex-ar" id="w-ex-ar"></div>
+          <div class="word-ex-en" id="w-ex-en"></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-outline" style="flex:1;" onclick="prevWord()">← Previous</button>
+          <button class="btn" style="flex:1;" onclick="nextWord()">Next word →</button>
+        </div>
+        <div style="margin-top:24px;">
+          <div class="label">All words</div>
+          <div class="card" style="padding:0;overflow:hidden;"><div id="word-list"></div></div>
+        </div>
+      </div>
+
+      <!-- SUNNAH -->
       <div class="page" id="page-sunnah">
         <div class="page-title">Sunnah Habit Builder</div>
         <div class="page-sub">Your 3 sunnah acts — tap to check off</div>
         <div id="sunnah-list"></div>
         <div style="margin-top:20px;"><div class="label">This week</div><div class="week-dots"><div class="wd on">S</div><div class="wd on">M</div><div class="wd on">T</div><div class="wd on">W</div><div class="wd">T</div><div class="wd">F</div><div class="wd">S</div></div></div>
       </div>
+
+      <!-- ANGER -->
       <div class="page" id="page-anger">
         <div class="page-title">Anger Guide</div>
         <div class="page-sub">Prophetic steps to follow when you feel angry</div>
@@ -278,6 +364,8 @@
         <div id="anger-steps"></div>
         <div class="ayah-card" style="margin-top:20px;"><div class="ayah-label">The Prophet ﷺ said</div><div class="ayah-text">"The strong man is not the one who overcomes people by his strength, but the one who controls himself while in anger."</div><div class="ayah-ref">Bukhari & Muslim</div></div>
       </div>
+
+      <!-- SHUKR -->
       <div class="page" id="page-shukr">
         <div class="page-title">Shukr Log</div>
         <div class="page-sub">Log 3 blessings daily with the niyyah of shukr</div>
@@ -291,12 +379,19 @@
         <div class="ayah-card"><div class="ayah-label">Today's verse on gratitude</div><div class="ayah-text" id="ayah-text">"If you are grateful, I will surely increase you in favour..."</div><div class="ayah-ref" id="ayah-ref">Surah Ibrahim · 14:7</div></div>
         <div style="margin-top:24px;"><div class="label">Past entries</div><div id="shukr-log"></div></div>
       </div>
+
+      <!-- BADGES -->
+      <div class="page" id="page-badges">
+        <div class="page-title">Badges</div>
+        <div class="page-sub">Earn badges as you grow — keep going</div>
+        <div class="badges-grid" id="badges-grid"></div>
+      </div>
+
     </main>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
-
 <script type="module" src="/src/main.js"></script>
 </body>
 </html>
