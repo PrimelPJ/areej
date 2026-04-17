@@ -244,6 +244,23 @@
     .dedication-body{font-family:'Playfair Display',serif;font-size:16px;color:var(--text);line-height:2;font-style:italic;max-width:480px;margin:0 auto 24px;}
     .dedication-heart{font-size:28px;display:block;margin:20px 0;color:var(--g);}
     .dedication-sig{font-size:11px;color:var(--gm);letter-spacing:2px;text-transform:uppercase;margin-top:24px;}
+
+    .names-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px;}
+    .name-card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;text-align:center;transition:all .15s;cursor:pointer;}
+    .name-card:hover{border-color:var(--g);background:var(--gl);}
+    .name-ar{font-family:'Playfair Display',serif;font-size:22px;color:var(--g);direction:rtl;margin-bottom:6px;}
+    .name-trans{font-size:12px;color:var(--gm);margin-bottom:4px;letter-spacing:.5px;}
+    .name-mean{font-size:13px;color:var(--text);font-weight:500;line-height:1.4;}
+    .name-num{font-size:10px;color:var(--gm);margin-top:6px;}
+    .name-detail{background:var(--g);border-radius:16px;padding:24px;margin-bottom:20px;text-align:center;}
+    .name-detail-ar{font-family:'Playfair Display',serif;font-size:40px;color:#fff;direction:rtl;margin-bottom:8px;}
+    .name-detail-trans{font-size:14px;color:#88c9a0;margin-bottom:6px;}
+    .name-detail-mean{font-size:18px;color:#e0f4e8;font-family:'Playfair Display',serif;margin-bottom:10px;}
+    .name-detail-desc{font-size:13px;color:#b8dfc4;line-height:1.7;}
+    .name-detail-ref{font-size:11px;color:#88c9a0;margin-top:10px;font-style:italic;}
+    .names-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+    .names-filter-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--bd);background:var(--card);color:var(--text2);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+    .names-filter-btn.active{background:var(--g);color:#fff;border-color:var(--g);}
     .loading{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:var(--g);background:var(--bg);}
 
     .hadith-grade{font-size:10px;color:var(--g);margin-top:2px;}
@@ -303,6 +320,7 @@
       <div class="s-item" onclick="goTo('nawawi')">📖 40 Nawawi</div>
       <div class="s-section">Learning</div>
       <div class="s-item" onclick="goTo('arabic')">🔤 Arabic Words</div>
+      <div class="s-item" onclick="goTo('names')">✦ 99 Names of Allah</div>
       <div class="s-section">Daily Practice</div>
       <div class="s-item" onclick="goTo('sunnah')">☀️ Sunnah Habits</div>
       <div class="s-item" onclick="goTo('anger')">🤲 Anger Guide</div>
@@ -568,6 +586,16 @@
           <div class="dedication-sig">All praise is due to Allah alone</div>
           <div class="dedication-ar" style="font-size:16px;margin-top:28px;">الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</div>
         </div>
+      </div>
+
+      <!-- 99 NAMES OF ALLAH -->
+      <div class="page" id="page-names">
+        <div class="page-title">99 Names of Allah</div>
+        <div class="page-sub">Al-Asma Al-Husna — the most beautiful names</div>
+        <div id="name-detail-panel" style="display:none;"></div>
+        <input class="search-input" id="names-search" placeholder="Search by name or meaning..." oninput="filterNames()"/>
+        <div class="names-filter" id="names-filter"></div>
+        <div class="names-grid" id="names-grid"></div>
       </div>
     </main>
   </div>

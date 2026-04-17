@@ -308,7 +308,7 @@ function goTo(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'))
   document.querySelectorAll('.s-item').forEach(i => i.classList.remove('active'))
   document.getElementById('page-' + page).classList.add('active')
-  const map = { home:0, quran:1, hadiths:2, nawawi:3, arabic:4, sunnah:5, anger:6, shukr:7, goals:8, badges:9, dedication:10 }
+  const map = { home:0, quran:1, hadiths:2, nawawi:3, arabic:4, names:5, sunnah:6, anger:7, shukr:8, goals:9, badges:10, dedication:11 }
   document.querySelectorAll('.s-item')[map[page]]?.classList.add('active')
 }
 
@@ -320,6 +320,7 @@ function toggleDark() {
 }
 
 function renderAll() {
+  renderNamesPage()
   renderHadith()
   renderSunnah()
   renderAnger()
@@ -889,6 +890,163 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2800)
 }
 
+
+// ─── 99 NAMES OF ALLAH ───────────────────────────────────────────────────────
+const allahNames = [
+  {num:1,ar:"اللَّهُ",trans:"Allah",mean:"The One God",cat:"Essence",desc:"The greatest name — the one who alone deserves worship. All other names are attributes of this one name."},
+  {num:2,ar:"الرَّحْمَٰنُ",trans:"Ar-Rahman",mean:"The Most Gracious",cat:"Mercy",desc:"The one whose mercy encompasses all of creation — believers and disbelievers, humans and animals. His mercy in this world is general."},
+  {num:3,ar:"الرَّحِيمُ",trans:"Ar-Rahim",mean:"The Most Merciful",cat:"Mercy",desc:"The one whose mercy is specific to the believers in the hereafter. A deep and continuous mercy reserved for those who believe."},
+  {num:4,ar:"الْمَلِكُ",trans:"Al-Malik",mean:"The King",cat:"Sovereignty",desc:"The sovereign owner of all dominion. Everything in the heavens and earth belongs to Him and He rules with absolute authority."},
+  {num:5,ar:"الْقُدُّوسُ",trans:"Al-Quddus",mean:"The Most Pure / Holy",cat:"Perfection",desc:"The one who is free from all defects, imperfections, and partners. Utterly pure and beyond any comparison."},
+  {num:6,ar:"السَّلَامُ",trans:"As-Salam",mean:"The Source of Peace",cat:"Perfection",desc:"The one from whom all peace comes. He is free from all deficiencies and grants peace to His creation."},
+  {num:7,ar:"الْمُؤْمِنُ",trans:"Al-Mu'min",mean:"The Guardian of Faith",cat:"Protection",desc:"The one who gives security and protects His servants. He confirms His messengers and grants safety to the believers."},
+  {num:8,ar:"الْمُهَيْمِنُ",trans:"Al-Muhaymin",mean:"The Overseer / Protector",cat:"Protection",desc:"The one who watches over, guards, and preserves all things. Nothing escapes His observation and care."},
+  {num:9,ar:"الْعَزِيزُ",trans:"Al-Aziz",mean:"The Almighty",cat:"Power",desc:"The one who is all-powerful and cannot be overcome. His might is absolute and He is never in need of anyone."},
+  {num:10,ar:"الْجَبَّارُ",trans:"Al-Jabbar",mean:"The Compeller / Restorer",cat:"Power",desc:"The one who compels all things to His will and who also repairs and restores the broken-hearted. He mends what is broken."},
+  {num:11,ar:"الْمُتَكَبِّرُ",trans:"Al-Mutakabbir",mean:"The Supremely Great",cat:"Greatness",desc:"The one who is truly great and above all things. Greatness belongs to Allah alone — arrogance in humans is forbidden, but in Allah it is a divine attribute."},
+  {num:12,ar:"الْخَالِقُ",trans:"Al-Khaliq",mean:"The Creator",cat:"Creation",desc:"The one who creates everything from nothing. He created the heavens, earth, and all that exists without any prior example."},
+  {num:13,ar:"الْبَارِئُ",trans:"Al-Bari",mean:"The Originator / Maker",cat:"Creation",desc:"The one who creates things and distinguishes them from one another. He fashions creation with perfect distinction."},
+  {num:14,ar:"الْمُصَوِّرُ",trans:"Al-Musawwir",mean:"The Fashioner of Forms",cat:"Creation",desc:"The one who gives form and shape to everything He creates. He fashions each creation in its unique and perfect form."},
+  {num:15,ar:"الْغَفَّارُ",trans:"Al-Ghaffar",mean:"The Ever-Forgiving",cat:"Forgiveness",desc:"The one who forgives repeatedly and covers the sins of His servants. He forgives abundantly, time after time."},
+  {num:16,ar:"الْقَهَّارُ",trans:"Al-Qahhar",mean:"The Subduer",cat:"Power",desc:"The one who overpowers and subdues all of creation. Nothing can resist His will or escape His dominion."},
+  {num:17,ar:"الْوَهَّابُ",trans:"Al-Wahhab",mean:"The Bestower",cat:"Generosity",desc:"The one who gives freely and generously without any expectation of return. All gifts and blessings come from Him."},
+  {num:18,ar:"الرَّزَّاقُ",trans:"Ar-Razzaq",mean:"The Provider",cat:"Generosity",desc:"The one who provides sustenance for all of creation. Every living thing receives its provision from Allah, without exception."},
+  {num:19,ar:"الْفَتَّاحُ",trans:"Al-Fattah",mean:"The Opener / Judge",cat:"Justice",desc:"The one who opens what is closed — doors of provision, mercy, and knowledge. He also judges between His creation with perfect justice."},
+  {num:20,ar:"الْعَلِيمُ",trans:"Al-Alim",mean:"The All-Knowing",cat:"Knowledge",desc:"The one whose knowledge encompasses all things — the seen and unseen, the past, present, and future. Nothing is hidden from Him."},
+  {num:21,ar:"الْقَابِضُ",trans:"Al-Qabid",mean:"The Withholder",cat:"Balance",desc:"The one who withholds and restricts as He wills. He constricts provision and sustenance according to His perfect wisdom."},
+  {num:22,ar:"الْبَاسِطُ",trans:"Al-Basit",mean:"The Expander",cat:"Balance",desc:"The one who expands and extends His provision and mercy as He wills. He opens the hand of generosity to whom He chooses."},
+  {num:23,ar:"الْخَافِضُ",trans:"Al-Khafid",mean:"The Abaser",cat:"Justice",desc:"The one who lowers and humbles whoever He wills. He brings the arrogant low and raises the humble."},
+  {num:24,ar:"الرَّافِعُ",trans:"Ar-Rafi",mean:"The Exalter",cat:"Justice",desc:"The one who raises and elevates whoever He wills in rank, station, and honour."},
+  {num:25,ar:"الْمُعِزُّ",trans:"Al-Mu'izz",mean:"The Honourer",cat:"Justice",desc:"The one who grants honour and dignity to whom He wills. All honour belongs to Allah and He gives it to whoever He chooses."},
+  {num:26,ar:"الْمُذِلُّ",trans:"Al-Mudhill",mean:"The Humiliator",cat:"Justice",desc:"The one who humiliates and disgraces whoever He wills. No one can grant honour to whom Allah has humiliated."},
+  {num:27,ar:"السَّمِيعُ",trans:"As-Sami",mean:"The All-Hearing",cat:"Knowledge",desc:"The one who hears all sounds and voices — public and private, loud and silent. Every supplication and every whisper reaches Him."},
+  {num:28,ar:"الْبَصِيرُ",trans:"Al-Basir",mean:"The All-Seeing",cat:"Knowledge",desc:"The one who sees all things — the visible and invisible, the smallest particle and the furthest star."},
+  {num:29,ar:"الْحَكَمُ",trans:"Al-Hakam",mean:"The Judge",cat:"Justice",desc:"The one who judges between His creation with absolute justice and wisdom. His judgment is always the truth."},
+  {num:30,ar:"الْعَدْلُ",trans:"Al-Adl",mean:"The Just",cat:"Justice",desc:"The one who is perfectly just in all matters. He never wrongs anyone — not even by the weight of an atom."},
+  {num:31,ar:"اللَّطِيفُ",trans:"Al-Latif",mean:"The Subtle / Kind",cat:"Mercy",desc:"The one who is aware of the subtlest details and who is gentle and kind to His servants in ways they may not even perceive."},
+  {num:32,ar:"الْخَبِيرُ",trans:"Al-Khabir",mean:"The All-Aware",cat:"Knowledge",desc:"The one who has complete awareness of all things — their inner realities, hidden states, and deepest secrets."},
+  {num:33,ar:"الْحَلِيمُ",trans:"Al-Halim",mean:"The Forbearing",cat:"Mercy",desc:"The one who is patient and does not rush to punish despite witnessing disobedience. He gives people time to repent."},
+  {num:34,ar:"الْعَظِيمُ",trans:"Al-Azim",mean:"The Magnificent",cat:"Greatness",desc:"The one of incomprehensible greatness and majesty. His greatness is beyond the capacity of creation to fully comprehend."},
+  {num:35,ar:"الْغَفُورُ",trans:"Al-Ghafur",mean:"The All-Forgiving",cat:"Forgiveness",desc:"The one who forgives all sins — no matter how great — for whoever turns to Him in sincere repentance."},
+  {num:36,ar:"الشَّكُورُ",trans:"Ash-Shakur",mean:"The Appreciative",cat:"Generosity",desc:"The one who appreciates and rewards even the smallest good deeds. He multiplies rewards far beyond what is deserved."},
+  {num:37,ar:"الْعَلِيُّ",trans:"Al-Ali",mean:"The Most High",cat:"Greatness",desc:"The one who is above all things in His essence, His attributes, and His power. Nothing and no one is above Him."},
+  {num:38,ar:"الْكَبِيرُ",trans:"Al-Kabir",mean:"The Most Great",cat:"Greatness",desc:"The one whose greatness is absolute and incomparable. All greatness belongs to Him alone."},
+  {num:39,ar:"الْحَفِيظُ",trans:"Al-Hafiz",mean:"The Preserver",cat:"Protection",desc:"The one who preserves and guards all things. He maintains the universe, records all deeds, and protects His servants."},
+  {num:40,ar:"الْمُقِيتُ",trans:"Al-Muqit",mean:"The Sustainer",cat:"Generosity",desc:"The one who provides the sustenance needed for every living being. He maintains and nourishes all of creation."},
+  {num:41,ar:"الْحَسِيبُ",trans:"Al-Hasib",mean:"The Reckoner",cat:"Justice",desc:"The one who takes account of all deeds and is sufficient for all needs. He is aware of and will account for every single action."},
+  {num:42,ar:"الْجَلِيلُ",trans:"Al-Jalil",mean:"The Majestic",cat:"Greatness",desc:"The one who possesses perfect majesty in all His attributes — His knowledge, power, and grandeur."},
+  {num:43,ar:"الْكَرِيمُ",trans:"Al-Karim",mean:"The Generous",cat:"Generosity",desc:"The one of infinite generosity who gives without limit and without being asked. His generosity has no end."},
+  {num:44,ar:"الرَّقِيبُ",trans:"Ar-Raqib",mean:"The Watchful",cat:"Protection",desc:"The one who watches over all things at all times. Nothing escapes His surveillance — He is ever watchful over every soul."},
+  {num:45,ar:"الْمُجِيبُ",trans:"Al-Mujib",mean:"The Responsive",cat:"Mercy",desc:"The one who answers and responds to every supplication. He hears every call and responds to whoever calls upon Him."},
+  {num:46,ar:"الْوَاسِعُ",trans:"Al-Wasi",mean:"The All-Encompassing",cat:"Greatness",desc:"The one whose knowledge, mercy, and provision are vast and all-encompassing. His capacity and generosity are without limit."},
+  {num:47,ar:"الْحَكِيمُ",trans:"Al-Hakim",mean:"The All-Wise",cat:"Knowledge",desc:"The one whose wisdom is perfect and whose every act contains profound wisdom, even when not apparent to human understanding."},
+  {num:48,ar:"الْوَدُودُ",trans:"Al-Wadud",mean:"The Loving",cat:"Mercy",desc:"The one who loves His believing servants and is loved by them. His love for the believers is real, deep, and everlasting."},
+  {num:49,ar:"الْمَجِيدُ",trans:"Al-Majid",mean:"The Most Glorious",cat:"Greatness",desc:"The one who combines perfect greatness with perfect generosity. He is glorious in His essence, attributes, and actions."},
+  {num:50,ar:"الْبَاعِثُ",trans:"Al-Ba'ith",mean:"The Resurrector",cat:"Power",desc:"The one who will resurrect all creation after death on the Day of Judgment. He brings the dead back to life."},
+  {num:51,ar:"الشَّهِيدُ",trans:"Ash-Shahid",mean:"The Witness",cat:"Knowledge",desc:"The one who witnesses all things at all times. He is present with His knowledge and nothing occurs without His witnessing it."},
+  {num:52,ar:"الْحَقُّ",trans:"Al-Haqq",mean:"The Truth",cat:"Essence",desc:"The one who is the absolute truth — in His existence, His attributes, and His promises. Everything other than Allah is contingent."},
+  {num:53,ar:"الْوَكِيلُ",trans:"Al-Wakil",mean:"The Trustee",cat:"Protection",desc:"The one in whom all trust is placed. Whoever places their affairs in His hands will find He is the best disposer of them."},
+  {num:54,ar:"الْقَوِيُّ",trans:"Al-Qawi",mean:"The All-Powerful",cat:"Power",desc:"The one whose power is perfect and complete. He is never weak, never tired, and His strength knows no limit."},
+  {num:55,ar:"الْمَتِينُ",trans:"Al-Matin",mean:"The Firm",cat:"Power",desc:"The one whose power and firmness are unshakeable. His strength is absolute and He cannot be weakened or overcome."},
+  {num:56,ar:"الْوَلِيُّ",trans:"Al-Wali",mean:"The Protecting Friend",cat:"Protection",desc:"The one who is the ally and protector of the believers. He supports them, loves them, and takes care of their affairs."},
+  {num:57,ar:"الْحَمِيدُ",trans:"Al-Hamid",mean:"The Praiseworthy",cat:"Greatness",desc:"The one who is deserving of all praise. All praise ultimately returns to Him whether or not creation acknowledges it."},
+  {num:58,ar:"الْمُحْصِيُّ",trans:"Al-Muhsi",mean:"The All-Enumerating",cat:"Knowledge",desc:"The one who has counted and recorded everything in precise detail. Not a single thing in creation escapes His count."},
+  {num:59,ar:"الْمُبْدِئُ",trans:"Al-Mubdi",mean:"The Originator",cat:"Creation",desc:"The one who begins and originates creation from nothing, without any prior model or example."},
+  {num:60,ar:"الْمُعِيدُ",trans:"Al-Mu'id",mean:"The Restorer",cat:"Creation",desc:"The one who brings creation back after it ceases to exist — who will restore and resurrect everything on the Day of Judgment."},
+  {num:61,ar:"الْمُحْيِي",trans:"Al-Muhyi",mean:"The Giver of Life",cat:"Power",desc:"The one who gives life to whatever He wills. He gave us life in this world and will give us life again after death."},
+  {num:62,ar:"الْمُمِيتُ",trans:"Al-Mumit",mean:"The Creator of Death",cat:"Power",desc:"The one who causes death at the appointed time. Death is under His command alone and no one can escape it."},
+  {num:63,ar:"الْحَيُّ",trans:"Al-Hayy",mean:"The Ever-Living",cat:"Essence",desc:"The one whose life has no beginning and no end. He is eternally alive and His life is unlike anything in creation."},
+  {num:64,ar:"الْقَيُّومُ",trans:"Al-Qayyum",mean:"The Self-Sustaining",cat:"Essence",desc:"The one who sustains all of existence and who Himself needs nothing. He is the sustainer of all, sustained by none."},
+  {num:65,ar:"الْوَاجِدُ",trans:"Al-Wajid",mean:"The Finder / All-Perceiving",cat:"Knowledge",desc:"The one who finds and perceives everything. He is never in need and never lacks anything He wills."},
+  {num:66,ar:"الْمَاجِدُ",trans:"Al-Majid",mean:"The All-Glorious",cat:"Greatness",desc:"The one who is noble, bountiful, and glorious. He is generous and His glory is boundless."},
+  {num:67,ar:"الْوَاحِدُ",trans:"Al-Wahid",mean:"The One",cat:"Essence",desc:"The one who is unique and singular. He has no partner, no equal, and no rival in any of His attributes."},
+  {num:68,ar:"الأَحَدُ",trans:"Al-Ahad",mean:"The Unique",cat:"Essence",desc:"The one who is absolutely and completely unique in every sense. There is nothing like Him and nothing comparable to Him."},
+  {num:69,ar:"الصَّمَدُ",trans:"As-Samad",mean:"The Eternal / Self-Sufficient",cat:"Essence",desc:"The one to whom all creation turns in need, while He Himself is in need of nothing. He is the master who is depended upon."},
+  {num:70,ar:"الْقَادِرُ",trans:"Al-Qadir",mean:"The All-Capable",cat:"Power",desc:"The one who has power over all things. He can do whatever He wills and nothing is beyond His capability."},
+  {num:71,ar:"الْمُقْتَدِرُ",trans:"Al-Muqtadir",mean:"The Powerful",cat:"Power",desc:"The one who executes His power and carries out what He wills with perfect effectiveness. His power is enacted and active."},
+  {num:72,ar:"الْمُقَدِّمُ",trans:"Al-Muqaddim",mean:"The Expediter",cat:"Balance",desc:"The one who brings forward what He wills and places things in their proper priority according to His wisdom."},
+  {num:73,ar:"الْمُؤَخِّرُ",trans:"Al-Mu'akhkhir",mean:"The Delayer",cat:"Balance",desc:"The one who delays and puts back what He wills. He places things in their proper time according to His perfect knowledge."},
+  {num:74,ar:"الأَوَّلُ",trans:"Al-Awwal",mean:"The First",cat:"Essence",desc:"The one who is first with no beginning before Him. He existed before everything and nothing preceded Him."},
+  {num:75,ar:"الآخِرُ",trans:"Al-Akhir",mean:"The Last",cat:"Essence",desc:"The one who remains after everything perishes. He has no end and will remain after all of creation ceases to exist."},
+  {num:76,ar:"الظَّاهِرُ",trans:"Az-Zahir",mean:"The Manifest",cat:"Essence",desc:"The one who is apparent and above all things. He is manifest through His signs, His creation, and His power."},
+  {num:77,ar:"الْبَاطِنُ",trans:"Al-Batin",mean:"The Hidden",cat:"Essence",desc:"The one who is hidden from the perception of creation. His essence cannot be perceived by the senses or comprehended by the mind."},
+  {num:78,ar:"الْوَالِي",trans:"Al-Wali",mean:"The Governor",cat:"Sovereignty",desc:"The one who governs and administers all of creation. He manages the affairs of the universe in perfect order."},
+  {num:79,ar:"الْمُتَعَالِي",trans:"Al-Muta'ali",mean:"The Most Exalted",cat:"Greatness",desc:"The one who is exalted far above anything that creation can attribute to Him. He transcends all comparison and limitation."},
+  {num:80,ar:"الْبَرُّ",trans:"Al-Barr",mean:"The Source of Goodness",cat:"Mercy",desc:"The one who is kind and good to His servants. He fulfils His promises and shows perfect goodness to those who believe."},
+  {num:81,ar:"التَّوَّابُ",trans:"At-Tawwab",mean:"The Accepter of Repentance",cat:"Forgiveness",desc:"The one who accepts repentance and turns to the repentant with mercy. He loves those who repent and return to Him."},
+  {num:82,ar:"الْمُنْتَقِمُ",trans:"Al-Muntaqim",mean:"The Avenger",cat:"Justice",desc:"The one who takes retribution from those who persist in wrongdoing and oppression. His justice is always served."},
+  {num:83,ar:"الْعَفُوُّ",trans:"Al-Afuw",mean:"The Pardoner",cat:"Forgiveness",desc:"The one who pardons and erases sins entirely, leaving no trace of them. His pardon is complete and absolute."},
+  {num:84,ar:"الرَّؤُوفُ",trans:"Ar-Ra'uf",mean:"The Most Kind",cat:"Mercy",desc:"The one who shows the deepest and most tender kindness. His compassion for His creation is profound and gentle."},
+  {num:85,ar:"مَالِكُ الْمُلْكِ",trans:"Malik Al-Mulk",mean:"Owner of All Sovereignty",cat:"Sovereignty",desc:"The one who possesses and controls all dominion. He gives power to whom He wills and takes it from whom He wills."},
+  {num:86,ar:"ذُو الْجَلَالِ وَالإِكْرَامِ",trans:"Dhul-Jalali Wal-Ikram",mean:"Lord of Majesty and Bounty",cat:"Greatness",desc:"The one who combines supreme majesty with supreme generosity. He is to be glorified and called upon by this name."},
+  {num:87,ar:"الْمُقْسِطُ",trans:"Al-Muqsit",mean:"The Equitable",cat:"Justice",desc:"The one who is perfectly equitable and just in all His dealings. He will settle all accounts with complete fairness."},
+  {num:88,ar:"الْجَامِعُ",trans:"Al-Jami",mean:"The Gatherer",cat:"Power",desc:"The one who gathers all of creation on the Day of Judgment. He brings together what He wills when He wills."},
+  {num:89,ar:"الْغَنِيُّ",trans:"Al-Ghani",mean:"The Self-Sufficient",cat:"Essence",desc:"The one who is free from all need. He does not need creation at all, while all of creation is in constant need of Him."},
+  {num:90,ar:"الْمُغْنِي",trans:"Al-Mughni",mean:"The Enricher",cat:"Generosity",desc:"The one who enriches and fulfils the needs of His creation. He makes rich whoever He wills from His infinite treasures."},
+  {num:91,ar:"الْمَانِعُ",trans:"Al-Mani",mean:"The Withholder",cat:"Balance",desc:"The one who withholds what He wills. When He withholds, it is an act of wisdom and mercy, not deprivation."},
+  {num:92,ar:"الضَّارُّ",trans:"Ad-Darr",mean:"The Distresser",cat:"Balance",desc:"The one who allows harm to reach whoever He wills as a test, a lesson, or a consequence. Harm only occurs by His will."},
+  {num:93,ar:"النَّافِعُ",trans:"An-Nafi",mean:"The Benefiter",cat:"Generosity",desc:"The one who causes benefit to reach whoever He wills. All benefit and good in the world comes from Him alone."},
+  {num:94,ar:"النُّورُ",trans:"An-Nur",mean:"The Light",cat:"Essence",desc:"The one who is the light of the heavens and the earth. His light illuminates the hearts of the believers and the entire universe."},
+  {num:95,ar:"الْهَادِي",trans:"Al-Hadi",mean:"The Guide",cat:"Mercy",desc:"The one who guides whoever He wills to the straight path. Guidance of the heart and soul belongs entirely to Him."},
+  {num:96,ar:"الْبَدِيعُ",trans:"Al-Badi",mean:"The Incomparable Originator",cat:"Creation",desc:"The one who creates in a wondrous and incomparable way with no prior model. His creation is uniquely beautiful."},
+  {num:97,ar:"الْبَاقِي",trans:"Al-Baqi",mean:"The Ever-Lasting",cat:"Essence",desc:"The one who endures forever with no end. While all creation perishes, He remains eternal and everlasting."},
+  {num:98,ar:"الْوَارِثُ",trans:"Al-Warith",mean:"The Inheritor",cat:"Sovereignty",desc:"The one who inherits the earth and all it contains after creation perishes. Everything returns to Him in the end."},
+  {num:99,ar:"الرَّشِيدُ",trans:"Ar-Rashid",mean:"The Guide to the Right Path",cat:"Knowledge",desc:"The one who directs all affairs with perfect wisdom and guides His creation to what is right and correct."},
+]
+
+const nameCategories = ['All', 'Essence', 'Mercy', 'Power', 'Knowledge', 'Forgiveness', 'Justice', 'Greatness', 'Creation', 'Generosity', 'Protection', 'Sovereignty', 'Balance', 'Perfection']
+let activeNameCat = 'All'
+let filteredAllahNames = [...allahNames]
+
+function renderNamesPage() {
+  // Filter tabs
+  document.getElementById('names-filter').innerHTML = nameCategories.map(c =>
+    `<button class="names-filter-btn ${c === activeNameCat ? 'active' : ''}" onclick="setNameCat('${c}')">${c}</button>`
+  ).join('')
+  // Grid
+  document.getElementById('names-grid').innerHTML = filteredAllahNames.map(n => `
+    <div class="name-card" onclick="showNameDetail(${n.num})">
+      <div class="name-ar">${n.ar}</div>
+      <div class="name-trans">${n.trans}</div>
+      <div class="name-mean">${n.mean}</div>
+      <div class="name-num">${n.num} of 99</div>
+    </div>`).join('')
+}
+
+function setNameCat(cat) {
+  activeNameCat = cat
+  applyNameFilter()
+}
+
+function filterNames() {
+  applyNameFilter()
+}
+
+function applyNameFilter() {
+  const q = document.getElementById('names-search').value.toLowerCase()
+  filteredAllahNames = allahNames.filter(n => {
+    const matchCat = activeNameCat === 'All' || n.cat === activeNameCat
+    const matchQ = !q || n.trans.toLowerCase().includes(q) || n.mean.toLowerCase().includes(q) || n.ar.includes(q)
+    return matchCat && matchQ
+  })
+  renderNamesPage()
+}
+
+function showNameDetail(num) {
+  const n = allahNames.find(x => x.num === num)
+  const panel = document.getElementById('name-detail-panel')
+  panel.style.display = 'block'
+  panel.innerHTML = `
+    <div class="name-detail">
+      <div class="name-detail-ar">${n.ar}</div>
+      <div class="name-detail-trans">${n.trans} · ${n.num} of 99</div>
+      <div class="name-detail-mean">${n.mean}</div>
+      <div class="name-detail-desc">${n.desc}</div>
+      <div class="name-detail-ref">${n.cat}</div>
+    </div>`
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
 // ─── EXPOSE TO HTML onclick handlers ─────────────────────────────────────────
 window.showLogin = showLogin; window.showSignup = showSignup
 window.doLogin = doLogin; window.doSignup = doSignup
@@ -909,6 +1067,10 @@ window.saveShukr = saveShukr
 window.addGoalFromInput = addGoalFromInput; window.addSuggestion = addSuggestion
 window.doneGoal = doneGoal; window.removeGoal = removeGoal; window.setSugCat = setSugCat
 window.completeChallenge = completeChallenge
+window.renderNamesPage = renderNamesPage
+window.setNameCat = setNameCat
+window.filterNames = filterNames
+window.showNameDetail = showNameDetail
 
 // ─── BOOT ─────────────────────────────────────────────────────────────────────
 onAuthChange(async (user) => {
