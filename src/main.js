@@ -331,6 +331,30 @@ function renderAll() {
   updateStats()
 }
 
+
+// ─── QURAN FONT SIZE ─────────────────────────────────────────────────────────
+let quranArabicSize = 20   // default px for arabic text
+let quranEnglishSize = 13  // default px for english text
+
+const fontSizeLabels = {
+  12: 'Tiny', 14: 'Small', 16: 'Small', 18: 'Medium',
+  20: 'Medium', 22: 'Large', 24: 'Large', 26: 'X-Large',
+  28: 'X-Large', 30: 'Huge', 32: 'Huge'
+}
+
+function changeQuranFont(delta) {
+  quranArabicSize = Math.min(36, Math.max(14, quranArabicSize + delta))
+  quranEnglishSize = Math.min(22, Math.max(11, quranEnglishSize + (delta > 0 ? 1 : -1)))
+  applyQuranFontSize()
+}
+
+function applyQuranFontSize() {
+  document.querySelectorAll('.ayah-ar').forEach(el => el.style.fontSize = quranArabicSize + 'px')
+  document.querySelectorAll('.ayah-en').forEach(el => el.style.fontSize = quranEnglishSize + 'px')
+  const label = document.getElementById('font-size-label')
+  if (label) label.textContent = fontSizeLabels[quranArabicSize] || 'Custom'
+}
+
 // ─── QURAN READER ─────────────────────────────────────────────────────────────
 // Uses api.quran.com which is reliable and well-maintained
 async function loadSurahs() {
@@ -421,6 +445,7 @@ async function openSurah(num, scrollToAyah = null) {
       }, 400)
     }
 
+    applyQuranFontSize()
     earnedBadges.add('quran_started')
     renderBadges()
   } catch(e) {
@@ -1052,6 +1077,7 @@ window.showLogin = showLogin; window.showSignup = showSignup
 window.doLogin = doLogin; window.doSignup = doSignup
 window.doGoogle = doGoogle; window.doLogout = doLogout
 window.goTo = goTo; window.toggleDark = toggleDark
+window.changeQuranFont = changeQuranFont
 window.filterSurahs = filterSurahs; window.openSurah = openSurah
 window.backToSurahList = backToSurahList; window.navigateSurah = navigateSurah
 window.saveCheckpoint = saveCheckpoint
