@@ -239,6 +239,11 @@
     .toast{position:fixed;bottom:24px;right:24px;background:var(--g);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;}
     .toast.show{opacity:1;}
     .loading{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:var(--g);background:var(--bg);}
+
+    .hadith-grade{font-size:10px;color:var(--g);margin-top:2px;}
+    .sunnah-notice{background:var(--gl);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:16px;font-size:13px;color:var(--text2);line-height:1.6;}
+    .sunnah-notice strong{color:var(--text);}
+    .sunnah-notice code{background:var(--card);border:1px solid var(--bd);border-radius:4px;padding:2px 6px;font-size:12px;color:var(--g);}
     @media(max-width:700px){.layout{grid-template-columns:1fr;}.sidebar{display:none;}.home-grid{grid-template-columns:1fr;}.stat-grid{grid-template-columns:1fr 1fr;}.quiz-options{grid-template-columns:1fr;}.badges-grid{grid-template-columns:repeat(2,1fr);}.collection-grid{grid-template-columns:1fr;}}
   </style>
 </head>
@@ -382,6 +387,13 @@
         <div class="page-title">Hadiths</div>
         <div class="page-sub">Browse major hadith collections — Bukhari, Muslim, Abu Dawud and more</div>
         <div id="hadiths-collections-view">
+        <div id="sunnah-api-notice" style="display:none;" class="sunnah-notice">
+          <strong>🔑 To browse live hadith data from sunnah.com:</strong><br/>
+          1. Register for a free API key at <strong>sunnah.com/api</strong><br/>
+          2. Add it to your <code>.env</code> file: <code>VITE_SUNNAH_API_KEY=your_key</code><br/>
+          3. Add the same key to Vercel under Settings → Environment Variables<br/>
+          4. Redeploy — all 9 collections will unlock immediately
+        </div>
           <div class="collection-grid" id="collections-grid"></div>
           <div class="card" style="padding:14px 16px;background:var(--gl);">
             <div style="font-size:12px;color:var(--text2);line-height:1.6;">Data sourced from the open hadith database. For the full verified sunnah.com database, visit <strong>sunnah.com</strong> and use their API with a free key from <strong>sunnah.com/api</strong>.</div>
