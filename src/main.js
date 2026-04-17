@@ -308,7 +308,7 @@ function goTo(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'))
   document.querySelectorAll('.s-item').forEach(i => i.classList.remove('active'))
   document.getElementById('page-' + page).classList.add('active')
-  const map = { home:0, quran:1, hadiths:2, nawawi:3, arabic:4, sunnah:5, anger:6, shukr:7, goals:8, badges:9 }
+  const map = { home:0, quran:1, hadiths:2, nawawi:3, arabic:4, sunnah:5, anger:6, shukr:7, goals:8, badges:9, dedication:10 }
   document.querySelectorAll('.s-item')[map[page]]?.classList.add('active')
 }
 

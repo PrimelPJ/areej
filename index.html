@@ -239,9 +239,11 @@
     .toast{position:fixed;bottom:24px;right:24px;background:var(--g);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;}
     .toast.show{opacity:1;}
 
-    .dedication-footer{text-align:center;padding:20px 24px;border-top:1px solid var(--bd);margin-top:auto;background:var(--bg);}
-    .dedication-text{font-family:'Playfair Display',serif;font-size:13px;color:var(--gm);line-height:1.8;font-style:italic;}
-    .dedication-heart{color:var(--g);font-size:14px;}
+    .dedication-page{padding:32px 24px;text-align:center;}
+    .dedication-ar{font-family:'Playfair Display',serif;font-size:24px;color:var(--g);direction:rtl;margin-bottom:24px;letter-spacing:1px;}
+    .dedication-body{font-family:'Playfair Display',serif;font-size:16px;color:var(--text);line-height:2;font-style:italic;max-width:480px;margin:0 auto 24px;}
+    .dedication-heart{font-size:28px;display:block;margin:20px 0;color:var(--g);}
+    .dedication-sig{font-size:11px;color:var(--gm);letter-spacing:2px;text-transform:uppercase;margin-top:24px;}
     .loading{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:var(--g);background:var(--bg);}
 
     .hadith-grade{font-size:10px;color:var(--g);margin-top:2px;}
@@ -309,6 +311,7 @@
       <div class="s-section">Profile</div>
       <div class="s-item" onclick="goTo('badges')">🏅 Badges</div>
       <div class="s-item" onclick="toggleDark()" id="dark-toggle">🌙 Dark mode</div>
+      <div class="s-item" onclick="goTo('dedication')">♡ Areej</div>
       <div class="s-streak">
         <div class="s-streak-label">Shukr streak</div>
         <div class="s-streak-val" id="streak-val">0</div>
@@ -544,13 +547,26 @@
       </div>
 
 
-      <!-- DEDICATION FOOTER — shown on every page -->
-      <div class="dedication-footer">
-        <div class="dedication-text">
-          Areej was made for someone I dearly love. <span class="dedication-heart">♡</span><br/>
-          This project is a form of sadaqah for her — every good deed earned from this website,<br/>
-          every young Muslim who learns something, every act of worship inspired here — is all for her.<br/>
-          <span style="font-size:11px;color:var(--bd);font-style:normal;letter-spacing:1px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
+      <!-- DEDICATION -->
+      <div class="page" id="page-dedication">
+        <div class="dedication-page">
+          <div class="dedication-ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+          <span class="dedication-heart">♡</span>
+          <div class="dedication-body">
+            Areej was made for someone I dearly love.
+            <br/><br/>
+            This project is a form of sadaqah for her.
+            Every good deed earned from this website,
+            every young Muslim who learns something,
+            every act of worship inspired here —
+            <br/><br/>
+            all of it is for her.
+            <br/><br/>
+            May Allah accept it from her, fill her life with barakah,
+            and grant her the highest level of Jannah.
+          </div>
+          <div class="dedication-sig">All praise is due to Allah alone</div>
+          <div class="dedication-ar" style="font-size:16px;margin-top:28px;">الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</div>
         </div>
       </div>
     </main>
