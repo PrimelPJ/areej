@@ -1077,125 +1077,116 @@ function showNameDetail(num) {
 // ─── DUA COLLECTION ──────────────────────────────────────────────────────────
 const duaCategories = [
   {
-    id:'morning', icon:'🌅', name:'Morning Adhkar', desc:'Start your day with protection and remembrance',
+    id:"morning", icon:"🌅", name:"Morning Adhkar", desc:"Start your day with protection and remembrance",
     duas:[
-      {title:'Dua upon waking up', ar:'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ', trans:'Alhamdu lillahil-ladhi ahyana ba'da ma amatana wa ilayhin-nushur', mean:'All praise is for Allah who gave us life after having taken it from us and unto Him is the resurrection.', src:'Bukhari'},
-      {title:'Dua for leaving the house', ar:'بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ', trans:"Bismillah, tawakkaltu 'alallah, wa la hawla wa la quwwata illa billah", mean:'In the name of Allah, I place my trust in Allah, and there is no might nor power except with Allah.', src:'Abu Dawud & Tirmidhi'},
-      {title:'Morning protection', ar:'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ', trans:"A'udhu bikalimatillahit-tammati min sharri ma khalaq", mean:'I seek refuge in the perfect words of Allah from the evil of what He has created.', src:'Muslim'},
-      {title:'Sayyid al-Istighfar', ar:'اللَّهُمَّ أَنْتَ رَبِّي لاَ إِلَهَ إِلاَّ أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ', trans:"Allahumma anta rabbi la ilaha illa ant, khalaqtani wa ana abduk", mean:'O Allah, You are my Lord. There is no god but You. You created me and I am Your slave.', src:'Bukhari'},
-      {title:'Morning remembrance', ar:'أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ', trans:'Asbahna wa asbahal mulku lillah, walhamdu lillah', mean:'We have entered a new morning and with it all dominion belongs to Allah, and all praise is for Allah.', src:'Muslim'},
+      {title:"Dua upon waking up", ar:"الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ", trans:"Alhamdu lillahil-ladhi ahyana ba\'da ma amatana wa ilayhin-nushur", mean:"All praise is for Allah who gave us life after having taken it from us and unto Him is the resurrection.", src:"Bukhari"},
+      {title:"Dua for leaving the house", ar:"بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ", trans:"Bismillah, tawakkaltu alallah, wa la hawla wa la quwwata illa billah", mean:"In the name of Allah, I place my trust in Allah, and there is no might nor power except with Allah.", src:"Abu Dawud & Tirmidhi"},
+      {title:"Morning protection", ar:"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ", trans:"A\'udhu bikalimatillahit-tammati min sharri ma khalaq", mean:"I seek refuge in the perfect words of Allah from the evil of what He has created.", src:"Muslim"},
+      {title:"Sayyid al-Istighfar", ar:"اللَّهُمَّ أَنْتَ رَبِّي لاَ إِلَهَ إِلاَّ أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ", trans:"Allahumma anta rabbi la ilaha illa ant, khalaqtani wa ana abduk", mean:"O Allah, You are my Lord. There is no god but You. You created me and I am Your slave.", src:"Bukhari"},
+      {title:"Morning remembrance", ar:"أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ", trans:"Asbahna wa asbahal mulku lillah, walhamdu lillah", mean:"We have entered a new morning and with it all dominion belongs to Allah, and all praise is for Allah.", src:"Muslim"},
     ]
   },
   {
-    id:'evening', icon:'🌙', name:'Evening Adhkar', desc:'End your day with remembrance and protection',
+    id:"evening", icon:"🌙", name:"Evening Adhkar", desc:"End your day with remembrance and protection",
     duas:[
-      {title:'Evening protection', ar:'أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ', trans:'Amsayna wa amsal mulku lillah, walhamdu lillah', mean:'We have entered the evening and with it all dominion belongs to Allah, and all praise is for Allah.', src:'Muslim'},
-      {title:'Dua before sleeping', ar:'اللَّهُمَّ بِاسْمِكَ أَمُوتُ وَأَحْيَا', trans:'Allahumma bismika amutu wa ahya', mean:'O Allah, in Your name I die and I live.', src:'Bukhari'},
-      {title:'Ayatul Kursi before sleep', ar:'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ', trans:'Allahu la ilaha illa huwal-hayyul-qayyum...', mean:'Allah — there is no deity except Him, the Ever-Living, the Sustainer of existence... (full Ayatul Kursi).', src:'Bukhari'},
-      {title:'Protection at night', ar:'بِسْمِكَ اللَّهُمَّ أَضَعُ جَنْبِي وَبِكَ أَرْفَعُهُ', trans:'Bismika allahumma ada'u janbi, wa bika arfa'uh', mean:'In Your name O Allah, I lay down my side, and in Your name I raise it.', src:'Bukhari & Muslim'},
-      {title:'Tasbih before sleep', ar:'سُبْحَانَ اللَّهِ — الْحَمْدُ لِلَّهِ — اللَّهُ أَكْبَرُ', trans:'SubhanAllah (33x) — Alhamdulillah (33x) — Allahu Akbar (34x)', mean:'Glory be to Allah — All praise is for Allah — Allah is the Greatest. Say this before sleeping, it is better than a servant.', src:'Bukhari & Muslim'},
+      {title:"Evening remembrance", ar:"أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ وَالْحَمْدُ لِلَّهِ", trans:"Amsayna wa amsal mulku lillah, walhamdu lillah", mean:"We have entered the evening and with it all dominion belongs to Allah, and all praise is for Allah.", src:"Muslim"},
+      {title:"Dua before sleeping", ar:"اللَّهُمَّ بِاسْمِكَ أَمُوتُ وَأَحْيَا", trans:"Allahumma bismika amutu wa ahya", mean:"O Allah, in Your name I die and I live.", src:"Bukhari"},
+      {title:"Ayatul Kursi before sleep", ar:"اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ", trans:"Allahu la ilaha illa huwal-hayyul-qayyum", mean:"Allah — there is no deity except Him, the Ever-Living, the Sustainer of existence. Recite the full Ayatul Kursi.", src:"Bukhari"},
+      {title:"Protection at night", ar:"بِسْمِكَ اللَّهُمَّ أَضَعُ جَنْبِي وَبِكَ أَرْفَعُهُ", trans:"Bismika allahumma ada\'u janbi, wa bika arfa\'uh", mean:"In Your name O Allah, I lay down my side, and in Your name I raise it.", src:"Bukhari & Muslim"},
+      {title:"Tasbih before sleep", ar:"سُبْحَانَ اللَّهِ — الْحَمْدُ لِلَّهِ — اللَّهُ أَكْبَرُ", trans:"SubhanAllah 33x — Alhamdulillah 33x — Allahu Akbar 34x", mean:"Glory be to Allah — All praise is for Allah — Allah is the Greatest. Say this before sleeping, it is better than a servant.", src:"Bukhari & Muslim"},
     ]
   },
   {
-    id:'salah', icon:'🕌', name:'Prayer (Salah)', desc:'Duas before, during, and after salah',
+    id:"salah", icon:"🕌", name:"Prayer (Salah)", desc:"Duas before, during, and after salah",
     duas:[
-      {title:'Opening dua in salah', ar:'سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ وَتَعَالَى جَدُّكَ وَلَا إِلَهَ غَيْرُكَ', trans:"Subhanakal-lahumma wa bihamdika wa tabarakasmuka wa ta'ala jadduka wa la ilaha ghayruk", mean:'How perfect You are O Allah, and I praise You. Blessed is Your name and exalted is Your majesty. There is no god but You.', src:'Abu Dawud & Tirmidhi'},
-      {title:'Dua in ruku', ar:'سُبْحَانَ رَبِّيَ الْعَظِيمِ', trans:"Subhana Rabbiyal-Azim", mean:'How perfect is my Lord, the Most Great.', src:'Muslim'},
-      {title:'Rising from ruku', ar:'رَبَّنَا وَلَكَ الْحَمْدُ حَمْدًا كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ', trans:"Rabbana wa lakal-hamd, hamdan kathiran tayyiban mubarakan fih", mean:'Our Lord, to You is all praise, an abundant beautiful blessed praise.', src:'Bukhari'},
-      {title:'Dua in sujud', ar:'سُبْحَانَ رَبِّيَ الأَعْلَى', trans:"Subhana Rabbiyal-A'la", mean:'How perfect is my Lord, the Most High.', src:'Muslim'},
-      {title:'Between the two sujud', ar:'رَبِّ اغْفِرْ لِي رَبِّ اغْفِرْ لِي', trans:"Rabbighfir li, rabbighfir li", mean:'My Lord, forgive me. My Lord, forgive me.', src:'Ibn Majah'},
-      {title:'After salah — Ayatul Kursi', ar:'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ', trans:"Allahu la ilaha illa huwal-hayyul-qayyum", mean:'Recite Ayatul Kursi after every salah — nothing stands between you and Jannah except death.', src:'Nasa'i'},
+      {title:"Opening dua in salah", ar:"سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ وَتَعَالَى جَدُّكَ وَلَا إِلَهَ غَيْرُكَ", trans:"Subhanakal-lahumma wa bihamdika wa tabarakasmuka wa ta\'ala jadduka wa la ilaha ghayruk", mean:"How perfect You are O Allah, and I praise You. Blessed is Your name and exalted is Your majesty. There is no god but You.", src:"Abu Dawud & Tirmidhi"},
+      {title:"Dua in ruku", ar:"سُبْحَانَ رَبِّيَ الْعَظِيمِ", trans:"Subhana Rabbiyal-Azim", mean:"How perfect is my Lord, the Most Great.", src:"Muslim"},
+      {title:"Rising from ruku", ar:"رَبَّنَا وَلَكَ الْحَمْدُ حَمْدًا كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ", trans:"Rabbana wa lakal-hamd, hamdan kathiran tayyiban mubarakan fih", mean:"Our Lord, to You is all praise — an abundant, beautiful, blessed praise.", src:"Bukhari"},
+      {title:"Dua in sujud", ar:"سُبْحَانَ رَبِّيَ الأَعْلَى", trans:"Subhana Rabbiyal-A\'la", mean:"How perfect is my Lord, the Most High.", src:"Muslim"},
+      {title:"Between the two sujud", ar:"رَبِّ اغْفِرْ لِي رَبِّ اغْفِرْ لِي", trans:"Rabbighfir li, rabbighfir li", mean:"My Lord, forgive me. My Lord, forgive me.", src:"Ibn Majah"},
+      {title:"After salah — Ayatul Kursi", ar:"اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ", trans:"Allahu la ilaha illa huwal-hayyul-qayyum", mean:"Recite Ayatul Kursi after every salah — nothing stands between you and Jannah except death.", src:"Nasa\'i"},
     ]
   },
   {
-    id:'food', icon:'🍽️', name:'Eating & Drinking', desc:'Duas before and after meals',
+    id:"food", icon:"🍽️", name:"Eating & Drinking", desc:"Duas before and after meals",
     duas:[
-      {title:'Before eating', ar:'بِسْمِ اللَّهِ', trans:'Bismillah', mean:'In the name of Allah. If you forget at the beginning, say: Bismillahi fi awwalihi wa akhirihi.', src:'Abu Dawud & Tirmidhi'},
-      {title:'Before eating (full)', ar:'اللَّهُمَّ بَارِكْ لَنَا فِيهِ وَأَطْعِمْنَا خَيْرًا مِنْهُ', trans:'Allahumma barik lana fihi wa at'imna khayran minh', mean:'O Allah, bless it for us and feed us something better than it.', src:'Tirmidhi'},
-      {title:'After eating', ar:'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مِنَ الْمُسْلِمِينَ', trans:'Alhamdu lillahil-ladhi at'amana wa saqana wa ja'alana minal-muslimin', mean:'All praise is for Allah who fed us and gave us drink and made us Muslims.', src:'Abu Dawud & Tirmidhi'},
-      {title:'After eating (short)', ar:'الْحَمْدُ لِلَّهِ', trans:'Alhamdulillah', mean:'All praise is for Allah.', src:'Muslim'},
-      {title:'Dua when breaking fast', ar:'اللَّهُمَّ لَكَ صُمْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ', trans:"Allahumma laka sumtu wa 'ala rizqika aftartu", mean:'O Allah, for You I fasted and upon Your provision I break my fast.', src:'Abu Dawud'},
+      {title:"Before eating", ar:"بِسْمِ اللَّهِ", trans:"Bismillah", mean:"In the name of Allah. If you forget at the beginning say: Bismillahi fi awwalihi wa akhirihi.", src:"Abu Dawud & Tirmidhi"},
+      {title:"Before eating (full)", ar:"اللَّهُمَّ بَارِكْ لَنَا فِيهِ وَأَطْعِمْنَا خَيْرًا مِنْهُ", trans:"Allahumma barik lana fihi wa at\'imna khayran minh", mean:"O Allah, bless it for us and feed us something better than it.", src:"Tirmidhi"},
+      {title:"After eating", ar:"الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مِنَ الْمُسْلِمِينَ", trans:"Alhamdu lillahil-ladhi at\'amana wa saqana wa ja\'alana minal-muslimin", mean:"All praise is for Allah who fed us and gave us drink and made us Muslims.", src:"Abu Dawud & Tirmidhi"},
+      {title:"Dua when breaking fast", ar:"اللَّهُمَّ لَكَ صُمْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ", trans:"Allahumma laka sumtu wa ala rizqika aftartu", mean:"O Allah, for You I fasted and upon Your provision I break my fast.", src:"Abu Dawud"},
     ]
   },
   {
-    id:'travel', icon:'✈️', name:'Travel', desc:'Duas for journeys and returning home',
+    id:"travel", icon:"✈️", name:"Travel", desc:"Duas for journeys and returning home",
     duas:[
-      {title:'Dua for travelling', ar:'اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا', trans:"Allahu akbar (x3), Subhanal-ladhi sakhkhara lana hadha wa ma kunna lahu muqrinin", mean:'Allah is the Greatest (x3). How perfect He is, the One who has subjected this for us, for we ourselves could not have done it.', src:'Muslim'},
-      {title:'Dua when entering a city', ar:'اللَّهُمَّ رَبَّ السَّمَاوَاتِ السَّبْعِ وَمَا أَظْلَلْنَ، رَبَّ الأَرَضِينَ وَمَا أَقْلَلْنَ', trans:"Allahumma rabbas-samawatis-sab'i wa ma azlalna, rabbal-aradina wa ma aqlaln", mean:'O Allah, Lord of the seven heavens and all they shade, Lord of the lands and all they support.', src:'Ibn Sunni'},
-      {title:'Dua when returning home', ar:'آيِبُونَ تَائِبُونَ عَابِدُونَ لِرَبِّنَا حَامِدُونَ', trans:'Ayibuna ta'ibuna abiduna lirabbina hamidun', mean:'We return, we repent, we worship and we praise our Lord.', src:'Muslim'},
-      {title:'Dua for riding a vehicle', ar:'بِسْمِ اللَّهِ، الْحَمْدُ لِلَّهِ، سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا', trans:'Bismillah, alhamdulillah, subhanal-ladhi sakhkhara lana hadha', mean:'In the name of Allah, all praise to Allah, how perfect He is, the One who has subjected this for us.', src:'Abu Dawud & Tirmidhi'},
+      {title:"Dua for travelling", ar:"اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا", trans:"Allahu akbar x3. Subhanal-ladhi sakhkhara lana hadha wa ma kunna lahu muqrinin", mean:"Allah is the Greatest x3. How perfect He is, the One who has subjected this for us — for we ourselves could not have done it.", src:"Muslim"},
+      {title:"Dua when returning home", ar:"آيِبُونَ تَائِبُونَ عَابِدُونَ لِرَبِّنَا حَامِدُونَ", trans:"Ayibuna ta\'ibuna abiduna lirabbina hamidun", mean:"We return, we repent, we worship and we praise our Lord.", src:"Muslim"},
+      {title:"Dua for riding a vehicle", ar:"بِسْمِ اللَّهِ، الْحَمْدُ لِلَّهِ، سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا", trans:"Bismillah, alhamdulillah, subhanal-ladhi sakhkhara lana hadha", mean:"In the name of Allah, all praise to Allah, how perfect He is who has subjected this for us.", src:"Abu Dawud & Tirmidhi"},
     ]
   },
   {
-    id:'anxiety', icon:'💙', name:'Anxiety & Hardship', desc:'Duas for difficult times and seeking ease',
+    id:"anxiety", icon:"💙", name:"Anxiety & Hardship", desc:"Duas for difficult times and seeking ease",
     duas:[
-      {title:'Dua for anxiety and grief', ar:'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ', trans:"Allahumma inni a'udhu bika minal-hammi wal-hazan, wal-'ajzi wal-kasal, wal-bukhli wal-jubn, wa dal'id-dayni wa ghalabatir-rijal", mean:'O Allah, I seek refuge in You from worry and grief, from incapacity and laziness, from miserliness and cowardice, and from the burden of debt and being overpowered by men.', src:'Bukhari'},
-      {title:'Dua of Prophet Yunus', ar:'لَا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ', trans:"La ilaha illa anta subhanaka inni kuntu minaz-zalimin", mean:'There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers.', src:'Quran 21:87'},
-      {title:'For relief from hardship', ar:'اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا وَأَنْتَ تَجْعَلُ الْحَزْنَ إِذَا شِئْتَ سَهْلًا', trans:"Allahumma la sahla illa ma ja'altahu sahla, wa anta taj'alul hazna idha shi'ta sahla", mean:'O Allah, there is no ease except what You make easy. And You make the difficult, if You wish, easy.', src:'Ibn Hibban'},
-      {title:'Dua for strength', ar:'حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ', trans:"Hasbunallahu wa ni'mal wakil", mean:'Allah is sufficient for us and He is the best disposer of affairs.', src:'Quran 3:173 & Bukhari'},
-      {title:'Removing sadness', ar:'اللَّهُمَّ إِنِّي عَبْدُكَ، ابْنُ عَبْدِكَ، ابْنُ أَمَتِكَ، نَاصِيَتِي بِيَدِكَ', trans:"Allahumma inni abduk, ibnu abdik, ibnu amatik, nasiyati biyadik", mean:'O Allah, I am Your servant, son of Your servant, son of Your maidservant, my forelock is in Your hand...', src:'Ahmad'},
+      {title:"Dua for anxiety and grief", ar:"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ", trans:"Allahumma inni a\'udhu bika minal-hammi wal-hazan, wal-ajzi wal-kasal, wal-bukhli wal-jubn", mean:"O Allah, I seek refuge in You from worry and grief, from incapacity and laziness, from miserliness and cowardice, and from the burden of debt.", src:"Bukhari"},
+      {title:"Dua of Prophet Yunus", ar:"لَا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ", trans:"La ilaha illa anta subhanaka inni kuntu minaz-zalimin", mean:"There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers.", src:"Quran 21:87"},
+      {title:"For relief from hardship", ar:"اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا", trans:"Allahumma la sahla illa ma ja\'altahu sahla, wa anta taj\'alul hazna idha shi\'ta sahla", mean:"O Allah, there is no ease except what You make easy. And You make the difficult, if You wish, easy.", src:"Ibn Hibban"},
+      {title:"Dua for strength", ar:"حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ", trans:"Hasbunallahu wa ni\'mal wakil", mean:"Allah is sufficient for us and He is the best disposer of affairs.", src:"Quran 3:173 & Bukhari"},
     ]
   },
   {
-    id:'forgiveness', icon:'🌿', name:'Forgiveness & Repentance', desc:'Duas for seeking Allah's forgiveness',
+    id:"forgiveness", icon:"🌿", name:"Forgiveness & Repentance", desc:"Duas for seeking forgiveness",
     duas:[
-      {title:'Sayyid al-Istighfar', ar:'اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ', trans:"Allahumma anta rabbi la ilaha illa ant, khalaqtani wa ana abduk, wa ana 'ala ahdika wa wa'dika mastata't", mean:'O Allah, You are my Lord, there is no god but You. You created me and I am Your slave. I am committed to Your covenant and promise as much as I can...', src:'Bukhari'},
-      {title:'Short istighfar', ar:'أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ', trans:"Astaghfirullahil-azimal-ladhi la ilaha illa huwal-hayyul-qayyumu wa atubu ilaih", mean:'I seek the forgiveness of Allah the Mighty, whom there is no god but He, the Living, the Eternal, and I repent to Him.', src:'Abu Dawud & Tirmidhi'},
-      {title:'Dua for forgiveness', ar:'رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ', trans:"Rabbighfir li wa tub 'alayya innaka antal-tawwabur-rahim", mean:'My Lord, forgive me and accept my repentance. Indeed You are the Ever-Returning, the Most Merciful.', src:'Ahmad'},
+      {title:"Sayyid al-Istighfar", ar:"اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ", trans:"Allahumma anta rabbi la ilaha illa ant, khalaqtani wa ana abduk, wa ana ala ahdika wa wa\'dika mastata\'t", mean:"O Allah, You are my Lord, there is no god but You. You created me and I am Your slave. I am committed to Your covenant and promise as much as I can.", src:"Bukhari"},
+      {title:"Short istighfar", ar:"أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ", trans:"Astaghfirullahil-azimal-ladhi la ilaha illa huwal-hayyul-qayyumu wa atubu ilaih", mean:"I seek the forgiveness of Allah the Mighty, whom there is no god but He, the Living, the Eternal, and I repent to Him.", src:"Abu Dawud & Tirmidhi"},
+      {title:"Dua for forgiveness", ar:"رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ", trans:"Rabbighfir li wa tub alayya innaka antal-tawwabur-rahim", mean:"My Lord, forgive me and accept my repentance. Indeed You are the Ever-Returning, the Most Merciful.", src:"Ahmad"},
     ]
   },
   {
-    id:'parents', icon:'❤️', name:'Parents & Family', desc:'Duas for your parents and loved ones',
+    id:"parents", icon:"❤️", name:"Parents & Family", desc:"Duas for your parents and loved ones",
     duas:[
-      {title:'Dua for parents', ar:'رَّبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا', trans:"Rabbir hamhuma kama rabbayani saghira", mean:'My Lord, have mercy upon them as they raised me when I was small.', src:'Quran 17:24'},
-      {title:'Dua for parents (extended)', ar:'اللَّهُمَّ اغْفِرْ لِي وَلِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا', trans:"Allahummagh-fir li wa liwalidayya war-hamhuma kama rabbayani saghira", mean:'O Allah, forgive me and my parents and have mercy on them as they raised me when I was young.', src:'Quran 17:24'},
-      {title:'Dua for a loved one', ar:'اللَّهُمَّ أَصْلِحْ لِي دِينِيَ الَّذِي هُوَ عِصْمَةُ أَمْرِي', trans:"Allahumma aslih li dini alladhi huwa 'ismatu amri", mean:'O Allah, make sound my religion which is the safeguard of my affairs.', src:'Muslim'},
-      {title:'Dua for good character', ar:'اللَّهُمَّ كَمَا حَسَّنْتَ خَلْقِي فَحَسِّنْ خُلُقِي', trans:"Allahumma kama hassanta khalqi fahassin khuluqi", mean:'O Allah, as You have made my physical form beautiful, make my character beautiful too.', src:'Ahmad'},
+      {title:"Dua for parents", ar:"رَّبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا", trans:"Rabbir hamhuma kama rabbayani saghira", mean:"My Lord, have mercy upon them as they raised me when I was small.", src:"Quran 17:24"},
+      {title:"Dua for parents (extended)", ar:"اللَّهُمَّ اغْفِرْ لِي وَلِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا", trans:"Allahummagh-fir li wa liwalidayya war-hamhuma kama rabbayani saghira", mean:"O Allah, forgive me and my parents and have mercy on them as they raised me when I was young.", src:"Quran 17:24"},
+      {title:"Dua for good character", ar:"اللَّهُمَّ كَمَا حَسَّنْتَ خَلْقِي فَحَسِّنْ خُلُقِي", trans:"Allahumma kama hassanta khalqi fahassin khuluqi", mean:"O Allah, as You have made my physical form beautiful, make my character beautiful too.", src:"Ahmad"},
     ]
   },
   {
-    id:'knowledge', icon:'📚', name:'Knowledge & Study', desc:'Duas for seeking beneficial knowledge',
+    id:"knowledge", icon:"📚", name:"Knowledge & Study", desc:"Duas for seeking beneficial knowledge",
     duas:[
-      {title:'Dua for knowledge', ar:'رَّبِّ زِدْنِي عِلْمًا', trans:"Rabbi zidni 'ilma", mean:'My Lord, increase me in knowledge.', src:'Quran 20:114'},
-      {title:'Before studying', ar:'اللَّهُمَّ انْفَعْنِي بِمَا عَلَّمْتَنِي وَعَلِّمْنِي مَا يَنْفَعُنِي', trans:"Allahumma infa'ni bima 'allamtani wa 'allimni ma yanfa'uni", mean:'O Allah, benefit me with what You have taught me, and teach me that which will benefit me.', src:'Tirmidhi & Ibn Majah'},
-      {title:'Dua for understanding', ar:'رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي', trans:"Rabbish-rah li sadri wa yassir li amri", mean:'My Lord, expand for me my chest and ease for me my task.', src:'Quran 20:25-26'},
-      {title:'Against forgetting', ar:'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْعِلْمِ الَّذِي لَا يَنْفَعُ', trans:"Allahumma inni a'udhu bika minal-'ilmil-ladhi la yanfa'", mean:'O Allah, I seek refuge in You from knowledge that does not benefit.', src:'Muslim'},
+      {title:"Dua for knowledge", ar:"رَّبِّ زِدْنِي عِلْمًا", trans:"Rabbi zidni ilma", mean:"My Lord, increase me in knowledge.", src:"Quran 20:114"},
+      {title:"Before studying", ar:"اللَّهُمَّ انْفَعْنِي بِمَا عَلَّمْتَنِي وَعَلِّمْنِي مَا يَنْفَعُنِي", trans:"Allahumma infa\'ni bima allamtani wa allimni ma yanfa\'uni", mean:"O Allah, benefit me with what You have taught me, and teach me that which will benefit me.", src:"Tirmidhi & Ibn Majah"},
+      {title:"Dua for understanding", ar:"رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي", trans:"Rabbish-rah li sadri wa yassir li amri", mean:"My Lord, expand for me my chest and ease for me my task.", src:"Quran 20:25-26"},
     ]
   },
   {
-    id:'masjid', icon:'🕌', name:'Masjid', desc:'Duas for entering and leaving the masjid',
+    id:"masjid", icon:"🕌", name:"Masjid", desc:"Duas for entering and leaving the masjid",
     duas:[
-      {title:'Entering the masjid', ar:'اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ', trans:"Allahummaf-tah li abwaba rahmatik", mean:'O Allah, open for me the gates of Your mercy.', src:'Muslim'},
-      {title:'Leaving the masjid', ar:'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ', trans:"Allahumma inni as'aluka min fadlik", mean:'O Allah, I ask of You from Your bounty.', src:'Muslim'},
-      {title:'Dua when hearing the adhan', ar:'اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ وَالصَّلَاةِ الْقَائِمَةِ', trans:"Allahumma rabba hadhihid-da'watit-tammah was-salatil-qa'imah", mean:'O Allah, Lord of this perfect call and the prayer to be established, grant Muhammad the intercession and superiority...', src:'Bukhari'},
+      {title:"Entering the masjid", ar:"اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ", trans:"Allahummaf-tah li abwaba rahmatik", mean:"O Allah, open for me the gates of Your mercy.", src:"Muslim"},
+      {title:"Leaving the masjid", ar:"اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ", trans:"Allahumma inni as\'aluka min fadlik", mean:"O Allah, I ask of You from Your bounty.", src:"Muslim"},
     ]
   },
   {
-    id:'health', icon:'💊', name:'Illness & Health', desc:'Duas when sick or visiting the ill',
+    id:"health", icon:"💊", name:"Illness & Health", desc:"Duas when sick or visiting the ill",
     duas:[
-      {title:'Dua for the sick', ar:'أَسْأَلُ اللَّهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ', trans:"As'alullahul-'azima rabbal-'arshil-'azimi an yashfiyak (x7)", mean:'I ask Allah the Mighty, Lord of the Mighty Throne, to cure you. (Say 7 times when visiting the sick)', src:'Abu Dawud & Tirmidhi'},
-      {title:'Ruqyah — self healing', ar:'بِسْمِ اللَّهِ أَرْقِيكَ مِنْ كُلِّ شَيْءٍ يُؤْذِيكَ', trans:"Bismillahi arqik, min kulli shay'in yu'dhik, min sharri kulli nafsin aw 'aynin hasid", mean:'In the name of Allah I perform ruqyah for you, from everything that harms you, from the evil of every soul or envious eye.', src:'Muslim'},
-      {title:'Placing hand on pain', ar:'بِسْمِ اللَّهِ — أَعُوذُ بِاللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ وَأُحَاذِرُ', trans:"Bismillah (x3) — A'udhu billahi wa qudratihi min sharri ma ajidu wa uhadhir (x7)", mean:'In the name of Allah (x3) — I seek refuge in Allah and His power from the evil of what I find and what I fear (x7). Place your hand on the area of pain.', src:'Muslim'},
+      {title:"Dua for the sick", ar:"أَسْأَلُ اللَّهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ", trans:"As\'alullahul-azima rabbal-arshil-azimi an yashfiyak — say 7 times", mean:"I ask Allah the Mighty, Lord of the Mighty Throne, to cure you. Say 7 times when visiting the sick.", src:"Abu Dawud & Tirmidhi"},
+      {title:"Placing hand on pain", ar:"بِسْمِ اللَّهِ — أَعُوذُ بِاللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ وَأُحَاذِرُ", trans:"Bismillah x3 — A\'udhu billahi wa qudratihi min sharri ma ajidu wa uhadhir x7", mean:"In the name of Allah x3 — I seek refuge in Allah and His power from the evil of what I find and what I fear x7. Place your hand on the area of pain.", src:"Muslim"},
     ]
   },
   {
-    id:'quran_dua', icon:'📖', name:'Quranic Duas', desc:'Beautiful duas directly from the Quran',
+    id:"quran_dua", icon:"📖", name:"Quranic Duas", desc:"Beautiful duas directly from the Quran",
     duas:[
-      {title:'Dua for guidance', ar:'رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً', trans:"Rabbana la tuzigh qulubana ba'da idh hadaytana wa hab lana milladunka rahmah", mean:'Our Lord, let not our hearts deviate after You have guided us and grant us from Yourself mercy.', src:'Quran 3:8'},
-      {title:'Dua of Ibrahim', ar:'رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِن ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاءِ', trans:"Rabbij-'alni muqimas-salati wa min dhurriyyati, rabbana wa taqabbal du'a", mean:'My Lord, make me an establisher of prayer, and from my descendants. Our Lord, and accept my supplication.', src:'Quran 14:40'},
-      {title:'Dua for good in both worlds', ar:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ', trans:"Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina adhaban-nar", mean:'Our Lord, give us good in this world and good in the Hereafter and protect us from the punishment of the Fire.', src:'Quran 2:201'},
-      {title:'Dua of Musa', ar:'رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ', trans:"Rabbi inni lima anzalta ilayya min khayrin faqir", mean:'My Lord, indeed I am, for whatever good You would send down to me, in need.', src:'Quran 28:24'},
-      {title:'Dua of Yunus', ar:'لَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ', trans:"La ilaha illa anta subhanaka inni kuntu minaz-zalimin", mean:'There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers.', src:'Quran 21:87'},
-      {title:'Dua for a righteous spouse', ar:'رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا', trans:"Rabbana hab lana min azwajina wa dhurriyyatina qurrata a'yunin waj'alna lil-muttaqina imama", mean:'Our Lord, grant us from among our wives and offspring comfort to our eyes and make us an example for the righteous.', src:'Quran 25:74'},
+      {title:"Dua for guidance", ar:"رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً", trans:"Rabbana la tuzigh qulubana ba\'da idh hadaytana wa hab lana milladunka rahmah", mean:"Our Lord, let not our hearts deviate after You have guided us and grant us from Yourself mercy.", src:"Quran 3:8"},
+      {title:"Dua for good in both worlds", ar:"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", trans:"Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina adhaban-nar", mean:"Our Lord, give us good in this world and good in the Hereafter and protect us from the punishment of the Fire.", src:"Quran 2:201"},
+      {title:"Dua of Musa", ar:"رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ", trans:"Rabbi inni lima anzalta ilayya min khayrin faqir", mean:"My Lord, indeed I am, for whatever good You would send down to me, in need.", src:"Quran 28:24"},
+      {title:"Dua of Yunus", ar:"لَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ", trans:"La ilaha illa anta subhanaka inni kuntu minaz-zalimin", mean:"There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers.", src:"Quran 21:87"},
+      {title:"Dua for a righteous family", ar:"رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ", trans:"Rabbana hab lana min azwajina wa dhurriyyatina qurrata a\'yunin waj\'alna lil-muttaqina imama", mean:"Our Lord, grant us from among our wives and offspring comfort to our eyes and make us an example for the righteous.", src:"Quran 25:74"},
     ]
   },
   {
-    id:'protection', icon:'🛡️', name:'Protection', desc:'Duas for protection from evil and harm',
+    id:"protection", icon:"🛡️", name:"Protection", desc:"Duas for protection from evil and harm",
     duas:[
-      {title:'The three Quls', ar:'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ — قُلْ أَعُوذُ بِرَبِّ النَّاسِ — قُلْ هُوَ اللَّهُ أَحَدٌ', trans:"Qul a'udhu birabbil-falaq — Qul a'udhu birabbin-nas — Qul huwallahu ahad", mean:'Recite Surah Al-Ikhlas, Al-Falaq, and An-Nas three times morning and evening — they are sufficient for you against all things.', src:'Abu Dawud & Tirmidhi'},
-      {title:'Against the evil eye', ar:'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّةِ مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ', trans:"A'udhu bikalimatillahit-tammati min kulli shaytanin wa hammah", mean:'I seek refuge in the perfect words of Allah from every devil and poisonous creature.', src:'Bukhari'},
-      {title:'Protection entering a place', ar:'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ', trans:"A'udhu bikalimatillahit-tammati min sharri ma khalaq", mean:'I seek refuge in the perfect words of Allah from the evil of what He has created.', src:'Muslim'},
-      {title:'Against black magic and evil', ar:'بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ', trans:"Bismillahil-ladhi la yadurru ma'asmihi shay'un fil-ardi wa la fis-sama'i wa huwas-sami'ul-'alim (x3)", mean:'In the name of Allah with whose name nothing can cause harm on earth or in the heavens, and He is the All-Hearing, All-Knowing. (Say 3 times in the morning and evening)', src:'Abu Dawud & Tirmidhi'},
+      {title:"The three Quls", ar:"قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ — قُلْ أَعُوذُ بِرَبِّ النَّاسِ — قُلْ هُوَ اللَّهُ أَحَدٌ", trans:"Qul a\'udhu birabbil-falaq — Qul a\'udhu birabbin-nas — Qul huwallahu ahad", mean:"Recite Surah Al-Ikhlas, Al-Falaq, and An-Nas three times morning and evening — sufficient for you against all things.", src:"Abu Dawud & Tirmidhi"},
+      {title:"Against the evil eye", ar:"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّةِ مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ", trans:"A\'udhu bikalimatillahit-tammati min kulli shaytanin wa hammah", mean:"I seek refuge in the perfect words of Allah from every devil and poisonous creature.", src:"Bukhari"},
+      {title:"Morning and evening protection", ar:"بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ", trans:"Bismillahil-ladhi la yadurru ma\'asmihi shay\'un fil-ardi wa la fis-sama\'i — say 3 times", mean:"In the name of Allah with whose name nothing can cause harm on earth or in the heavens. Say 3 times morning and evening.", src:"Abu Dawud & Tirmidhi"},
     ]
   },
 ]
