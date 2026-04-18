@@ -174,6 +174,7 @@ const badgesData = [
 
 // ─── STATE ───────────────────────────────────────────────────────────────────
 let currentUser = null
+let expandedHadith = null
 let learned = new Set()
 let sunnahDone = Array(12).fill(false)
 let shukrLog = []
@@ -615,17 +616,100 @@ function backToCollections() {
   document.getElementById('hadiths-items-view').style.display = 'none'
 }
 
+
+// ─── HADITH EXPLANATIONS ─────────────────────────────────────────────────────
+const hadithExplanations = [
+  "This is the first and most foundational hadith. Every action is judged by the intention behind it. If you pray, fast, or give charity for Allah's sake, you receive the full reward. If your intention is to show off or gain worldly benefit, you receive no reward with Allah. This hadith teaches us to constantly renew and purify our intentions.",
+  "This hadith outlines the five pillars of Islam in summary form. The testimony of faith is the entry into Islam. Prayer connects the servant to Allah five times a day. Zakat purifies wealth and supports the community. Fasting in Ramadan builds taqwa. Hajj is the global gathering of the ummah. These five form the skeleton of a Muslim's life.",
+  "The Prophet ﷺ listed the five pillars in order of importance. The shahada comes first as it is the foundation. Prayer is the most important act of worship after the shahada. Zakat is mentioned third, then fasting, then Hajj — which is only obligatory for those who are able.",
+  "This hadith teaches us about the origins of the human soul. Each person is formed in the womb in stages — a drop of fluid, then a clot, then a lump. At 120 days an angel breathes the soul into the body and records four things: the person's provision, lifespan, deeds, and whether they will be happy or miserable. This reminds us that Allah knows and controls all.",
+  "Any innovation in the religion that has no basis in the Quran or Sunnah is rejected. This protects the purity of Islam from additions and changes. The Prophet ﷺ said: 'Every innovation is misguidance, and every misguidance leads to the Fire.' This does not refer to worldly innovations like technology, but to newly invented acts of worship.",
+  "The halal is clear — what Allah has permitted is known. The haram is clear — what Allah has forbidden is known. Between them are matters that are unclear to many people. Whoever stays away from the doubtful out of caution has protected their deen and their honour. Whoever falls into the doubtful may fall into the haram — like a shepherd grazing near a protected area.",
+  "The entire religion can be summarised as sincere advice and goodwill. To Allah — by believing in Him, obeying Him, avoiding what He hates. To His Book — by reciting, understanding, and acting by it. To His Messenger ﷺ — by following his sunnah. To the leaders — by obeying in what is good. To the people — by wanting for them what you want for yourself.",
+  "This hadith refers to the command given to the early Muslims to fight those who refused to accept Islam. Scholars explain this refers to a specific historical context — the Arabian Peninsula — not a general command to fight all non-Muslims forever. When the conditions are met, fighting stops.",
+  "The Prophet ﷺ told us to avoid what he forbade and do what he commanded as much as we are able. The phrase 'as much as you are able' shows the mercy of Islam — we are not expected to do the impossible. But avoidance of prohibitions is absolute — there is no 'as much as you can' when it comes to staying away from the haram.",
+  "Allah is pure and only accepts what is pure. He commanded the believers to eat from the good and lawful, just as He commanded the prophets. This hadith reminds us that our sustenance must be halal — haram food and income can block our duas from being answered.",
+  "Leaving what doesn't concern you is a sign of good Islam. A person who wastes no time on irrelevant matters, gossip, or things unrelated to their deen and dunya has perfected something important. The Prophet ﷺ said this is from the excellence of a person's Islam — meaning it is a high rank, not the bare minimum.",
+  "True faith is not just about what you believe — it must translate into how you treat others. If you love for your brother what you love for yourself, you cannot envy him, cannot cheat him, and cannot harm him. This hadith sets a very high standard for how believers relate to one another.",
+  "Anger is one of the most dangerous doors through which shaytan enters. The Prophet ﷺ repeated this advice three times — showing how serious and difficult it is. When we are angry we say things we regret, we make decisions we regret, and we act in ways that damage our relationships and our deen.",
+  "Fearing Allah is the foundation of taqwa. Following a bad deed with a good deed wipes it out — this gives hope to the sinner. Treating people with good character is a summary of social ethics in Islam. These three principles — taqwa, tawbah, and good character — cover our relationship with Allah and with people.",
+  "This hadith teaches us to guard Allah's commands and He will guard us in return. If you protect the boundaries Allah set — the halal and haram — He will protect you in your deen, your life, and your family. The second part is equally powerful: know Allah in times of ease and He will know you in times of difficulty.",
+  "We should seek help from Allah and not give up. When something bad happens, we should not dwell on 'if only I had done differently' — because that opens the door to shaytan. Instead say: 'Allah decreed this and He does what He wills.' Accept the decree with patience while still doing your best to improve your situation.",
+  "Purification is half of faith — both physical purity (wudu, ghusl) and spiritual purity (tawbah, sincerity). Alhamdulillah fills the scale — the most weighty thing on the scale of deeds on the Day of Judgment. SubhanAllah and Alhamdulillah together fill what is between the heavens and earth — an enormous reward for just a few words.",
+  "Every single act of goodness is a form of charity. Removing harm from the road, smiling at your brother, giving good advice, visiting the sick, making dua for others — all of this is sadaqah. Islam is a religion of constant charity, and this hadith shows that sadaqah is not limited to money.",
+  "The truly strong person is not the one who wins fights — it is the one who can control themselves when they are angry. Controlling anger requires immense strength of character. The Prophet ﷺ said this to correct our understanding of strength — real power is internal, not physical.",
+  "Seeking knowledge is one of the greatest acts of worship. Whoever walks a path to seek knowledge — literally or metaphorically — Allah makes the path to Jannah easy for them. This applies to knowledge of the deen, and also to beneficial worldly knowledge when sought with the right intention.",
+  "Allah loves excellence — in worship, in work, in relationships, in everything. When you do something, do it well. Pray with khushu, work with care, help people thoroughly. Doing things with ihsan (excellence) is a form of worship. The Prophet ﷺ said Allah does not just want you to do good things — He wants you to do them with excellence.",
+  "The best of people in terms of religious benefit to the ummah are those who learn the Quran and teach it to others. This is sadaqah jariyah — the one who teaches passes on knowledge that outlives them. Every person who learns from you and then teaches others — you get a share of their reward too.",
+  "Harm must not be inflicted or returned. If something harms you, you cannot harm others to compensate. This is the foundation of Islamic law regarding harm, compensation, and rights. It protects the weak from oppression and prevents cycles of revenge and harm.",
+  "Every Muslim has a duty to change evil — with their hand if they have authority, with their tongue if they can, and with their heart at minimum. This hadith shows that the duty to oppose evil is graduated based on ability. Changing evil with the heart — hating it sincerely — is the bare minimum of faith.",
+  "Guiding someone to good is as if you did the good yourself. This means that teachers, parents, scholars, and friends who guide others to good deeds receive a reward equal to every good deed those people do, without the person's reward being reduced at all. This is one of the most powerful motivations for dawah.",
+  "Patience is only truly valuable at the moment the calamity first strikes — before you have processed it, before the shock wears off. Patience after the initial shock is easier and less meritorious. The real test is the first moment: can you say Inna lillahi wa inna ilayhi raji'un and mean it?",
+  "Allah does not judge you by your appearance or your wealth — He judges you by what is in your heart and what you do. This removes all forms of discrimination based on looks, race, or status in Islam. The one with the best heart and the best deeds is the most honoured in the sight of Allah.",
+  "A Muslim is defined not just by what they believe but by how they treat others. The one whose neighbours and fellow Muslims are safe from their tongue and their hands has fulfilled a major obligation. This makes safety — not just prayer and fasting — a defining characteristic of a Muslim.",
+  "Gratitude to people is connected to gratitude to Allah. If a person cannot bring themselves to thank the people who benefit them, it reflects an inability to truly appreciate and be grateful to Allah. Start with thanking the people around you — your parents, teachers, friends — and this trains the heart for shukr to Allah.",
+  "The best people are those who benefit others the most. This is a standard by which to measure your life: how much have you benefited the people around you? It could be through teaching, helping, giving, listening, advising, or any form of service. Being beneficial to others is one of the highest honours.",
+  "Live in this world as a traveller — lightly, with your eyes on the destination, not getting too attached to the comforts of the road. The traveller does not furnish the hotel room. They stay briefly and move on. This world is your journey, the akhirah is your home. Don't decorate the journey at the expense of the destination.",
+  "Righteousness is good character — how you treat people, how you speak, how you carry yourself. Sin is what disturbs your conscience and what you would be embarrassed for people to know about. These two tests — one internal and one social — cover the full range of moral life.",
+  "When you leave something for the sake of Allah — a haram relationship, a forbidden income, a bad habit — Allah replaces it with something better. This requires trust. The replacement may not be immediate or obvious. But the promise of the Prophet ﷺ is certain: leave it for Allah and He will give you better.",
+  "The first ten days of Dhul Hijjah are the most virtuous days of the year — more than Ramadan according to many scholars. Good deeds done in these days are the most beloved to Allah. Make the most of them with extra prayer, fasting, dhikr, sadaqah, and recitation of the Quran.",
+  "The dunya should be in your hand — used as a tool — not in your heart where it controls and distracts you. You can have wealth, comfort, and success, as long as your heart is free of attachment to them. The test is simple: if you lost everything tomorrow, would your heart be at peace? That is where the dunya should sit.",
+  "Detachment from the dunya brings rest to the heart and body. Chasing the world — its wealth, its status, its pleasures — brings endless anxiety, sleeplessness, and exhaustion. The person who is satisfied with what Allah has given them and is not consumed by worldly desire lives with a lightness and peace that money cannot buy.",
+  "Whoever believes in Allah and the Last Day must guard their tongue — say good or stay silent. The tongue is the most dangerous limb. More people enter the Fire because of what their tongues say than almost anything else. Honouring the neighbour and the guest are marks of a person of complete faith.",
+  "Fasting Ramadan with true faith and seeking the reward of Allah — not just habit or social obligation — leads to the forgiveness of all past sins. The condition is sincerity: iman and ihtisab. This is one of the greatest gifts of the month.",
+  "After death, most deeds are cut off — except three that continue to bring reward: ongoing charity (a well, a masjid, a school), beneficial knowledge that others use, and a righteous child who prays for you. Building these three in your lifetime is the wisest investment a person can make.",
+  "The Prophet ﷺ was sent to complete and perfect good character. Islam is not just rituals — it is above all else a refinement of character. Honesty, generosity, patience, kindness, justice — these are what Islam came to perfect. Judge the quality of your Islam by the quality of your character.",
+]
+
 // ─── NAWAWI 40 ────────────────────────────────────────────────────────────────
 function renderHadith() {
-  document.getElementById('hadith-list').innerHTML = hadithData.map((h, i) => `
-    <div class="h-row ${learned.has(i) ? 'learned' : ''}">
-      <div class="h-num">${i + 1}</div>
-      <div style="flex:1;">
-        <div class="h-ar">${h.ar}</div>
-        <div style="font-size:11px;color:var(--gm);">${h.src.split('·')[0].trim()}</div>
+  document.getElementById('hadith-list').innerHTML = hadithData.map((h, i) => {
+    const isExpanded = expandedHadith === i
+    const isLearned = learned.has(i)
+    return `
+      <div class="h-row ${isLearned ? 'learned' : ''} ${isExpanded ? 'h-row-expanded' : ''}" onclick="toggleHadithExpand(${i})">
+        <div class="h-num">${i + 1}</div>
+        <div style="flex:1;">
+          <div class="h-ar">${h.ar}</div>
+          <div style="font-size:11px;color:var(--gm);">${h.src.split('·')[0].trim()}</div>
+        </div>
+        <div style="font-size:13px;color:var(--gm);padding-left:8px;">${isExpanded ? '▲' : '▼'}</div>
       </div>
-      <div style="font-size:11px;color:var(--gm);">${learned.has(i) ? '✓' : ''}</div>
-    </div>`).join('')
+      ${isExpanded ? `
+      <div class="h-expand-body">
+        <div class="h-expand-ar">${h.ar}</div>
+        <div class="h-expand-en">"${h.en}"</div>
+        <div class="h-expand-src">— ${h.src}</div>
+        <div class="h-expand-exp">
+          <div class="h-expand-exp-label">What this means</div>
+          ${hadithExplanations[i] || ''}
+        </div>
+        <button class="h-learned-btn ${isLearned ? 'done' : ''}" onclick="event.stopPropagation(); markLearnedFromList(${i})">
+          ${isLearned ? '✓ Marked as memorised' : '+ Mark as memorised'}
+        </button>
+      </div>` : ''}
+    `
+  }).join('')
+}
+
+function toggleHadithExpand(i) {
+  expandedHadith = expandedHadith === i ? null : i
+  renderHadith()
+  if (expandedHadith !== null) {
+    setTimeout(() => {
+      const rows = document.querySelectorAll('.h-expand-body')
+      if (rows.length) rows[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }, 50)
+  }
+}
+
+async function markLearnedFromList(i) {
+  learned.add(i)
+  renderHadith()
+  updateStats()
+  checkBadges()
+  await saveHadithProgress(currentUser.id, [...learned])
+  showToast('Hadith ' + (i+1) + ' marked as memorised ✓')
 }
 
 function switchHadithMode(mode) {
@@ -1264,7 +1348,9 @@ window.saveCheckpoint = saveCheckpoint
 window.openCollection = openCollection; window.openBook = openBook
 window.backToCollections = backToCollections; window.filterHadiths = filterHadiths
 window.toggleHadithBookmark = toggleHadithBookmark
-window.switchHadithMode = switchHadithMode; window.startQuiz = startQuiz
+window.switchHadithMode = switchHadithMode
+window.toggleHadithExpand = toggleHadithExpand
+window.markLearnedFromList = markLearnedFromList; window.startQuiz = startQuiz
 window.answerQuiz = answerQuiz; window.flipCard = flipCard; window.markHadith = markHadith
 window.loadWord = loadWord; window.loadWordGo = loadWordGo
 window.nextWord = nextWord; window.prevWord = prevWord
