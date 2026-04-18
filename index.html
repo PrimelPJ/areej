@@ -263,6 +263,22 @@
     .name-detail-mean{font-size:18px;color:#e0f4e8;font-family:'Playfair Display',serif;margin-bottom:10px;}
     .name-detail-desc{font-size:13px;color:#b8dfc4;line-height:1.7;}
     .name-detail-ref{font-size:11px;color:#88c9a0;margin-top:10px;font-style:italic;}
+
+    .dua-cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:24px;}
+    .dua-cat-card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;text-align:center;cursor:pointer;transition:all .15s;}
+    .dua-cat-card:hover{border-color:var(--g);background:var(--gl);}
+    .dua-cat-icon{font-size:26px;margin-bottom:8px;}
+    .dua-cat-name{font-size:13px;color:var(--text);font-weight:500;}
+    .dua-cat-count{font-size:11px;color:var(--gm);margin-top:3px;}
+    .dua-item{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:20px;margin-bottom:14px;}
+    .dua-item-ar{font-family:'Playfair Display',serif;font-size:20px;color:var(--text);direction:rtl;text-align:right;line-height:1.9;margin-bottom:12px;}
+    .dua-item-trans{font-size:12px;color:var(--gm);margin-bottom:8px;font-style:italic;}
+    .dua-item-mean{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:8px;}
+    .dua-item-src{font-size:11px;color:var(--gm);}
+    .dua-item-title{font-size:14px;color:var(--text);font-weight:500;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--bd);}
+    .dua-back{display:flex;align-items:center;gap:8px;margin-bottom:20px;cursor:pointer;color:var(--text2);font-size:13px;}
+    .dua-back:hover{color:var(--g);}
+    .dua-list{max-height:none;}
     .names-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
     .names-filter-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--bd);background:var(--card);color:var(--text2);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;}
     .names-filter-btn.active{background:var(--g);color:#fff;border-color:var(--g);}
@@ -331,6 +347,7 @@
       <div class="s-item" onclick="goTo('anger')">🤲 Anger Guide</div>
       <div class="s-item" onclick="goTo('shukr')">✨ Shukr Log</div>
       <div class="s-item" onclick="goTo('goals')">🎯 My Goals</div>
+      <div class="s-item" onclick="goTo('duas')">🤲 Dua Collection</div>
       <div class="s-section">Profile</div>
       <div class="s-item" onclick="goTo('badges')">🏅 Badges</div>
       <div class="s-item" onclick="toggleDark()" id="dark-toggle">🌙 Dark mode</div>
@@ -608,10 +625,28 @@
         <div class="names-filter" id="names-filter"></div>
         <div class="names-grid" id="names-grid"></div>
       </div>
+
+      <!-- DUA COLLECTION -->
+      <div class="page" id="page-duas">
+        <div class="page-title">Dua Collection</div>
+        <div class="page-sub">Duas for every moment — Arabic, transliteration, and meaning</div>
+        <div id="duas-cats-view">
+          <input class="search-input" id="duas-search" placeholder="Search duas..." oninput="searchDuas()"/>
+          <div id="duas-search-results" style="display:none;"></div>
+          <div class="dua-cat-grid" id="duas-cat-grid"></div>
+        </div>
+        <div id="duas-list-view" style="display:none;">
+          <div class="dua-back" onclick="backToDuasCats()">← All categories</div>
+          <div class="page-title" id="duas-list-title" style="font-size:20px;margin-bottom:4px;"></div>
+          <div class="page-sub" id="duas-list-sub" style="margin-bottom:20px;"></div>
+          <div id="duas-list-items"></div>
+        </div>
+      </div>
     </main>
   </div>
 </div>
 <div class="toast" id="toast"></div>
 <script type="module" src="/src/main.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
