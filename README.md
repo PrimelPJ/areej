@@ -22,15 +22,18 @@ May Allah accept it from her, and may it be a source of light for everyone who u
 
 | Module | Description |
 |--------|-------------|
-| 📗 **Quran Reader** | Full Quran with Arabic + English translation, checkpoint saving |
+| 📗 **Quran Reader** | Full Quran with Arabic + English, per-ayah bookmarks, font size control |
 | 📜 **Hadiths** | Browse Bukhari, Muslim, Abu Dawud, Tirmidhi + 5 more collections |
-| 📖 **40 Nawawi Hadith** | Memorise with flip cards and quiz mode |
+| 📖 **40 Nawawi Hadith** | Expandable list with explanations, flip cards, and quiz mode |
+| ✦ **99 Names of Allah** | All 99 names with Arabic, transliteration, meaning, and full description |
+| 🤲 **Dua Collection** | 60+ duas across 13 categories with Arabic, transliteration, and meaning |
 | 🔤 **Arabic Words** | 30 Islamic vocabulary words with Quran & hadith examples |
 | ☀️ **Sunnah Habits** | 12 daily sunnah acts with sahabi context and rewards |
 | 🤲 **Anger Guide** | Prophetic steps — a'udhu, sit, wudu, silence |
 | ✨ **Shukr Log** | Daily gratitude journal tied to Quran verses |
 | 🎯 **My Goals** | Set personal goals with 48 curated Islamic suggestions |
-| 🌟 **Daily Challenge** | A different deed every day with its reward mentioned |
+| 🌟 **Daily Challenge** | A different deed every day — completes and refreshes |
+| 📊 **My Progress** | Progress monitor with milestones and Allah reminders |
 | 🏅 **Badges** | Earn badges as you grow in knowledge and practice |
 | 🌙 **Dark Mode** | Easy on the eyes for night reading |
 | ♡ **Areej** | A private dedication page |
