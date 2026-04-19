@@ -438,7 +438,14 @@ async function openSurah(num, scrollToAyah = null) {
       <div class="ayah-row ${checkAyah === v.verse_number ? 'bookmarked' : ''}" id="ayah-${v.verse_number}">
         <div class="ayah-ar">${v.text_uthmani} ﴿${v.verse_number}﴾</div>
         <div class="ayah-en">${v.translations?.[0]?.text?.replace(/<[^>]*>/g,'') || ''}</div>
-        <div class="ayah-num">Ayah ${v.verse_number} · Surah ${num}</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;">
+          <div class="ayah-num">Ayah ${v.verse_number} · Surah ${num}</div>
+          <button class="ayah-bookmark-btn ${checkAyah === v.verse_number ? 'active' : ''}"
+            onclick="event.stopPropagation(); bookmarkAyah(${num}, ${v.verse_number})"
+            title="Bookmark this ayah">
+            ${checkAyah === v.verse_number ? '📍 Bookmarked' : '📍'}
+          </button>
+        </div>
       </div>`).join('')
 
     if (scrollToAyah) {
@@ -465,6 +472,27 @@ function backToSurahList() {
 function navigateSurah(dir) {
   const next = currentSurahNum + dir
   if (next >= 1 && next <= 114) openSurah(next)
+}
+
+
+async function bookmarkAyah(surahNum, ayahNum) {
+  const s = allSurahs.find(x => x.id === surahNum)
+  const surahName = s?.name_simple || ''
+  await saveQuranProgress(currentUser.id, surahNum, surahName, ayahNum)
+  quranProgress = { surah_number: surahNum, surah_name: surahName, ayah_number: ayahNum }
+  document.getElementById('quran-badge').textContent = surahName + ' · Ayah ' + ayahNum
+  // Re-render to update highlighted bookmark
+  document.querySelectorAll('.ayah-bookmark-btn').forEach(btn => {
+    btn.classList.remove('active')
+    btn.textContent = '📍'
+  })
+  const target = document.getElementById('ayah-' + ayahNum)
+  if (target) {
+    target.classList.add('bookmarked')
+    const btn = target.querySelector('.ayah-bookmark-btn')
+    if (btn) { btn.classList.add('active'); btn.textContent = '📍 Bookmarked' }
+  }
+  showToast('Bookmark saved — Ayah ' + ayahNum + ' of Surah ' + surahNum + ' 📍')
 }
 
 async function saveCheckpoint() {
@@ -1489,6 +1517,7 @@ window.goTo = goTo; window.toggleDark = toggleDark
 window.changeQuranFont = changeQuranFont
 window.filterSurahs = filterSurahs; window.openSurah = openSurah
 window.backToSurahList = backToSurahList; window.navigateSurah = navigateSurah
+window.bookmarkAyah = bookmarkAyah
 window.saveCheckpoint = saveCheckpoint
 window.openCollection = openCollection; window.openBook = openBook
 window.backToCollections = backToCollections; window.filterHadiths = filterHadiths
