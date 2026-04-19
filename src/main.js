@@ -953,8 +953,41 @@ async function removeGoal(id) {
 
 function completeChallenge() {
   showToast('JazakAllahu khairan — challenge complete! 🌿')
-  const btn = document.querySelector('.challenge-done')
-  btn.textContent = 'Done ✓'; btn.style.opacity = '.5'; btn.disabled = true
+
+  // Pick a new challenge different from the current one
+  const currentText = document.getElementById('challenge-text').textContent
+  const remaining = dailyChallenges.filter(c => c.text !== currentText)
+  const next = remaining[Math.floor(Math.random() * remaining.length)]
+
+  const card = document.querySelector('.challenge-card')
+
+  // Fade out
+  card.style.transition = 'opacity 0.4s'
+  card.style.opacity = '0'
+
+  setTimeout(() => {
+    // Show completion message briefly
+    card.innerHTML = `
+      <div style="text-align:center;padding:8px 0;">
+        <div style="font-size:22px;margin-bottom:8px;">✓</div>
+        <div style="font-size:15px;color:#fff;font-family:'Playfair Display',serif;margin-bottom:4px;">Challenge complete</div>
+        <div style="font-size:12px;color:#88c9a0;">JazakAllahu khairan — may Allah accept it</div>
+      </div>`
+    card.style.opacity = '1'
+
+    // After 2 seconds show the next challenge
+    setTimeout(() => {
+      card.style.opacity = '0'
+      setTimeout(() => {
+        card.innerHTML = `
+          <div class="challenge-label">New Challenge</div>
+          <div class="challenge-text" id="challenge-text">${next.text}</div>
+          <div class="challenge-reward" id="challenge-reward">✦ Reward: ${next.reward}</div>
+          <button class="challenge-done" onclick="completeChallenge()">Mark as done ✓</button>`
+        card.style.opacity = '1'
+      }, 400)
+    }, 2000)
+  }, 400)
 }
 
 // ─── BADGES ───────────────────────────────────────────────────────────────────
