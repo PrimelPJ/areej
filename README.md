@@ -1,6 +1,6 @@
-# 🌿 Areej — عَرَج
+# 🌿 Areej - عَرَج
 
-> *"And do good — indeed, Allah loves the doers of good."* — Surah Al-Baqarah 2:195
+> *"And do good - indeed, Allah loves the doers of good."* - Surah Al-Baqarah 2:195
 
 ---
 
@@ -8,9 +8,9 @@
 
 This app was built as an act of love and intention.
 
-I made Areej for someone I dearly love — as a gift, and as a means of ongoing reward for her. Every user who opens this app, learns a hadith, builds a sunnah habit, or writes their shukr — she receives sadaqah jariyah for being the inspiration behind it.
+I made Areej for someone I dearly love - as a gift, and as a means of ongoing reward for her. Every user who opens this app, learns a hadith, builds a sunnah habit, or writes their shukr - she receives sadaqah jariyah for being the inspiration behind it.
 
-Every good deed earned from this website, every young Muslim who learns something, every act of worship inspired here — is all for her.
+Every good deed earned from this website, every young Muslim who learns something, every act of worship inspired here - is all for her.
 
 May Allah accept it from her, and may it be a source of light for everyone who uses it.
 
@@ -29,10 +29,10 @@ May Allah accept it from her, and may it be a source of light for everyone who u
 | 🤲 **Dua Collection** | 60+ duas across 13 categories with Arabic, transliteration, and meaning |
 | 🔤 **Arabic Words** | 30 Islamic vocabulary words with Quran & hadith examples |
 | ☀️ **Sunnah Habits** | 12 daily sunnah acts with sahabi context and rewards |
-| 🤲 **Anger Guide** | Prophetic steps — a'udhu, sit, wudu, silence |
+| 🤲 **Anger Guide** | Prophetic steps - a'udhu, sit, wudu, silence |
 | ✨ **Shukr Log** | Daily gratitude journal tied to Quran verses |
 | 🎯 **My Goals** | Set personal goals with 48 curated Islamic suggestions |
-| 🌟 **Daily Challenge** | A different deed every day — completes and refreshes |
+| 🌟 **Daily Challenge** | A different deed every day - completes and refreshes |
 | 📊 **My Progress** | Progress monitor with milestones and Allah reminders |
 | 🏅 **Badges** | Earn badges as you grow in knowledge and practice |
 | 🌙 **Dark Mode** | Easy on the eyes for night reading |
@@ -86,7 +86,7 @@ Tables: `profiles` · `hadith_progress` · `sunnah_log` · `shukr_log` · `goals
 
 ## 🌐 Deploy
 
-Push to `main` — Vercel auto-deploys in ~30 seconds.
+Push to `main` - Vercel auto-deploys in ~30 seconds.
 
 Add these to Vercel → Settings → Environment Variables:
 - `VITE_SUPABASE_URL`
@@ -97,9 +97,9 @@ Add these to Vercel → Settings → Environment Variables:
 
 ## 🤲 Dedication
 
-*To her — may Allah grant you the highest level of Jannah, fill your life with barakah, and accept every good deed done in your name. This is the least of what you deserve.*
+*To her - may Allah grant you the highest level of Jannah, fill your life with barakah, and accept every good deed done in your name. This is the least of what you deserve.*
 
-*And to every young Muslim who opens this app — may it bring you closer to Allah, one habit at a time.*
+*And to every young Muslim who opens this app - may it bring you closer to Allah, one habit at a time.*
 
 ---
 
