@@ -309,7 +309,7 @@ function goTo(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'))
   document.querySelectorAll('.s-item').forEach(i => i.classList.remove('active'))
   document.getElementById('page-' + page).classList.add('active')
-  const map = { home:0, quran:1, hadiths:2, nawawi:3, arabic:4, names:5, sunnah:6, anger:7, shukr:8, goals:9, duas:10, badges:11, dedication:12 }
+  const map = { home:0, quran:1, hadiths:2, nawawi:3, arabic:4, names:5, sunnah:6, anger:7, shukr:8, goals:9, duas:10, badges:11, progress:12, dedication:13 }
   document.querySelectorAll('.s-item')[map[page]]?.classList.add('active')
 }
 
@@ -321,6 +321,7 @@ function toggleDark() {
 }
 
 function renderAll() {
+  renderProgressPage()
   renderDuasPage()
   renderNamesPage()
   renderHadith()
@@ -1015,6 +1016,7 @@ function renderBadges() {
 }
 
 function updateStats() {
+  renderProgressPage()
   const lc = learned.size, sc = sunnahDone.filter(Boolean).length, shc = shukrLog.length
   document.getElementById('h-count').textContent = lc
   document.getElementById('hm').textContent = lc
@@ -1369,6 +1371,116 @@ function searchDuas() {
     : '<div style="padding:20px;text-align:center;color:var(--gm);font-size:13px;">No duas found for that search.</div>'
 }
 
+
+// ─── PROGRESS MONITOR ────────────────────────────────────────────────────────
+
+const allahReminders = [
+  { ar:"وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ", en:"My success is not but through Allah.", ref:"Surah Hud · 11:88" },
+  { ar:"وَمَا بِكُم مِّن نِّعْمَةٍ فَمِنَ اللَّهِ", en:"Whatever blessing you have — it is from Allah.", ref:"Surah An-Nahl · 16:53" },
+  { ar:"إِنَّ اللَّهَ يُحِبُّ إِذَا عَمِلَ أَحَدُكُمْ عَمَلًا أَنْ يُتْقِنَهُ", en:"Allah loves that when one of you does a deed, he does it with excellence.", ref:"Bayhaqi" },
+  { ar:"وَاللَّهُ يُحِبُّ الْمُحْسِنِينَ", en:"And Allah loves the doers of good.", ref:"Surah Al-Baqarah · 2:195" },
+]
+
+const deedReminders = [
+  { ar:"إِنَّ أَحَبَّ الأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ", en:"The most beloved deeds to Allah are the most consistent ones, even if they are small.", ref:"Bukhari & Muslim" },
+  { ar:"مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ", en:"Whoever guides someone to goodness will have a reward equal to the one who did it.", ref:"Muslim" },
+  { ar:"لَا يَشْكُرُ اللَّهَ مَنْ لَا يَشْكُرُ النَّاسَ", en:"He who does not thank people has not thanked Allah.", ref:"Abu Dawud & Tirmidhi" },
+  { ar:"الطَّهُورُ شَطْرُ الْإِيمَانِ وَالْحَمْدُ لِلَّهِ تَمْلَأُ الْمِيزَانَ", en:"Purification is half of faith and Alhamdulillah fills the scale.", ref:"Muslim" },
+]
+
+const achievedItems = [
+  { id:'hadith_any', icon:'📖', name:'Started the 40 Hadith', desc:'You opened the door to memorising the words of the Prophet ﷺ', check: () => learned.size > 0, val: () => learned.size + ' / 40 memorised', prog: () => Math.round(learned.size/40*100) },
+  { id:'sunnah_any', icon:'☀️', name:'Practiced Sunnah today', desc:'You followed the way of the Prophet ﷺ in your daily life', check: () => sunnahDone.some(Boolean), val: () => sunnahDone.filter(Boolean).length + ' / 12 today', prog: () => Math.round(sunnahDone.filter(Boolean).length/12*100) },
+  { id:'shukr_any', icon:'✨', name:'Logged shukr', desc:'You turned your blessings into an act of worship', check: () => shukrLog.length > 0, val: () => shukrLog.length + ' days logged', prog: () => Math.min(100, Math.round(shukrLog.length/30*100)) },
+  { id:'goals_any', icon:'🎯', name:'Set a goal', desc:'You made an intention to grow for the sake of Allah', check: () => goals.length > 0, val: () => goals.length + ' goals set', prog: () => goals.length > 0 ? Math.round(goals.filter(g=>g.done).length/goals.length*100) : 0 },
+  { id:'quran_any', icon:'📗', name:'Read the Quran', desc:'You spent time with the Book of Allah', check: () => Boolean(quranProgress), val: () => quranProgress ? 'Surah ' + quranProgress.surah_number + ' saved' : 'Not started', prog: () => quranProgress ? Math.round(quranProgress.surah_number/114*100) : 0 },
+  { id:'arabic_any', icon:'🔤', name:'Learned Arabic words', desc:'You took a step toward understanding the language of the Quran', check: () => true, val: () => '30 words available', prog: () => 100 },
+  { id:'duas_any', icon:'🤲', name:'Explored duas', desc:'You equipped yourself with the weapons of the believer', check: () => true, val: () => '60+ duas available', prog: () => 100 },
+  { id:'names_any', icon:'✦', name:'Learned the 99 Names', desc:'You deepened your knowledge of who Allah is', check: () => true, val: () => '99 names with meanings', prog: () => 100 },
+]
+
+const nextMilestones = [
+  { icon:'📖', name:'Memorise 5 Hadith', desc:'Start with the first 5 Nawawi hadith', dist: () => Math.max(0, 5 - learned.size) + ' hadith away', achieved: () => learned.size >= 5 },
+  { icon:'📖', name:'Memorise 10 Hadith', desc:'Reach the rank of a dedicated student', dist: () => Math.max(0, 10 - learned.size) + ' hadith away', achieved: () => learned.size >= 10 },
+  { icon:"📖", name:"Memorise all 40 Hadith", desc:"Complete Nawawi's 40 — one of the greatest achievements", dist: () => Math.max(0, 40 - learned.size) + ' hadith away', achieved: () => learned.size >= 40 },
+  { icon:'✨', name:'7 days of Shukr', desc:'Build a week-long habit of gratitude', dist: () => Math.max(0, 7 - shukrLog.length) + ' days away', achieved: () => shukrLog.length >= 7 },
+  { icon:'✨', name:'30 days of Shukr', desc:'A full month of thanking Allah every day', dist: () => Math.max(0, 30 - shukrLog.length) + ' days away', achieved: () => shukrLog.length >= 30 },
+  { icon:'☀️', name:'Complete all 12 Sunnahs', desc:'Follow the Prophet ﷺ in every act today', dist: () => Math.max(0, 12 - sunnahDone.filter(Boolean).length) + ' sunnahs away', achieved: () => sunnahDone.every(Boolean) },
+  { icon:"🎯", name:"Complete a goal", desc:"Take one goal from intention to action", dist: () => goals.some(g=>g.done) ? "Done!" : goals.length > 0 ? "You have goals set — complete one" : "Set a goal first", achieved: () => goals.some(g=>g.done) },
+  { icon:'📗', name:'Read 10 Surahs', desc:'Work through the Quran surah by surah', dist: () => quranProgress ? (quranProgress.surah_number >= 10 ? 'Done!' : (10 - quranProgress.surah_number) + ' surahs away') : 'Start reading the Quran', achieved: () => quranProgress && quranProgress.surah_number >= 10 },
+  { icon:'📗', name:'Complete the full Quran', desc:'Finish a complete khatm — one of the greatest acts of worship', dist: () => quranProgress ? (quranProgress.surah_number >= 114 ? 'Complete!' : (114 - quranProgress.surah_number) + ' surahs remaining') : 'Start reading', achieved: () => quranProgress && quranProgress.surah_number >= 114 },
+]
+
+function renderProgressPage() {
+  // Allah reminder rotation
+  const r = allahReminders[Math.floor(Date.now() / 60000) % allahReminders.length]
+  const reminderEl = document.getElementById('allah-reminder-text')
+  if (reminderEl) reminderEl.textContent = '"' + r.en + '" — ' + r.ref
+
+  // Deed reminder
+  const d = deedReminders[Math.floor(Date.now() / 90000) % deedReminders.length]
+  const darEl = document.getElementById('deed-reminder-ar')
+  const denEl = document.getElementById('deed-reminder-en')
+  const drefEl = document.getElementById('deed-reminder-ref')
+  if (darEl) darEl.textContent = d.ar
+  if (denEl) denEl.textContent = '"' + d.en + '"'
+  if (drefEl) drefEl.textContent = '— ' + d.ref
+
+  // Total score
+  const total = learned.size + shukrLog.length + sunnahDone.filter(Boolean).length + goals.filter(g=>g.done).length
+  const totalEl = document.getElementById('total-score')
+  if (totalEl) totalEl.textContent = total
+  const subEl = document.getElementById('total-score-sub')
+  if (subEl) {
+    const parts = []
+    if (learned.size) parts.push(learned.size + ' hadith memorised')
+    if (shukrLog.length) parts.push(shukrLog.length + ' days of shukr')
+    if (sunnahDone.filter(Boolean).length) parts.push(sunnahDone.filter(Boolean).length + ' sunnahs today')
+    if (goals.filter(g=>g.done).length) parts.push(goals.filter(g=>g.done).length + ' goals completed')
+    subEl.textContent = parts.length ? parts.join(' · ') : 'Start any module to see your progress here'
+  }
+
+  // Achieved items
+  const achievedGrid = document.getElementById('progress-achieved-grid')
+  if (achievedGrid) {
+    achievedGrid.innerHTML = achievedItems.map(item => {
+      const done = item.check()
+      const prog = item.prog()
+      return `
+        <div class="progress-item ${done ? 'achieved' : ''}">
+          <div class="progress-item-top">
+            <div class="progress-item-icon">${item.icon}</div>
+            <div class="progress-item-check">${done ? '✓' : ''}</div>
+          </div>
+          <div class="progress-item-val">${item.val()}</div>
+          <div class="progress-item-name">${item.name}</div>
+          <div class="progress-item-desc">${item.desc}</div>
+          <div class="progress-bar-row">
+            <div class="prog-bar" style="flex:1;height:4px;"><div class="prog-fill" style="width:${prog}%"></div></div>
+            <div class="progress-bar-label">${prog}%</div>
+          </div>
+        </div>`
+    }).join('')
+  }
+
+  // Next milestones — show unachieved ones first, then achieved
+  const nextGrid = document.getElementById('progress-next-grid')
+  if (nextGrid) {
+    const unachieved = nextMilestones.filter(m => !m.achieved())
+    const achieved = nextMilestones.filter(m => m.achieved())
+    const display = [...unachieved, ...achieved].slice(0, 6)
+    nextGrid.innerHTML = display.map(m => `
+      <div class="next-milestone" style="${m.achieved() ? 'opacity:.5;' : ''}">
+        <div class="next-milestone-icon">${m.icon}</div>
+        <div style="flex:1;">
+          <div class="next-milestone-name">${m.name} ${m.achieved() ? '✓' : ''}</div>
+          <div class="next-milestone-desc">${m.desc}</div>
+          <div class="next-milestone-dist">${m.dist()}</div>
+        </div>
+      </div>`).join('')
+  }
+}
+
 // ─── EXPOSE TO HTML onclick handlers ─────────────────────────────────────────
 window.showLogin = showLogin; window.showSignup = showSignup
 window.doLogin = doLogin; window.doSignup = doSignup
@@ -1394,6 +1506,7 @@ window.doneGoal = doneGoal; window.removeGoal = removeGoal; window.setSugCat = s
 window.completeChallenge = completeChallenge
 window.renderNamesPage = renderNamesPage
 window.renderDuasPage = renderDuasPage
+window.renderProgressPage = renderProgressPage
 window.openDuaCategory = openDuaCategory
 window.backToDuasCats = backToDuasCats
 window.searchDuas = searchDuas
