@@ -331,6 +331,52 @@
     .names-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
     .names-filter-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--bd);background:var(--card);color:var(--text2);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;}
     .names-filter-btn.active{background:var(--g);color:#fff;border-color:var(--g);}
+
+    /* ── PROGRESS PAGE ── */
+    .prog-page-wrap { max-width:720px; }
+    .prog-top-banner{background:var(--g);border-radius:16px;padding:20px 24px;margin-bottom:24px;text-align:center;}
+    .prog-top-ar{font-family:'Playfair Display',serif;font-size:18px;color:#88c9a0;direction:rtl;margin-bottom:6px;}
+    .prog-top-quote{font-size:13px;color:#b8dfc4;line-height:1.7;font-style:italic;}
+    .prog-top-ref{font-size:10px;color:#88c9a0;margin-top:4px;}
+    .prog-section{margin-bottom:28px;}
+    .prog-section-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gm);margin-bottom:14px;}
+    .prog-rings{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;}
+    .prog-ring-card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px 12px;text-align:center;}
+    .prog-ring-wrap{position:relative;width:72px;height:72px;margin:0 auto 10px;}
+    .prog-ring-svg{transform:rotate(-90deg);}
+    .prog-ring-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:17px;color:var(--text);}
+    .prog-ring-label{font-size:11px;color:var(--text);font-weight:500;margin-bottom:2px;}
+    .prog-ring-sub{font-size:10px;color:var(--gm);line-height:1.4;}
+    .activity-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;margin-bottom:8px;}
+    .activity-cell{aspect-ratio:1;border-radius:2px;transition:transform .15s;}
+    .activity-cell:hover{transform:scale(1.3);}
+    .activity-day-labels{display:flex;justify-content:space-between;font-family:'Playfair Display',serif;font-size:9px;color:var(--gm);margin-bottom:4px;}
+    .chart-wrap{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:20px;margin-bottom:14px;}
+    .chart-bars{display:flex;align-items:flex-end;gap:4px;height:80px;}
+    .chart-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;}
+    .chart-bar{width:100%;border-radius:3px 3px 0 0;transition:height .4s ease;min-height:2px;}
+    .chart-bar-label{font-size:8px;color:var(--gm);letter-spacing:.3px;}
+    .improve-list{display:flex;flex-direction:column;gap:8px;}
+    .improve-item{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px;}
+    .improve-item.good{border-color:var(--g);background:var(--gb);}
+    .improve-icon{font-size:18px;flex-shrink:0;}
+    .improve-title{font-size:13px;color:var(--text);font-weight:500;margin-bottom:2px;}
+    .improve-desc{font-size:11px;color:var(--gm);line-height:1.5;}
+    .improve-badge{font-size:10px;padding:2px 8px;border-radius:10px;flex-shrink:0;font-family:'DM Sans',sans-serif;}
+    .improve-badge.good{background:var(--g);color:#fff;}
+    .improve-badge.warn{background:#f59e0b;color:#fff;}
+    .improve-badge.todo{background:var(--bd);color:var(--gm);}
+    .total-banner{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:20px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+    .total-num{font-family:'Playfair Display',serif;font-size:48px;color:var(--g);line-height:1;}
+    .total-label{font-size:12px;color:var(--gm);margin-top:4px;}
+    .total-breakdown{display:flex;gap:16px;flex-wrap:wrap;}
+    .total-item{text-align:center;}
+    .total-item-num{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);}
+    .total-item-lbl{font-size:10px;color:var(--gm);}
+    .hadith-reminder-card{background:var(--g);border-radius:12px;padding:16px;margin:20px 0;}
+    .hadith-reminder-ar{font-family:'Playfair Display',serif;font-size:16px;color:#fff;direction:rtl;text-align:right;margin-bottom:6px;}
+    .hadith-reminder-en{font-size:12px;color:#b8dfc4;font-style:italic;line-height:1.6;}
+    .hadith-reminder-ref{font-size:10px;color:#88c9a0;margin-top:4px;}
     .loading{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:var(--g);background:var(--bg);}
 
     .hadith-grade{font-size:10px;color:var(--g);margin-top:2px;}
@@ -673,37 +719,60 @@
       <!-- PROGRESS MONITOR -->
       <div class="page" id="page-progress">
         <div class="page-title">My Progress</div>
-        <div class="page-sub">Everything you have accomplished — and everything ahead</div>
-        <div class="progress-hero">
-          <div class="progress-hero-ar">وَمَا بِكُم مِّن نِّعْمَةٍ فَمِنَ اللَّهِ</div>
-          <div class="progress-hero-quote">"And whatever blessing you have — it is from Allah."</div>
-          <div class="progress-hero-ref">Surah An-Nahl · 16:53</div>
+        <div class="page-sub">Your journey — built from everything you have actually done</div>
+
+        <div class="prog-top-banner">
+          <div class="prog-top-ar">وَمَا بِكُم مِّن نِّعْمَةٍ فَمِنَ اللَّهِ</div>
+          <div class="prog-top-quote">"And whatever blessing you have — it is from Allah."</div>
+          <div class="prog-top-ref">Surah An-Nahl · 16:53</div>
         </div>
-        <div class="progress-reminder">
-          <div class="progress-reminder-icon">🤲</div>
-          <div class="progress-reminder-text" id="allah-reminder-text"></div>
-          <div class="progress-reminder-sub">All the good you have done — every hadith memorised, every sunnah practiced, every blessing logged — is only by the tawfiq of Allah. He gave you the ability, the time, and the heart to do it. All praise is due to Him alone.</div>
+
+        <!-- Total score -->
+        <div class="total-banner">
+          <div>
+            <div class="total-num" id="total-score">0</div>
+            <div class="total-label">Total deeds recorded</div>
+          </div>
+          <div class="total-breakdown" id="total-breakdown"></div>
         </div>
-        <div class="total-score-card">
-          <div class="total-score-num" id="total-score">0</div>
-          <div class="total-score-label">Total good deeds recorded</div>
-          <div class="total-score-sub" id="total-score-sub"></div>
+
+        <!-- Progress rings -->
+        <div class="prog-section-label">Module progress</div>
+        <div class="prog-rings" id="prog-rings"></div>
+
+        <!-- Activity chart — last 30 days -->
+        <div class="prog-section-label">Activity — last 30 days</div>
+        <div class="chart-wrap">
+          <div class="activity-day-labels" id="activity-labels"></div>
+          <div class="activity-grid" id="activity-grid"></div>
+          <div style="display:flex;gap:16px;margin-top:10px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:var(--gm);">
+              <div style="width:10px;height:10px;border-radius:2px;background:var(--gb);border:1px solid var(--bd);"></div>No activity
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:var(--gm);">
+              <div style="width:10px;height:10px;border-radius:2px;background:#7aaa8a;"></div>Some
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:var(--gm);">
+              <div style="width:10px;height:10px;border-radius:2px;background:var(--g);"></div>Active day
+            </div>
+          </div>
         </div>
-        <div class="progress-section-title">What you have accomplished</div>
-        <div class="progress-section-sub">Every single one of these is a gift from Allah</div>
-        <div class="progress-items-grid" id="progress-achieved-grid"></div>
-        <div class="allah-reminder">
-          <div class="allah-reminder-ar" id="deed-reminder-ar"></div>
-          <div class="allah-reminder-en" id="deed-reminder-en"></div>
-          <div class="allah-reminder-ref" id="deed-reminder-ref"></div>
+
+        <!-- Weekly bar chart -->
+        <div class="prog-section-label">Deeds per day — last 10 days</div>
+        <div class="chart-wrap">
+          <div class="chart-bars" id="chart-bars"></div>
         </div>
-        <div class="progress-section-title">What you can still achieve</div>
-        <div class="progress-section-sub">These are waiting for you — with Allah's tawfiq</div>
-        <div id="progress-next-grid"></div>
-        <div class="progress-reminder" style="margin-top:24px;">
-          <div class="progress-reminder-icon">♡</div>
-          <div class="progress-reminder-text">The goal is not the number.</div>
-          <div class="progress-reminder-sub">"The most beloved deeds to Allah are the most consistent ones, even if they are small." — Bukhari and Muslim. Keep going, one day at a time, for His sake alone.</div>
+
+        <!-- What to improve -->
+        <div class="prog-section-label" style="margin-top:24px;">Where to grow</div>
+        <div class="improve-list" id="improve-list"></div>
+
+        <!-- Hadith reminder -->
+        <div class="hadith-reminder-card">
+          <div class="hadith-reminder-ar">إِنَّ أَحَبَّ الأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ</div>
+          <div class="hadith-reminder-en">"The most beloved deeds to Allah are the most consistent ones, even if they are small."</div>
+          <div class="hadith-reminder-ref">Bukhari and Muslim</div>
         </div>
       </div>
     </main>

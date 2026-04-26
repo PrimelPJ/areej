@@ -2,7 +2,8 @@ import {
   supabase, signUp, signIn, signInWithGoogle, signOut, onAuthChange,
   saveHadithProgress, loadHadithProgress, saveSunnahLog, loadTodaySunnah,
   saveShukrEntry, loadShukrLog, saveGoal, loadGoals, toggleGoalDone, deleteGoal,
-  saveQuranProgress, loadQuranProgress, saveHadithBookmark, loadHadithBookmarks, deleteHadithBookmark
+  saveQuranProgress, loadQuranProgress, saveHadithBookmark, loadHadithBookmarks, deleteHadithBookmark,
+  loadSunnahHistory
 } from './supabase.js'
 
 // ─── API CONFIG ───────────────────────────────────────────────────────────────
@@ -175,6 +176,7 @@ const badgesData = [
 // ─── STATE ───────────────────────────────────────────────────────────────────
 let currentUser = null
 let expandedHadith = null
+let sunnahHistory = []
 let learned = new Set()
 let sunnahDone = Array(12).fill(false)
 let shukrLog = []
@@ -262,14 +264,16 @@ async function doLogout() { await signOut() }
 async function initApp(user) {
   currentUser = user
   // Load everything in parallel for speed
-  const [learnedArr, sunnahArr, shukrArr, goalsArr, quranProg, bookmarks] = await Promise.all([
+  const [learnedArr, sunnahArr, shukrArr, goalsArr, quranProg, bookmarks, sunnahHist] = await Promise.all([
     loadHadithProgress(user.id),
     loadTodaySunnah(user.id),
     loadShukrLog(user.id),
     loadGoals(user.id),
     loadQuranProgress(user.id),
     loadHadithBookmarks(user.id),
+    loadSunnahHistory(user.id),
   ])
+  sunnahHistory = sunnahHist
   learned = new Set(learnedArr)
   sunnahDone = Array.isArray(sunnahArr) && sunnahArr.length === 12 ? sunnahArr : Array(12).fill(false)
   shukrLog = shukrArr
@@ -1402,112 +1406,208 @@ function searchDuas() {
 
 // ─── PROGRESS MONITOR ────────────────────────────────────────────────────────
 
-const allahReminders = [
-  { ar:"وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ", en:"My success is not but through Allah.", ref:"Surah Hud · 11:88" },
-  { ar:"وَمَا بِكُم مِّن نِّعْمَةٍ فَمِنَ اللَّهِ", en:"Whatever blessing you have — it is from Allah.", ref:"Surah An-Nahl · 16:53" },
-  { ar:"إِنَّ اللَّهَ يُحِبُّ إِذَا عَمِلَ أَحَدُكُمْ عَمَلًا أَنْ يُتْقِنَهُ", en:"Allah loves that when one of you does a deed, he does it with excellence.", ref:"Bayhaqi" },
-  { ar:"وَاللَّهُ يُحِبُّ الْمُحْسِنِينَ", en:"And Allah loves the doers of good.", ref:"Surah Al-Baqarah · 2:195" },
-]
-
-const deedReminders = [
-  { ar:"إِنَّ أَحَبَّ الأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ", en:"The most beloved deeds to Allah are the most consistent ones, even if they are small.", ref:"Bukhari & Muslim" },
-  { ar:"مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ", en:"Whoever guides someone to goodness will have a reward equal to the one who did it.", ref:"Muslim" },
-  { ar:"لَا يَشْكُرُ اللَّهَ مَنْ لَا يَشْكُرُ النَّاسَ", en:"He who does not thank people has not thanked Allah.", ref:"Abu Dawud & Tirmidhi" },
-  { ar:"الطَّهُورُ شَطْرُ الْإِيمَانِ وَالْحَمْدُ لِلَّهِ تَمْلَأُ الْمِيزَانَ", en:"Purification is half of faith and Alhamdulillah fills the scale.", ref:"Muslim" },
-]
-
-const achievedItems = [
-  { id:'hadith_any', icon:'📖', name:'Started the 40 Hadith', desc:'You opened the door to memorising the words of the Prophet ﷺ', check: () => learned.size > 0, val: () => learned.size + ' / 40 memorised', prog: () => Math.round(learned.size/40*100) },
-  { id:'sunnah_any', icon:'☀️', name:'Practiced Sunnah today', desc:'You followed the way of the Prophet ﷺ in your daily life', check: () => sunnahDone.some(Boolean), val: () => sunnahDone.filter(Boolean).length + ' / 12 today', prog: () => Math.round(sunnahDone.filter(Boolean).length/12*100) },
-  { id:'shukr_any', icon:'✨', name:'Logged shukr', desc:'You turned your blessings into an act of worship', check: () => shukrLog.length > 0, val: () => shukrLog.length + ' days logged', prog: () => Math.min(100, Math.round(shukrLog.length/30*100)) },
-  { id:'goals_any', icon:'🎯', name:'Set a goal', desc:'You made an intention to grow for the sake of Allah', check: () => goals.length > 0, val: () => goals.length + ' goals set', prog: () => goals.length > 0 ? Math.round(goals.filter(g=>g.done).length/goals.length*100) : 0 },
-  { id:'quran_any', icon:'📗', name:'Read the Quran', desc:'You spent time with the Book of Allah', check: () => Boolean(quranProgress), val: () => quranProgress ? 'Surah ' + quranProgress.surah_number + ' saved' : 'Not started', prog: () => quranProgress ? Math.round(quranProgress.surah_number/114*100) : 0 },
-  { id:'arabic_any', icon:'🔤', name:'Learned Arabic words', desc:'You took a step toward understanding the language of the Quran', check: () => true, val: () => '30 words available', prog: () => 100 },
-  { id:'duas_any', icon:'🤲', name:'Explored duas', desc:'You equipped yourself with the weapons of the believer', check: () => true, val: () => '60+ duas available', prog: () => 100 },
-  { id:'names_any', icon:'✦', name:'Learned the 99 Names', desc:'You deepened your knowledge of who Allah is', check: () => true, val: () => '99 names with meanings', prog: () => 100 },
-]
-
-const nextMilestones = [
-  { icon:'📖', name:'Memorise 5 Hadith', desc:'Start with the first 5 Nawawi hadith', dist: () => Math.max(0, 5 - learned.size) + ' hadith away', achieved: () => learned.size >= 5 },
-  { icon:'📖', name:'Memorise 10 Hadith', desc:'Reach the rank of a dedicated student', dist: () => Math.max(0, 10 - learned.size) + ' hadith away', achieved: () => learned.size >= 10 },
-  { icon:"📖", name:"Memorise all 40 Hadith", desc:"Complete Nawawi's 40 — one of the greatest achievements", dist: () => Math.max(0, 40 - learned.size) + ' hadith away', achieved: () => learned.size >= 40 },
-  { icon:'✨', name:'7 days of Shukr', desc:'Build a week-long habit of gratitude', dist: () => Math.max(0, 7 - shukrLog.length) + ' days away', achieved: () => shukrLog.length >= 7 },
-  { icon:'✨', name:'30 days of Shukr', desc:'A full month of thanking Allah every day', dist: () => Math.max(0, 30 - shukrLog.length) + ' days away', achieved: () => shukrLog.length >= 30 },
-  { icon:'☀️', name:'Complete all 12 Sunnahs', desc:'Follow the Prophet ﷺ in every act today', dist: () => Math.max(0, 12 - sunnahDone.filter(Boolean).length) + ' sunnahs away', achieved: () => sunnahDone.every(Boolean) },
-  { icon:"🎯", name:"Complete a goal", desc:"Take one goal from intention to action", dist: () => goals.some(g=>g.done) ? "Done!" : goals.length > 0 ? "You have goals set — complete one" : "Set a goal first", achieved: () => goals.some(g=>g.done) },
-  { icon:'📗', name:'Read 10 Surahs', desc:'Work through the Quran surah by surah', dist: () => quranProgress ? (quranProgress.surah_number >= 10 ? 'Done!' : (10 - quranProgress.surah_number) + ' surahs away') : 'Start reading the Quran', achieved: () => quranProgress && quranProgress.surah_number >= 10 },
-  { icon:'📗', name:'Complete the full Quran', desc:'Finish a complete khatm — one of the greatest acts of worship', dist: () => quranProgress ? (quranProgress.surah_number >= 114 ? 'Complete!' : (114 - quranProgress.surah_number) + ' surahs remaining') : 'Start reading', achieved: () => quranProgress && quranProgress.surah_number >= 114 },
-]
-
 function renderProgressPage() {
-  // Allah reminder rotation
-  const r = allahReminders[Math.floor(Date.now() / 60000) % allahReminders.length]
-  const reminderEl = document.getElementById('allah-reminder-text')
-  if (reminderEl) reminderEl.textContent = '"' + r.en + '" — ' + r.ref
-
-  // Deed reminder
-  const d = deedReminders[Math.floor(Date.now() / 90000) % deedReminders.length]
-  const darEl = document.getElementById('deed-reminder-ar')
-  const denEl = document.getElementById('deed-reminder-en')
-  const drefEl = document.getElementById('deed-reminder-ref')
-  if (darEl) darEl.textContent = d.ar
-  if (denEl) denEl.textContent = '"' + d.en + '"'
-  if (drefEl) drefEl.textContent = '— ' + d.ref
-
-  // Total score
-  const total = learned.size + shukrLog.length + sunnahDone.filter(Boolean).length + goals.filter(g=>g.done).length
+  // ── Totals ──
+  const hadithCount = learned.size
+  const sunnahCount = sunnahDone.filter(Boolean).length
+  const shukrCount = shukrLog.length
+  const goalsCount = goals.filter(g => g.done).length
+  const total = hadithCount + sunnahCount + shukrCount + goalsCount
   const totalEl = document.getElementById('total-score')
   if (totalEl) totalEl.textContent = total
-  const subEl = document.getElementById('total-score-sub')
-  if (subEl) {
-    const parts = []
-    if (learned.size) parts.push(learned.size + ' hadith memorised')
-    if (shukrLog.length) parts.push(shukrLog.length + ' days of shukr')
-    if (sunnahDone.filter(Boolean).length) parts.push(sunnahDone.filter(Boolean).length + ' sunnahs today')
-    if (goals.filter(g=>g.done).length) parts.push(goals.filter(g=>g.done).length + ' goals completed')
-    subEl.textContent = parts.length ? parts.join(' · ') : 'Start any module to see your progress here'
+
+  const breakdown = document.getElementById('total-breakdown')
+  if (breakdown) {
+    const items = [
+      { num: hadithCount, lbl: 'Hadith' },
+      { num: shukrCount, lbl: 'Shukr days' },
+      { num: sunnahCount, lbl: 'Sunnahs' },
+      { num: goalsCount, lbl: 'Goals done' },
+    ]
+    breakdown.innerHTML = items.map(i => `
+      <div class="total-item">
+        <div class="total-item-num">${i.num}</div>
+        <div class="total-item-lbl">${i.lbl}</div>
+      </div>`).join('')
   }
 
-  // Achieved items
-  const achievedGrid = document.getElementById('progress-achieved-grid')
-  if (achievedGrid) {
-    achievedGrid.innerHTML = achievedItems.map(item => {
-      const done = item.check()
-      const prog = item.prog()
+  // ── Rings ──
+  const rings = [
+    { label: '40 Hadith', sub: `${hadithCount} / 40`, pct: Math.round(hadithCount / 40 * 100), num: hadithCount },
+    { label: 'Sunnah', sub: `${sunnahCount} / 12 today`, pct: Math.round(sunnahCount / 12 * 100), num: sunnahCount },
+    { label: 'Shukr', sub: `${shukrCount} days`, pct: Math.min(100, Math.round(shukrCount / 30 * 100)), num: shukrCount },
+    { label: 'Goals', sub: `${goalsCount} done`, pct: goals.length ? Math.round(goalsCount / goals.length * 100) : 0, num: goalsCount },
+    { label: 'Quran', sub: quranProgress ? `Surah ${quranProgress.surah_number}` : 'Not started', pct: quranProgress ? Math.round(quranProgress.surah_number / 114 * 100) : 0, num: quranProgress?.surah_number || 0 },
+    { label: 'Nawawi', sub: `${hadithCount} memorised`, pct: Math.round(hadithCount / 40 * 100), num: hadithCount },
+    { label: 'Bookmarks', sub: `${hadithBookmarks.length} saved`, pct: Math.min(100, hadithBookmarks.length * 10), num: hadithBookmarks.length },
+    { label: 'Streaks', sub: `${shukrCount} day streak`, pct: Math.min(100, Math.round(shukrCount / 7 * 100)), num: shukrCount },
+  ]
+
+  const ringsEl = document.getElementById('prog-rings')
+  if (ringsEl) {
+    const r = 28, circ = 2 * Math.PI * r
+    ringsEl.innerHTML = rings.map(item => {
+      const stroke = circ - (item.pct / 100) * circ
+      const col = item.pct >= 80 ? 'var(--g)' : item.pct >= 40 ? '#7aaa8a' : 'var(--bd)'
       return `
-        <div class="progress-item ${done ? 'achieved' : ''}">
-          <div class="progress-item-top">
-            <div class="progress-item-icon">${item.icon}</div>
-            <div class="progress-item-check">${done ? '✓' : ''}</div>
+        <div class="prog-ring-card">
+          <div class="prog-ring-wrap">
+            <svg class="prog-ring-svg" width="72" height="72" viewBox="0 0 72 72">
+              <circle cx="36" cy="36" r="${r}" fill="none" stroke="var(--gb)" stroke-width="6"/>
+              <circle cx="36" cy="36" r="${r}" fill="none" stroke="${col}" stroke-width="6"
+                stroke-dasharray="${circ}" stroke-dashoffset="${stroke}"
+                stroke-linecap="round"
+                style="transition:stroke-dashoffset .8s ease;"/>
+            </svg>
+            <div class="prog-ring-num">${item.pct}%</div>
           </div>
-          <div class="progress-item-val">${item.val()}</div>
-          <div class="progress-item-name">${item.name}</div>
-          <div class="progress-item-desc">${item.desc}</div>
-          <div class="progress-bar-row">
-            <div class="prog-bar" style="flex:1;height:4px;"><div class="prog-fill" style="width:${prog}%"></div></div>
-            <div class="progress-bar-label">${prog}%</div>
-          </div>
+          <div class="prog-ring-label">${item.label}</div>
+          <div class="prog-ring-sub">${item.sub}</div>
         </div>`
     }).join('')
   }
 
-  // Next milestones — show unachieved ones first, then achieved
-  const nextGrid = document.getElementById('progress-next-grid')
-  if (nextGrid) {
-    const unachieved = nextMilestones.filter(m => !m.achieved())
-    const achieved = nextMilestones.filter(m => m.achieved())
-    const display = [...unachieved, ...achieved].slice(0, 6)
-    nextGrid.innerHTML = display.map(m => `
-      <div class="next-milestone" style="${m.achieved() ? 'opacity:.5;' : ''}">
-        <div class="next-milestone-icon">${m.icon}</div>
+  // ── Activity grid — last 30 days ──
+  const today = new Date()
+  const days30 = Array.from({length: 30}, (_, i) => {
+    const d = new Date(today)
+    d.setDate(today.getDate() - (29 - i))
+    return d.toISOString().split('T')[0]
+  })
+
+  // Build activity map: date -> count
+  const activityMap = {}
+  shukrLog.forEach(e => { activityMap[e.date] = (activityMap[e.date] || 0) + 3 })
+  sunnahHistory.forEach(e => {
+    const done = Array.isArray(e.completions) ? e.completions.filter(Boolean).length : 0
+    activityMap[e.date] = (activityMap[e.date] || 0) + done
+  })
+
+  const gridEl = document.getElementById('activity-grid')
+  const labelsEl = document.getElementById('activity-labels')
+  if (gridEl) {
+    const maxAct = Math.max(...days30.map(d => activityMap[d] || 0), 1)
+    gridEl.style.gridTemplateColumns = `repeat(${days30.length}, 1fr)`
+    gridEl.innerHTML = days30.map(d => {
+      const val = activityMap[d] || 0
+      const intensity = val === 0 ? 0 : val < 3 ? 1 : val < 8 ? 2 : 3
+      const bg = ['var(--gb)', '#a8d4b0', '#4a9e6a', 'var(--g)'][intensity]
+      const border = intensity === 0 ? 'var(--bd)' : 'transparent'
+      const isToday = d === today.toISOString().split('T')[0]
+      return `<div class="activity-cell" title="${d}: ${val} deeds"
+        style="background:${bg};border:${isToday ? '1.5px solid var(--g)' : `1px solid ${border}`};"></div>`
+    }).join('')
+  }
+  if (labelsEl) {
+    const first = days30[0].slice(5), last = days30[29].slice(5)
+    labelsEl.innerHTML = `<span>${first}</span><span>Today</span>`
+  }
+
+  // ── Bar chart — last 10 days ──
+  const days10 = days30.slice(-10)
+  const barsEl = document.getElementById('chart-bars')
+  if (barsEl) {
+    const vals = days10.map(d => activityMap[d] || 0)
+    const maxV = Math.max(...vals, 1)
+    barsEl.innerHTML = days10.map((d, i) => {
+      const v = vals[i]
+      const pct = Math.round(v / maxV * 100)
+      const col = v === 0 ? 'var(--bd)' : v < 3 ? '#a8d4b0' : v < 8 ? '#4a9e6a' : 'var(--g)'
+      const dayLabel = new Date(d + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short' }).slice(0, 2)
+      const isToday = d === today.toISOString().split('T')[0]
+      return `
+        <div class="chart-bar-col" title="${d}: ${v} deeds">
+          <div class="chart-bar" style="height:${Math.max(pct, 4)}%;background:${col};${isToday ? 'box-shadow:0 0 0 1.5px var(--g);' : ''}"></div>
+          <div class="chart-bar-label" style="color:${isToday ? 'var(--g)' : 'var(--gm)'};">${dayLabel}</div>
+        </div>`
+    }).join('')
+  }
+
+  // ── What to improve ──
+  const improveEl = document.getElementById('improve-list')
+  if (improveEl) {
+    const checks = [
+      {
+        icon: '📖', title: '40 Nawawi Hadith', 
+        good: hadithCount >= 40,
+        warn: hadithCount > 0 && hadithCount < 40,
+        desc: hadithCount >= 40
+          ? 'MashaAllah — you have memorised all 40 hadith.'
+          : hadithCount > 0
+          ? `You have memorised ${hadithCount} of 40. ${40 - hadithCount} remaining — keep going with the flip cards.`
+          : 'You have not started the 40 Hadith yet. Open the flip card mode and learn one today.',
+        badge: hadithCount >= 40 ? 'Complete' : hadithCount > 0 ? `${hadithCount}/40` : 'Not started'
+      },
+      {
+        icon: '✨', title: 'Daily Shukr',
+        good: shukrCount >= 7,
+        warn: shukrCount > 0 && shukrCount < 7,
+        desc: shukrCount >= 30
+          ? `MashaAllah — ${shukrCount} days of shukr. You have built a powerful habit of gratitude.`
+          : shukrCount >= 7
+          ? `${shukrCount} days logged. Keep it up — consistency is what matters.`
+          : shukrCount > 0
+          ? `${shukrCount} days logged. Try to write 3 blessings every single day.`
+          : 'You have not logged any shukr yet. Open the Shukr Log and write your first 3 blessings.',
+        badge: shukrCount >= 30 ? '30 day habit' : shukrCount >= 7 ? '7 day streak' : shukrCount > 0 ? `${shukrCount} days` : 'Not started'
+      },
+      {
+        icon: '☀️', title: 'Sunnah Habits',
+        good: sunnahCount >= 10,
+        warn: sunnahCount > 0 && sunnahCount < 10,
+        desc: sunnahCount >= 12
+          ? 'All 12 sunnahs completed today. This is the way of the Prophet ﷺ.'
+          : sunnahCount > 0
+          ? `${sunnahCount} of 12 sunnahs done today. ${12 - sunnahCount} more to complete your day.`
+          : 'No sunnahs checked off today. Start with Bismillah before eating — the easiest one.',
+        badge: sunnahCount >= 12 ? 'All 12 done' : sunnahCount > 0 ? `${sunnahCount}/12` : 'Today: 0'
+      },
+      {
+        icon: '📗', title: 'Quran Reading',
+        good: Boolean(quranProgress),
+        warn: false,
+        desc: quranProgress
+          ? `You are at Surah ${quranProgress.surah_number} (${quranProgress.surah_name}), Ayah ${quranProgress.ayah_number}. Keep reading — even one page a day completes the Quran in a year.`
+          : 'You have not opened the Quran reader yet. Start from Al-Fatihah — it takes less than a minute.',
+        badge: quranProgress ? `Surah ${quranProgress.surah_number}/114` : 'Not started'
+      },
+      {
+        icon: '🎯', title: 'Personal Goals',
+        good: goals.some(g => g.done),
+        warn: goals.length > 0 && !goals.some(g => g.done),
+        desc: goals.filter(g => g.done).length > 0
+          ? `${goals.filter(g => g.done).length} goal${goals.filter(g => g.done).length > 1 ? 's' : ''} completed. MashaAllah — intention followed by action is the mark of taqwa.`
+          : goals.length > 0
+          ? `You have ${goals.length} goal${goals.length > 1 ? 's' : ''} set but none completed yet. Take one small step today.`
+          : 'No goals set yet. Go to My Goals and pick one thing to work on this week.',
+        badge: goals.filter(g => g.done).length > 0 ? `${goals.filter(g => g.done).length} done` : goals.length > 0 ? 'In progress' : 'Not started'
+      },
+      {
+        icon: '🤲', title: 'Hadith Bookmarks',
+        good: hadithBookmarks.length >= 5,
+        warn: hadithBookmarks.length > 0 && hadithBookmarks.length < 5,
+        desc: hadithBookmarks.length >= 5
+          ? `${hadithBookmarks.length} hadith saved. Great habit — revisit them regularly.`
+          : hadithBookmarks.length > 0
+          ? `${hadithBookmarks.length} hadith bookmarked. Browse more collections and save ones that move you.`
+          : 'No hadith bookmarked yet. Open a collection and save ones that speak to you.',
+        badge: hadithBookmarks.length > 0 ? `${hadithBookmarks.length} saved` : 'None saved'
+      },
+    ]
+
+    improveEl.innerHTML = checks.map(c => `
+      <div class="improve-item ${c.good ? 'good' : ''}">
+        <div class="improve-icon">${c.icon}</div>
         <div style="flex:1;">
-          <div class="next-milestone-name">${m.name} ${m.achieved() ? '✓' : ''}</div>
-          <div class="next-milestone-desc">${m.desc}</div>
-          <div class="next-milestone-dist">${m.dist()}</div>
+          <div class="improve-title">${c.title}</div>
+          <div class="improve-desc">${c.desc}</div>
         </div>
-      </div>`).join('')
+        <div class="improve-badge ${c.good ? 'good' : c.warn ? 'warn' : 'todo'}">${c.badge}</div>
+      </div>`
+    ).join('')
   }
 }
+
 
 // ─── EXPOSE TO HTML onclick handlers ─────────────────────────────────────────
 window.showLogin = showLogin; window.showSignup = showSignup

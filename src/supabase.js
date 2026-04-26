@@ -166,3 +166,13 @@ export async function deleteHadithBookmark(id) {
   const { error } = await supabase.from('hadith_bookmarks').delete().eq('id', id)
   if (error) throw error
 }
+
+export async function loadSunnahHistory(userId) {
+  const { data, error } = await supabase.from('sunnah_log')
+    .select('date, completions')
+    .eq('user_id', userId)
+    .order('date', { ascending: true })
+    .limit(60)
+  if (error) throw error
+  return data ?? []
+}
