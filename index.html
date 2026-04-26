@@ -642,6 +642,70 @@
       </div>
 
 
+
+      <!-- 99 NAMES OF ALLAH -->
+      <div class="page" id="page-names">
+        <div class="page-title">99 Names of Allah</div>
+        <div class="page-sub">Al-Asma Al-Husna — the most beautiful names</div>
+        <div id="name-detail-panel" style="display:none;"></div>
+        <input class="search-input" id="names-search" placeholder="Search by name or meaning..." oninput="filterNames()"/>
+        <div class="names-filter" id="names-filter"></div>
+        <div class="names-grid" id="names-grid"></div>
+      </div>
+
+      <!-- DUA COLLECTION -->
+      <div class="page" id="page-duas">
+        <div class="page-title">Dua Collection</div>
+        <div class="page-sub">Duas for every moment — Arabic, transliteration, and meaning</div>
+        <div id="duas-cats-view">
+          <input class="search-input" id="duas-search" placeholder="Search duas..." oninput="searchDuas()"/>
+          <div id="duas-search-results" style="display:none;"></div>
+          <div class="dua-cat-grid" id="duas-cat-grid"></div>
+        </div>
+        <div id="duas-list-view" style="display:none;">
+          <div class="dua-back" onclick="backToDuasCats()">← All categories</div>
+          <div class="page-title" id="duas-list-title" style="font-size:20px;margin-bottom:4px;"></div>
+          <div class="page-sub" id="duas-list-sub" style="margin-bottom:20px;"></div>
+          <div id="duas-list-items"></div>
+        </div>
+      </div>
+
+      <!-- PROGRESS MONITOR -->
+      <div class="page" id="page-progress">
+        <div class="page-title">My Progress</div>
+        <div class="page-sub">Everything you have accomplished — and everything ahead</div>
+        <div class="progress-hero">
+          <div class="progress-hero-ar">وَمَا بِكُم مِّن نِّعْمَةٍ فَمِنَ اللَّهِ</div>
+          <div class="progress-hero-quote">"And whatever blessing you have — it is from Allah."</div>
+          <div class="progress-hero-ref">Surah An-Nahl · 16:53</div>
+        </div>
+        <div class="progress-reminder">
+          <div class="progress-reminder-icon">🤲</div>
+          <div class="progress-reminder-text" id="allah-reminder-text"></div>
+          <div class="progress-reminder-sub">All the good you have done — every hadith memorised, every sunnah practiced, every blessing logged — is only by the tawfiq of Allah. He gave you the ability, the time, and the heart to do it. All praise is due to Him alone.</div>
+        </div>
+        <div class="total-score-card">
+          <div class="total-score-num" id="total-score">0</div>
+          <div class="total-score-label">Total good deeds recorded</div>
+          <div class="total-score-sub" id="total-score-sub"></div>
+        </div>
+        <div class="progress-section-title">What you have accomplished</div>
+        <div class="progress-section-sub">Every single one of these is a gift from Allah</div>
+        <div class="progress-items-grid" id="progress-achieved-grid"></div>
+        <div class="allah-reminder">
+          <div class="allah-reminder-ar" id="deed-reminder-ar"></div>
+          <div class="allah-reminder-en" id="deed-reminder-en"></div>
+          <div class="allah-reminder-ref" id="deed-reminder-ref"></div>
+        </div>
+        <div class="progress-section-title">What you can still achieve</div>
+        <div class="progress-section-sub">These are waiting for you — with Allah's tawfiq</div>
+        <div id="progress-next-grid"></div>
+        <div class="progress-reminder" style="margin-top:24px;">
+          <div class="progress-reminder-icon">♡</div>
+          <div class="progress-reminder-text">The goal is not the number.</div>
+          <div class="progress-reminder-sub">"The most beloved deeds to Allah are the most consistent ones, even if they are small." — Bukhari and Muslim. Keep going, one day at a time, for His sake alone.</div>
+        </div>
+      </div>
     </main>
   </div>
 </div>
